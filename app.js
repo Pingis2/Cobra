@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 //const MONGODB_URI = "mongodb+srv://vercel-admin-user-66f3947340812d083bafe300:goKMDYTa8TSdcyhV@cluster0.vcd7gi2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-const MONGODB_URI = "mongodb+srv://antonschyberg08:Dajmkryss1234@cluster0.vcd7gi2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const MONGODB_URI = "mongodb+srv://antonschyberg08:Dajmkryss1234@cluster0.vcd7gi2.mongodb.net/mymongodb?retryWrites=true&w=majority&appName=Cluster0";
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
