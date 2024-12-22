@@ -1,34 +1,19 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-
-type User = {
-  _id: string; // Assuming MongoDB returns an _id field
-  firstName: string
-}
-
-type BackendData = {
-  users?: User[];
-  error?: boolean;
-}
+import { IUserData } from './models/IUsers';
+import { getUsers } from './services/userService';
 
 function App() {
-
-  const [backendData, setBackendData] = useState<BackendData>({})
+  const [backendData, setBackendData] = useState<IUserData>({})
 
   useEffect(() => {
-    fetch("https://express-test-pearl.vercel.app/api")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log("Fetched data:", data); // Log the data
+
+    getUsers()
+      .then((data) => {
         setBackendData({ users: data.users });
       })
-      .catch(error => {
-        console.error("Error fetching data:", error);
+      .catch((error) => {
+        console.error("Error during API call:", error);
         setBackendData({ error: true });
       });
   }, []);
@@ -36,11 +21,15 @@ function App() {
   return (
     <>
       <div>
-        {(typeof backendData.users === 'undefined') ? (
+        {backendData.error ? (
+          <p>Error loading users</p>
+        ) : !backendData.users ? (
           <p>Loading...</p>
         ) : (
           backendData.users.map((user) => (
-            <p key={user._id}>{user.firstName}</p>
+            <p key={user._id}>
+              {user.userName}, {user._id}
+            </p>
           ))
         )}
       </div>

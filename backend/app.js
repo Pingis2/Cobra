@@ -52,9 +52,9 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//app.use('/users', usersRouter);
 
-app.get("/api", async (req, res) => {
+app.get("/users", async (req, res) => {
     const db = client.db("Users");
     if (!db) {
         console.error("Database not initialized");
