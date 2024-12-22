@@ -55,7 +55,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.get("/api", async (req, res) => {
-    //res.json({ message: "Hello from server!" });
     const db = client.db("Users");
     if (!db) {
         console.error("Database not initialized");
@@ -72,6 +71,28 @@ app.get("/api", async (req, res) => {
     } catch (err) {
         console.error("Error getting users", err);
         res.status(500).send("Error getting users");
+    }
+})
+
+app.post("/api", async (req, res) => {
+    const db = client.db("Users");
+    if (!db) {
+        console.error("Database not initialized");
+        return res.status(500).send("Database not initialized");
+    }
+    try {
+        const user = {
+            firstName: "Anton",
+            lastName: "Schyberg",
+            email: "anton@email.com",
+            password: "1234",
+        };
+        const result = await db.collection("doctors").insertOne(user);
+        console.log("Inserted user:", result);
+        res.json({ user });
+    } catch (err) {
+        console.error("Error inserting user", err);
+        res.status(500).send("Error inserting user");
     }
 })
 
