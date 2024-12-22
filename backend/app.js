@@ -5,15 +5,12 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
 var app = express();
 
-//const MONGODB_URI = "mongodb+srv://vercel-admin-user-66f3947340812d083bafe300:goKMDYTa8TSdcyhV@cluster0.vcd7gi2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 const MONGODB_URI = "mongodb+srv://antonschyberg08:Dajmkryss1234@cluster0.vcd7gi2.mongodb.net/mymongodb?retryWrites=true&w=majority&appName=Cluster0";
 
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(MONGODB_URI, {
     serverApi: {
         version: ServerApiVersion.v1,
@@ -24,31 +21,15 @@ const client = new MongoClient(MONGODB_URI, {
 async function connectToDatabase() {
     try {
         await client.connect();
-        const db = client.db(); // Specify the database name if needed
-        app.locals.db = db; // Store the database in app.locals
+        const db = client.db();
+        app.locals.db = db;
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
-        process.exit(1); // Exit with error code
+        process.exit(1);
     }
 }
 connectToDatabase();
-
-/*
-const MongoClient = require("mongodb").MongoClient;
-
-MongoClient.connect(MONGODB_URI, { useUnifiedTopology: true })
-    .then(client => {
-
-        const db = client.db();
-        app.locals.db = db;
-        console.log("Connected to MongoDB Atlas");
-    })
-    .catch(error => {
-        console.error("Error connecting to MongoDB", error);
-        process.exit(1); // Exit the process with an error code
-    });
-*/
 
 app.use(logger('dev'));
 app.use(express.json());
