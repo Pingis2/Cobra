@@ -62,7 +62,7 @@ app.get("/api", async (req, res) => {
         return res.status(500).send("Database not initialized");
     }
     try {
-        const users = await db.collection("users").find().toArray();
+        const users = await db.collection("doctors").find().toArray();
         if (users.length === 0) {
             console.log("No users found in the database");
         } else {
