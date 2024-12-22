@@ -13,7 +13,6 @@ const MONGODB_URI = "mongodb+srv://antonschyberg08:Dajmkryss1234@cluster0.vcd7gi
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const { default: cli } = require('@angular/cli');
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(MONGODB_URI, {
     serverApi: {
