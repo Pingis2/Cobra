@@ -61,7 +61,7 @@ app.get("/api", async (req, res) => {
         return res.status(500).send("Database not initialized");
     }
     try {
-        const users = await db.collection("doctors").find().toArray();
+        const users = await db.collection("users").find().toArray();
         if (users.length === 0) {
             console.log("No users found in the database");
         } else {
@@ -74,7 +74,7 @@ app.get("/api", async (req, res) => {
     }
 })
 
-app.post("/api/addUser", async (req, res) => {
+app.post("/addUser", async (req, res) => {
     const db = client.db("Users");
     if (!db) {
         console.error("Database not initialized");

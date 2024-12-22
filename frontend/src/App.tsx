@@ -3,7 +3,7 @@ import './App.css'
 
 type User = {
   _id: string; // Assuming MongoDB returns an _id field
-  name: string
+  firstName: string
 }
 
 type BackendData = {
@@ -16,7 +16,7 @@ function App() {
   const [backendData, setBackendData] = useState<BackendData>({})
 
   useEffect(() => {
-    fetch("http://localhost:5000/api")
+    fetch("https://express-test-pearl.vercel.app/api")
       .then(response => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -40,7 +40,7 @@ function App() {
           <p>Loading...</p>
         ) : (
           backendData.users.map((user) => (
-            <p key={user._id}>{user.name}</p>
+            <p key={user._id}>{user.firstName}</p>
           ))
         )}
       </div>
