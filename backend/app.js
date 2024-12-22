@@ -56,7 +56,7 @@ app.use('/users', usersRouter);
 
 app.get("/api", async (req, res) => {
     //res.json({ message: "Hello from server!" });
-    const db = client.db("Users");
+    const db = client.db("Users.doctors");
     if (!db) {
         console.error("Database not initialized");
         return res.status(500).send("Database not initialized");
