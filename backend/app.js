@@ -74,7 +74,7 @@ app.get("/api", async (req, res) => {
     }
 })
 
-app.post("/api", async (req, res) => {
+app.post("/addUser", async (req, res) => {
     const db = client.db("Users");
     if (!db) {
         console.error("Database not initialized");
@@ -82,7 +82,7 @@ app.post("/api", async (req, res) => {
     }
     try {
         const user = {
-            firstName: "Anton",
+            firstName: "Panton",
             lastName: "Schyberg",
             email: "anton@email.com",
             password: "1234",
