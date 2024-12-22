@@ -89,7 +89,12 @@ app.post("/api", async (req, res) => {
         };
         const result = await db.collection("doctors").insertOne(user);
         console.log("Inserted user:", result);
-        res.json({ user });
+        res.json({
+            _id: result.insertedId,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+        });
     } catch (err) {
         console.error("Error inserting user", err);
         res.status(500).send("Error inserting user");
