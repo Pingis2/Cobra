@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 
 app.use(
     cors({
-        origin: "http://localhost:5173", // Replace with your frontend origin during development
+        origin: "https://express-test-pearl.vercel.app/api/", // Replace with your frontend origin during development
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true,
