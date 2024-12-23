@@ -16,16 +16,21 @@ export const getUsers = async (): Promise<IUserData> => {
     }
 };
 
-export const loginUser = async (email: string, password: string): Promise<IUserData> => {
+export const loginUser = async (email: string, password: string): Promise<IUserData | null> => {
     try {
-        const response = await post<IUserData>(
+        const response = await post<{ success: boolean; user?: IUserData; message?: string }>(
             `${BASE_URL}login`,
             { email, password }
         );
 
-        return response.data;
+        if (response.data.success) {
+            return response.data.user || null;
+        } else {
+            console.error("Login failed:", response.data.message);
+            return null; // Indicate failure
+        }
     } catch (error) {
         console.error("Error during API call:", error);
         throw error;
     }
-}
+};

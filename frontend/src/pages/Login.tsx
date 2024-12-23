@@ -11,6 +11,7 @@ export const Login = () => {
 
     let handleLogin = async (event: React.FormEvent) => {
         event.preventDefault();
+        setError("");
         try {
             const data = await loginUser(email, password);
             console.log(data);
@@ -54,3 +55,5 @@ export const Login = () => {
         </section>
     );
 }
+
+export default Login;
