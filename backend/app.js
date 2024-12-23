@@ -101,7 +101,7 @@ app.post("/addUser", async (req, res) => {
     }
 })
 
-app.get("/login", async (req, res) => {
+app.post("/login", async (req, res) => {
     try {
         const db = client.db("Users");
         if (!db) {
