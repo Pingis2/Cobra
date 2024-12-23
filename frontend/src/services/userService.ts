@@ -15,3 +15,16 @@ export const getUsers = async (): Promise<IUserData> => {
         throw error;
     }
 };
+
+export const login = async (): Promise<IUserData> => {
+    try {
+        const response = await get<IUserData>(
+            `${BASE_URL}login`
+        );
+
+        return response.data;
+    } catch (error) {
+        console.error("Error during API call:", error);
+        throw error;
+    }
+}

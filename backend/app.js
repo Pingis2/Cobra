@@ -101,6 +101,14 @@ app.post("/addUser", async (req, res) => {
     }
 })
 
+app.get("/login", async (req, res) => {
+    const db = client.db("Users");
+    if (!db) {
+        console.error("Database not initialized");
+        return res.status(500).send("Database not initialized");
+    }
+})
+
 app.listen(5000, () => { console.log("Server is running on port 5000") })
 
 module.exports = app;
