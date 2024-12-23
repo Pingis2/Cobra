@@ -134,13 +134,16 @@ app.post("/api/login", async (req, res) => {
         console.log("Received login attempt:", { email, password });
 
         if (!user) {
+            console.log("User not found:", email);
             return res.status(404).send("User not found");
         }
 
         if (user.password !== password) {
+            console.log("Invalid password for user:", email);
             return res.status(401).send("Invalid password");
         }
 
+        console.log("Login successful for user:", email);
         return res.status(200).json({
             message: "Logged in successfully",
             user: {
