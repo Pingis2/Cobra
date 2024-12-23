@@ -46,7 +46,8 @@ app.use((req, res, next) => {
 
 app.use(
     cors({
-        origin: "https://express-test-pearl.vercel.app", // Replace with your frontend origin during development
+        //origin: "https://express-test-pearl.vercel.app",
+        origin: "http://localhost:5173",
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
         credentials: true,
@@ -130,6 +131,8 @@ app.post("/api/login", async (req, res) => {
         const usersCollection = db.collection("users");
         const user = await usersCollection.findOne({ email });
 
+        console.log("Received login attempt:", { email, password });
+
         if (!user) {
             return res.status(404).send("User not found");
         }
@@ -154,6 +157,6 @@ app.post("/api/login", async (req, res) => {
     
 });
 
-app.listen(5000, () => { console.log("Server is running on port 5000") })
+app.listen(5001, () => { console.log("Server is running on port 5000") })
 
 module.exports = app;
