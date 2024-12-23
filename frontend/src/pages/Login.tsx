@@ -20,9 +20,20 @@ export const Login = () => {
             } else {
                 setError("Wrong email or password");
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error during login:", error);
-            setError("Error during login");
+            if (error.response) {
+                // Handle specific HTTP errors
+                if (error.response.status === 404) {
+                    setError("User not found");
+                } else if (error.response.status === 401) {
+                    setError("Invalid password");
+                } else {
+                    setError("An error occurred during login");
+                }
+            } else {
+                setError("Network or server error");
+            }
         }
     }
 
