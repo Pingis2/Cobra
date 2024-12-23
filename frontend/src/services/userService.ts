@@ -1,7 +1,7 @@
 import { IUserData } from "../models/IUsers";
 import { get, post } from "./serviceBase";
 
-const BASE_URL = 'https://express-test-pearl.vercel.app/api/';
+const BASE_URL = 'https://express-test-pearl.vercel.app/';
 
 export const getUsers = async (): Promise<IUserData> => {
     try {
