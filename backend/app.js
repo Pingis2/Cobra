@@ -13,11 +13,19 @@ var app = express();
 const MONGODB_URI = "mongodb+srv://antonschyberg08:Dajmkryss1234@cluster0.vcd7gi2.mongodb.net/mymongodb?retryWrites=true&w=majority&appName=Cluster0";
 
 const client = new MongoClient(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,  // Ensure that this is enabled for better connection handling
     serverApi: {
         version: ServerApiVersion.v1,
         strict: true,
         deprecationErrors: true,
-    }
+    },
+    // Enable automatic reconnection and retry logic
+    maxPoolSize: 10, // Limit the number of connections
+    socketTimeoutMS: 30000, // Timeout after 30 seconds if no activity
+    connectTimeoutMS: 10000, // Timeout after 10 seconds for initial connection
+    retryWrites: true, // Enable retryable writes for better reliability
+    autoReconnect: true, // Enable auto-reconnect
 });
 async function connectToDatabase() {
     try {
