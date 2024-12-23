@@ -52,7 +52,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRouter);
-//app.use('/users', usersRouter);
 
 app.get("/users", async (req, res) => {
     const db = client.db("Users");
@@ -109,7 +108,7 @@ app.post("/login", async (req, res) => {
             return res.status(500).send("Database not initialized");
         }
 
-        const { email, password } = req.query;
+        const { email, password } = req.body;
         
         if (!email || !password) {
             return res.status(400).send("Missing email or password");
@@ -126,7 +125,16 @@ app.post("/login", async (req, res) => {
             return res.status(401).send("Invalid password");
         }
 
-        return res.status(200).send("Login successful");
+        return res.status(200).json({
+            message: "Logged in successfully",
+            user: {
+                _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+            }
+        })
+            ;
     } catch (error) {
         console.error("Error logging in", error);
     }
