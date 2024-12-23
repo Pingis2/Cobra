@@ -25,7 +25,6 @@ const client = new MongoClient(MONGODB_URI, {
     socketTimeoutMS: 30000, // Timeout after 30 seconds if no activity
     connectTimeoutMS: 10000, // Timeout after 10 seconds for initial connection
     retryWrites: true, // Enable retryable writes for better reliability
-    autoReconnect: true, // Enable auto-reconnect
 });
 async function connectToDatabase() {
     try {
