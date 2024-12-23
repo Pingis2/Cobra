@@ -12,7 +12,11 @@ export const get = async <T>(url: string) => {
 
 export const post = async <T>(url: string, data: any) => {
     try {
-        const response = await axios.post<T>(url, data);
+        const response = await axios.post<T>(url, data, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
         return response;
     } catch (error) {
         console.error("Error during API call:", error);
