@@ -102,13 +102,37 @@ app.post("/addUser", async (req, res) => {
 })
 
 app.get("/login", async (req, res) => {
-    const db = client.db("Users");
-    if (!db) {
-        console.error("Database not initialized");
-        return res.status(500).send("Database not initialized");
-    }
-})
+    try {
+        const db = client.db("Users");
+        if (!db) {
+            console.error("Database not initialized");
+            return res.status(500).send("Database not initialized");
+        }
 
-app.listen(5000, () => { console.log("Server is running on port 5000") })
+        const { email, password } = req.query;
+        
+        if (!email || !password) {
+            return res.status(400).send("Missing email or password");
+        }
+
+        const usersCollection = db.collection("users");
+        const user = await usersCollection.findOne({ email });
+
+        if (!user) {
+            return res.status(404).send("User not found");
+        }
+
+        if (user.password !== password) {
+            return res.status(401).send("Invalid password");
+        }
+
+        return res.status(200).send("Login successful");
+    } catch (error) {
+        console.error("Error logging in", error);
+    }
+    
+});
+
+app.listen(5001, () => { console.log("Server is running on port 5000") })
 
 module.exports = app;

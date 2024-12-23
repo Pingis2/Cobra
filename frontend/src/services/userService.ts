@@ -1,5 +1,5 @@
 import { IUserData } from "../models/IUsers";
-import { get } from "./serviceBase";
+import { get, post } from "./serviceBase";
 
 const BASE_URL = 'https://express-test-pearl.vercel.app/';
 
@@ -16,10 +16,11 @@ export const getUsers = async (): Promise<IUserData> => {
     }
 };
 
-export const login = async (): Promise<IUserData> => {
+export const loginUser = async (email: string, password: string): Promise<IUserData> => {
     try {
-        const response = await get<IUserData>(
-            `${BASE_URL}login`
+        const response = await post<IUserData>(
+            `${BASE_URL}login`,
+            { email, password }
         );
 
         return response.data;

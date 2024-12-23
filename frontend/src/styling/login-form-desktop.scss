@@ -1,0 +1,13 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    input {
+        margin-left: 20px;
+    }
+
+    button {
+        margin: 40px 0 0 0;
+    }
+}
