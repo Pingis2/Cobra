@@ -5,7 +5,7 @@ const BASE_URL = 'https://express-test-pearl.vercel.app/api/';
 
 export const getUsers = async (): Promise<IUserData[]> => {
     try {
-        const response = await get<{success: boolean; user?: IUserData; message?: string}>(
+        const response = await get<IUserData>(
             `${BASE_URL}leaderboard`
         );
 
