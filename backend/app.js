@@ -22,8 +22,8 @@ const client = new MongoClient(MONGODB_URI, {
     },
     // Enable automatic reconnection and retry logic
     maxPoolSize: 10, // Limit the number of connections
-    socketTimeoutMS: 30000, // Timeout after 30 seconds if no activity
-    connectTimeoutMS: 10000, // Timeout after 10 seconds for initial connection
+    socketTimeoutMS: 100000, // Timeout after 1 minute if no activity
+    connectTimeoutMS: 100000, // Timeout after 1 minute for initial connection
     retryWrites: true, // Enable retryable writes for better reliability
 });
 async function connectToDatabase() {
