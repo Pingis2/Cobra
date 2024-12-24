@@ -5,11 +5,13 @@ const BASE_URL = 'https://express-test-pearl.vercel.app/api/';
 
 export const getUsers = async (): Promise<IUserData> => {
     try {
-        const respone = await get<IUserData>(
+        const response = await get<{user?: IUserData}>(
             `${BASE_URL}users`
         );
 
-        return respone.data;
+        console.log("api response", response.data);
+
+        return response.data;
     } catch (error) {
         console.error("Error during API call:", error);
         throw error;

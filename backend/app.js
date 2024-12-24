@@ -26,7 +26,9 @@ const client = new MongoClient(MONGODB_URI, {
     connectTimeoutMS: 100000, // Timeout after 1 minute for initial connection
     retryWrites: true, // Enable retryable writes for better reliability
 });
-async function connectToDatabase() {
+
+
+const connectToDatabase = async () => {
     try {
         await client.connect();
         const db = client.db();
@@ -34,9 +36,9 @@ async function connectToDatabase() {
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
-        process.exit(1);
+        process.exit(1);  // Exit the process if the connection fails
     }
-}
+};
 connectToDatabase();
 
 app.use(logger('dev'));

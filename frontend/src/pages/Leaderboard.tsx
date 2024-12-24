@@ -10,7 +10,6 @@ export const Leaderboard = () => {
         getUsers()
             .then((data) => {
                 setBackendData({ users: data.users });
-                console.log("data", data);
             })
             .catch((error) => {
                 console.error("Error during API call:", error);
