@@ -3,7 +3,7 @@ import { get, post } from "./serviceBase";
 
 const BASE_URL = 'https://express-test-pearl.vercel.app/api/';
 
-export const getUsers = async (): Promise<IUserData[]> => {
+export const getUsers = async (): Promise<IUserData> => {
     try {
         const response = await get<IUserData>(
             `${BASE_URL}leaderboard`
@@ -12,7 +12,7 @@ export const getUsers = async (): Promise<IUserData[]> => {
         console.log("api response", response);
 
         if (response.data && response.data.users) {
-            return response.data.users;
+            return { users: response.data.users };
         } else {
             console.error("No users found in the response");
             return [];
