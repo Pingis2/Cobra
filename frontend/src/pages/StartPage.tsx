@@ -1,4 +1,9 @@
 export const StartPage = () => {
+
+    const handleNavigation = (path: string) => {
+        navigate(path);
+    }
+    
     return (
         <section>
             <h1>Start Page</h1>
