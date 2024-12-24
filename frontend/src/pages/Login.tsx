@@ -16,7 +16,7 @@ export const Login = () => {
             const data = await loginUser(email, password);
             console.log(data);
             if (data) {
-                navigate("/");
+                navigate("/start-page");
             } else {
                 setError("Wrong email or password");
             }
