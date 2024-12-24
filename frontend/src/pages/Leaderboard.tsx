@@ -9,7 +9,7 @@ export const Leaderboard = () => {
 
         getUsers()
             .then((data) => {
-                setBackendData({ users: data.user });
+                setBackendData({ users: data.users });
             })
             .catch((error) => {
                 console.error("Error during API call:", error);
