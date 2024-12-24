@@ -3,7 +3,7 @@ import { IUserData } from "../models/IUsers";
 import { getUsers } from "../services/userService";
 
 export const Leaderboard = () => {
-    const [backendData, setBackendData] = useState<IUserData>({users: []});
+    const [backendData, setBackendData] = useState<IUserData>();
 
     useEffect(() => {
 
