@@ -45,14 +45,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-*/
-
 app.use(
     cors({
         origin: ["http://localhost:5173", "https://express-test-pearl.vercel.app"],
@@ -73,7 +65,7 @@ app.use((req, res, next) => {
 });
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+    res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
 app.use('/', indexRouter);
