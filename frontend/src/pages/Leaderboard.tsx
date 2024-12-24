@@ -3,13 +3,14 @@ import { IUserData } from "../models/IUsers";
 import { getUsers } from "../services/userService";
 
 export const Leaderboard = () => {
-    const [backendData, setBackendData] = useState<IUserData>({})
+    const [backendData, setBackendData] = useState<IUserData>({ users: [] });
 
     useEffect(() => {
 
         getUsers()
             .then((data) => {
                 setBackendData({ users: data.users });
+                console.log("data", data);
             })
             .catch((error) => {
                 console.error("Error during API call:", error);
