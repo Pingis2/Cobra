@@ -72,9 +72,11 @@ app.get("*", (req, res) => {
 
 app.use('/', indexRouter);
 
-app.get("/api/leaderboard", async (req, res) => {
+app.get("/leaderboard", async (req, res) => {
     console.log("Fetching users");
     const db = client.db("Users");
+    console.log("Database:", db);
+    
     if (!db) {
         console.error("Database not initialized");
         return res.status(500).send("Database not initialized");
@@ -120,7 +122,7 @@ app.post("/addUser", async (req, res) => {
     }
 })
 
-app.post("/api/login", async (req, res) => {
+app.post("/login", async (req, res) => {
     console.log("Logging in user", req.body);
     try {
         const db = client.db("Users");
