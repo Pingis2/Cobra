@@ -11,7 +11,6 @@ export const Home = () => {
         <>
             Home
             <button onClick={() => handleNavigation('/login')} type="submit">Login</button>
-            <button onClick={() => handleNavigation('/leaderboard')} type="submit">Login</button>
         </>
     );
 }

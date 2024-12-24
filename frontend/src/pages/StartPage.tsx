@@ -3,6 +3,7 @@ export const StartPage = () => {
         <section>
             <h1>Start Page</h1>
             <p>Welcome to the start page</p>
+            <button onClick={() => handleNavigation('/leaderboard')} type="submit">Leaderboard</button>
         </section>
     );
 };
