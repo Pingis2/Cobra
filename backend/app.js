@@ -78,7 +78,7 @@ app.get("*", (req, res) => {
 
 app.use('/', indexRouter);
 
-app.get("/users", async (req, res) => {
+app.get("/api/users", async (req, res) => {
     const db = client.db("Users");
     if (!db) {
         console.error("Database not initialized");
