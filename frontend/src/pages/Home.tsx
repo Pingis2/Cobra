@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 export const Home = () => {
     const navigate = useNavigate();
 
-    const button = () => {
-        navigate("/login");
+    const handleNavigation = (path: string) => {
+        navigate(path);
     }
 
     return (
         <>
             Home
-            <button onClick={button}>Login</button>
+            <button onClick={() => handleNavigation('/login')} type="submit">Login</button>
+            <button onClick={() => handleNavigation('/leaderboard')} type="submit">Login</button>
         </>
     );
 }
