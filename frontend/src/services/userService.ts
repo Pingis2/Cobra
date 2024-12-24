@@ -23,6 +23,8 @@ export const loginUser = async (email: string, password: string): Promise<IUserD
             { email, password }
         );
 
+        console.log("api response", response.data);
+        
         if (response.data.success) {
             return response.data.user || null;
         } else {

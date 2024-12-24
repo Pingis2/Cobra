@@ -151,8 +151,20 @@ app.post("/api/login", async (req, res) => {
         }
 
         console.log("Login successful for user:", email);
+
+        console.log("Response to client:", {
+            success: true,
+            user: {
+                _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+            },
+        });
+
         return res.status(200).json({
             message: "Logged in successfully",
+            success: true,
             user: {
                 _id: user._id,
                 firstName: user.firstName,
