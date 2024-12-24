@@ -17,6 +17,7 @@ export const Login = () => {
             console.log("login result", data);
             if (data) {
                 navigate("/start-page");
+                localStorage.setItem("user", JSON.stringify(data));
             } else {
                 setError("Wrong email or password");
             }

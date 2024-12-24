@@ -71,6 +71,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+});
+
 app.use('/', indexRouter);
 
 app.get("/users", async (req, res) => {
