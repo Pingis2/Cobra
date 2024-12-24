@@ -72,7 +72,7 @@ app.get("*", (req, res) => {
 
 app.use('/', indexRouter);
 
-app.get("/users", async (req, res) => {
+app.get("/api/leaderboard", async (req, res) => {
     console.log("Fetching users");
     const db = client.db("Users");
     if (!db) {
