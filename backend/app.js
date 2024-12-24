@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 
 app.use(
     cors({
-        origin: "https://express-test-pearl.vercel.app",
+        origin: "https://express-test-pearl.vercel.app/api/",
         //origin: "http://localhost:5173/",
         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
