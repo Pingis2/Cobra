@@ -3,9 +3,9 @@ import { get, post } from "./serviceBase";
 
 const BASE_URL = 'https://express-test-pearl.vercel.app/api/';
 
-export const getUsers = async (): Promise<IUsers[]> => {
+export const getUsers = async (): Promise<IUsersData[]> => {
     try {
-        const response = await get<IUsers>(
+        const response = await get<IUsersData>(
             `${BASE_URL}leaderboard`
         );
 
