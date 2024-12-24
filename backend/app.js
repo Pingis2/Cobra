@@ -93,6 +93,17 @@ app.get("/leaderboard", async (req, res) => {
         console.error("Error getting users", err);
         res.status(500).send("Error getting users");
     }
+
+    return res.status(200).json({
+            message: "Fetched users successfully",
+            success: true,
+            user: {
+                _id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+            }
+        })
 })
 
 app.post("/addUser", async (req, res) => {
