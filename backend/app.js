@@ -112,7 +112,7 @@ app.post("/api/add-user", async (req, res) => {
     }
     try {
         const user = req.body;
-        const result = await db.collection("doctors").insertOne(user);
+        const result = await db.collection("users").insertOne(user);
         console.log("Inserted user:", result);
         res.json({
             _id: result.insertedId,
