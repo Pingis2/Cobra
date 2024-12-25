@@ -3,7 +3,11 @@ import axios from "axios";
 export const get = async <T>(url: string) => {
     try {
         console.log("api url", url)
-        const response = await axios.get<T>(url);
+        const response = await axios.get<T>(url, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
         console.log("api response", response);
         
         

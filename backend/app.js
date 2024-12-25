@@ -66,6 +66,12 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use((req, res, next) => {
+    console.log("unhandled route:", req.path);
+    res.status(404).send("Not found");
+    next();
+});
+
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
