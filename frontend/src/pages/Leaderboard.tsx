@@ -1,30 +1,33 @@
 import { useEffect, useState } from "react";
-import { IUserData } from "../models/IUsers";
+import { IUsers } from "../models/IUsers";
 import { getUsers } from "../services/userService";
 
 export const Leaderboard = () => {
-    const [backendData, setBackendData] = useState<IUserData | null>(null);
+    const [backendData, setBackendData] = useState<IUsers[] | null>(null);
+    const [, setError] = useState(false);
 
     useEffect(() => {
         getUsers()
             .then((data) => {
-                setBackendData({ users: data });
+                if (data.error) {
+                    setError(true);
+                } else {
+                    setBackendData(data.users || []);
+                }
             })
             .catch((error) => {
                 console.error("Error during API call:", error);
-                setBackendData({ error: true });
+                setError(true);
             });
     }, []);
 
     return (
         <>
             <div>
-                {backendData.error ? (
-                    <p>Error loading users</p>
-                ) : !backendData.users ? (
+                {backendData === null ? (
                     <p>Loading...</p>
                 ) : (
-                    backendData.users.map((user) => (
+                    backendData.map((user) => (
                         <p key={user._id}>
                             {user.userName}, {user._id}
                         </p>

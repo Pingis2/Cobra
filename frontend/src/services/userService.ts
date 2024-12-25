@@ -15,7 +15,7 @@ export const getUsers = async (): Promise<IUserData> => {
             return { users: response.data.users };
         } else {
             console.error("No users found in the response");
-            return [];
+            return { error: true };
         }
     } catch (error) {
         console.error("Error during API call:", error);
