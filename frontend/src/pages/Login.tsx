@@ -44,7 +44,7 @@ export const Login = () => {
 
     return (
         <>
-            <section>
+            <section className="login-container">
                 <h1>Login</h1>
                 <p>Log in to your account</p>
                 <form className="login-form" onSubmit={handleLogin}>
@@ -69,9 +69,10 @@ export const Login = () => {
                     {error && <p>{error}</p>}
                     <button type="submit">Login</button>
                 </form>
-            </section>
+            
 
-            <p onClick={() => handleNavigation('/create-account')}>Don't have an account? Click to create one</p>
+                <p onClick={() => handleNavigation('/create-account')}>Don't have an account? Click to create one</p>
+            </section>
         </>
     );
 }

@@ -1,4 +1,20 @@
-.create-user-form {
-    display: flex;
-    flex-direction: column;
+.create-user-container {
+    
+    .create-user-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    p {
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover {
+            color: #FFA500;
+        }
+    }
+    
 }
+
+
+

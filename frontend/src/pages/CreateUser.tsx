@@ -49,6 +49,7 @@ export const CreateUser = () => {
     return (
         <>
             <h1>Create Account</h1>
+            <section className="create-user-container">
             <form className="create-user-form" onSubmit={handleCreateUser}>
                 <label htmlFor="firstName">First name:</label>
                 <input
@@ -113,7 +114,8 @@ export const CreateUser = () => {
                 <button type="submit">Create User</button>
             </form>
 
-            <p onClick={() => handleNavigation('/login')}>Already have an account? Click here to log in</p>
+                <p onClick={() => handleNavigation('/login')}>Already have an account? Click here to log in</p>
+            </section>
         </>
     );
 }
