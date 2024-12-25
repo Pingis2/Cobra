@@ -7,6 +7,10 @@ export const Login = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+
+    const handleNavigation = (path: string) => {
+        navigate(path);
+    }
     
 
     let handleLogin = async (event: React.FormEvent) => {
@@ -39,32 +43,36 @@ export const Login = () => {
     }
 
     return (
-        <section>
-            <h1>Login</h1>
-            <p>Log in to your account</p>
-            <form className="login-form" onSubmit={handleLogin}>
-                <label>
-                    Email:
-                    <input
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </label>
-                <label>
-                    Password:
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </label>
-                {error && <p>{error}</p>}
-                <button type="submit">Login</button>
-            </form>
-        </section>
+        <>
+            <section>
+                <h1>Login</h1>
+                <p>Log in to your account</p>
+                <form className="login-form" onSubmit={handleLogin}>
+                    <label>
+                        Email:
+                        <input
+                            type="text"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Password:
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </label>
+                    {error && <p>{error}</p>}
+                    <button type="submit">Login</button>
+                </form>
+            </section>
+
+            <p onClick={() => handleNavigation('/create-account')}>Don't have an account? Click to create one</p>
+        </>
     );
 }
 

@@ -66,6 +66,7 @@ app.use((req, res, next) => {
     next();
 });
 
+
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
@@ -103,19 +104,14 @@ app.get("api/test", async (req, res) => {
     res.json({ message: "Testing endpoint" });
 })
 
-app.post("/addUser", async (req, res) => {
+app.post("/add-user", async (req, res) => {
     const db = client.db("Users");
     if (!db) {
         console.error("Database not initialized");
         return res.status(500).send("Database not initialized");
     }
     try {
-        const user = {
-            firstName: "Panton",
-            lastName: "Schyberg",
-            email: "anton@email.com",
-            password: "1234",
-        };
+        const user = req.body;
         const result = await db.collection("doctors").insertOne(user);
         console.log("Inserted user:", result);
         res.json({

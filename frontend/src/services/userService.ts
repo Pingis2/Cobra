@@ -43,3 +43,38 @@ export const loginUser = async (email: string, password: string): Promise<IUserD
         throw error;
     }
 };
+
+export const createUser = async (
+    userName: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    country: string,
+    ): Promise<IUserData | null> => {
+    try {
+        const response = await post<{ success: boolean; user?: IUserData; message?: string }>(
+            `${BASE_URL}add-user`,
+            {
+                userName,
+                firstName,
+                lastName,
+                email,
+                password,
+                country
+            }
+        );
+
+        console.log("api response", response.data);
+        
+        if (response.data.success) {
+            return response.data.user || null;
+        } else {
+            console.error("Registration failed:", response.data.message);
+            return null; // Indicate failure
+        }
+    } catch (error) {
+        console.error("Error during API call:", error);
+        throw error;
+    }
+}
