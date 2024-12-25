@@ -22,9 +22,12 @@ export const CreateUser = () => {
         event.preventDefault();
         setError("");
         try {
+            // Pass the user data to the createUser function
             const data = await createUser(userName, firstName, lastName, email, password, country);
             console.log("create user result", data);
+
             if (data) {
+                // Once the user is created, you can navigate and store user info
                 navigate("/start-page");
                 localStorage.setItem("user", JSON.stringify(data));
             } else {

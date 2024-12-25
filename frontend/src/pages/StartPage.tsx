@@ -24,11 +24,13 @@ export const StartPage = () => {
                 }
             });
 
-            if (response.data.user) {
-                setUser(response.data.user); // Assuming response contains user data
+            if (response.data.users && response.data.users.length > 0) {
+                setUser(response.data.users[0]); // Assuming response contains user data
             } else {
                 setError('User not found');
             }
+
+            console.log("api response", response.data.users);
         } catch (err) {
             console.error("Error fetching user data:", err);
             setError('Failed to load user data.');

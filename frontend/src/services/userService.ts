@@ -82,7 +82,7 @@ export const createUser = async (
     country: string,
     ): Promise<IUserData | null> => {
     try {
-        const response = await post<{ success: boolean; user?: IUserData; message?: string; token: string; }>(
+        const response = await post<{ success: boolean; user?: IUserData; message?: string; }>(
             `${BASE_URL}add-user`,
             {
                 userName,
@@ -90,23 +90,17 @@ export const createUser = async (
                 lastName,
                 email,
                 password,
-                country
+                country,
             }
         );
 
         console.log("api response", response.data);
         
         if (response.data.success) {
-
-            const token = response.data.token;
-            if (token) {
-                localStorage.setItem('authToken', token);
-            }
-
             return response.data.user || null;
         } else {
             console.error("Registration failed:", response.data.message);
-            return null; // Indicate failure
+            return null;
         }
     } catch (error) {
         console.error("Error during API call:", error);
