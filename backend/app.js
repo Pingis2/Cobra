@@ -163,7 +163,8 @@ app.post("/api/login", async (req, res) => {
 
         console.log("Login successful for user:", email);
 
-        const JWT_SECRET = process.env.JWT_SECRET;
+        console.log("JWT_SECRET", process.env.JWT_SECRET);
+        
 
         const token = jwt.sign(
             { _id: user._id, email: user.email },
