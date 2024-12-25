@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 var indexRouter = require('./routes/index');
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -57,6 +58,8 @@ app.use(
 );
 
 app.options("*", cors());
+
+app.use(express.json());
 
 app.use((req, res, next) => {
     if (!req.app.locals.db) {
@@ -159,6 +162,8 @@ app.post("/api/login", async (req, res) => {
         }
 
         console.log("Login successful for user:", email);
+
+        const JWT_SECRET = process.env.JWT_SECRET;
 
         const token = jwt.sign(
             { _id: user._id, email: user.email },
