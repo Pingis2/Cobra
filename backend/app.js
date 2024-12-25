@@ -74,6 +74,7 @@ app.use('/', indexRouter);
 
 app.get("/api/leaderboard", async (req, res) => {
     console.log("Fetching users");
+    /*
     const db = client.db("Users");
     console.log("Database:", db);
     
@@ -104,6 +105,7 @@ app.get("/api/leaderboard", async (req, res) => {
                 email: user.email,
             }
         })
+        */
 })
 
 app.post("/addUser", async (req, res) => {
