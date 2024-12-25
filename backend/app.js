@@ -104,7 +104,7 @@ app.get("api/test", async (req, res) => {
     res.json({ message: "Testing endpoint" });
 })
 
-app.post("/add-user", async (req, res) => {
+app.post("/api/add-user", async (req, res) => {
     const db = client.db("Users");
     if (!db) {
         console.error("Database not initialized");
