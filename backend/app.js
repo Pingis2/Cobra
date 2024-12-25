@@ -99,6 +99,10 @@ app.get("/api/leaderboard", async (req, res) => {
     */
 })
 
+app.get("api/test", async (req, res) => {
+    res.json({ message: "Testing endpoint" });
+})
+
 app.post("/addUser", async (req, res) => {
     const db = client.db("Users");
     if (!db) {
