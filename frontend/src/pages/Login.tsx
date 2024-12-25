@@ -19,7 +19,7 @@ export const Login = () => {
         try {
             const data = await loginUser(email, password);
             console.log("login result", data);
-            if (data) {
+            if (data && data.token) {
                 localStorage.setItem("token", data.token);
                 navigate("/start-page");
             } else {

@@ -27,7 +27,7 @@ export const getUsers = async (): Promise<IUserData> => {
 
 export const loginUser = async (email: string, password: string): Promise<IUserData | null> => {
     try {
-        const response = await post<{ success: boolean; users?: IUsers[]; token?: string; message?: string }>(
+        const response = await post<{ success: boolean; user?: IUsers[]; token?: string; message?: string }>(
             `${BASE_URL}login`,
             { email, password }
         );
@@ -36,7 +36,7 @@ export const loginUser = async (email: string, password: string): Promise<IUserD
         
         if (response.data.success) {
             return {
-                users: response.data.users || [],
+                users: response.data.user || [],
                 token: response.data.token || '',
             }
         } else {
