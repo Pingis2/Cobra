@@ -105,24 +105,26 @@ app.get("api/test", async (req, res) => {
 })
 
 app.post("/api/add-user", async (req, res) => {
-    const db = client.db("Users");
-    if (!db) {
-        console.error("Database not initialized");
-        return res.status(500).send("Database not initialized");
-    }
     try {
+        const db = client.db("Users");
         const user = req.body;
         const result = await db.collection("users").insertOne(user);
         console.log("Inserted user:", result);
         res.json({
-            _id: result.insertedId,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
+            success: true,
+            user: {
+                _id: result.insertedId,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                username: user.username,
+                email: user.email,
+                password: user.password,
+                country: user.country,
+            },
         });
     } catch (err) {
         console.error("Error inserting user", err);
-        res.status(500).send("Error inserting user");
+        res.status(500).json({ success: false, message: "Error inserting user" });
     }
 })
 
