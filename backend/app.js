@@ -107,12 +107,54 @@ app.get("api/test", async (req, res) => {
     res.json({ message: "Testing endpoint" });
 })
 
+app.get("/api/get-user", (req, res) => {
+    const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).send("Token is required");
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).send("Invalid or expired token");
+        }
+
+        const userId = decoded._id;
+        const db = client.db("Users");
+        db.collection("users").findOne({ _id: new ObjectId(userId) })
+            .then(user => {
+                if (!user) {
+                    return res.status(404).send("User not found");
+                }
+                res.json({ user });
+            })
+            .catch(err => {
+                res.status(500).send("Error fetching user data");
+            });
+    });
+});
+
+
 app.post("/api/add-user", async (req, res) => {
     try {
         const db = client.db("Users");
         const user = req.body;
         const result = await db.collection("users").insertOne(user);
         console.log("Inserted user:", result);
+
+        const JWT_SECRET = process.env.JWT_SECRET;
+
+        if (!JWT_SECRET) {
+            console.error("JWT_SECRET is not defined");
+            return res.status(500).json({ success: false, message: "Internal server error" });
+        }
+
+        const token = jwt.sign(
+            { _id: result.insertedId, email: user.email },
+            JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
         res.json({
             success: true,
             user: {
@@ -124,6 +166,7 @@ app.post("/api/add-user", async (req, res) => {
                 password: user.password,
                 country: user.country,
             },
+            token,
         });
     } catch (err) {
         console.error("Error inserting user", err);

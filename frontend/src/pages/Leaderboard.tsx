@@ -7,18 +7,26 @@ export const Leaderboard = () => {
     const [, setError] = useState(false);
 
     useEffect(() => {
-        getUsers()
-            .then((data) => {
-                if (data.error) {
+        const token = localStorage.getItem('authToken'); // Get token from localStorage
+
+        if (token) {
+            // Pass the token to the getUsers function
+            getUsers(token)
+                .then((data) => {
+                    if (data.error) {
+                        setError(true);
+                    } else {
+                        setBackendData(data.users || []);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error during API call:", error);
                     setError(true);
-                } else {
-                    setBackendData(data.users || []);
-                }
-            })
-            .catch((error) => {
-                console.error("Error during API call:", error);
-                setError(true);
-            });
+                });
+        } else {
+            console.error("No token found in localStorage");
+            setError(true);
+        }
     }, []);
 
     return (

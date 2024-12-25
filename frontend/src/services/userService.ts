@@ -4,10 +4,13 @@ import { get, post } from "./serviceBase";
 const BASE_URL = 'https://express-test-pearl.vercel.app/api/';
 
 
-export const getUsers = async (): Promise<IUserData> => {
+export const getUsers = async (token: string): Promise<IUserData> => {
     try {
         const response = await get<IUserData>(
-            `${BASE_URL}leaderboard`
+            `${BASE_URL}leaderboard`,
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            }
         );
 
         console.log("api response", response);
@@ -23,6 +26,27 @@ export const getUsers = async (): Promise<IUserData> => {
         throw error;
     }
 };
+
+export const getUser = async (token: string): Promise<IUserData | {error: boolean}> => {
+    try {
+        const response = await get<IUserData>(
+            `${BASE_URL}get-user`,
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        console.log("api response", response);
+
+        if (response.data && response.data.users) {
+            return { users: response.data.users, token: token };
+        } else {
+            console.error("No user found in the response");
+            return { error: true, token: '' };
+        }
+    } catch (error) {
+        console.error("Error during API call:", error);
+        throw error;
+    }
+}
 
 
 export const loginUser = async (email: string, password: string): Promise<IUserData | null> => {
@@ -58,7 +82,7 @@ export const createUser = async (
     country: string,
     ): Promise<IUserData | null> => {
     try {
-        const response = await post<{ success: boolean; user?: IUserData; message?: string }>(
+        const response = await post<{ success: boolean; user?: IUserData; message?: string; token: string; }>(
             `${BASE_URL}add-user`,
             {
                 userName,
@@ -73,6 +97,12 @@ export const createUser = async (
         console.log("api response", response.data);
         
         if (response.data.success) {
+
+            const token = response.data.token;
+            if (token) {
+                localStorage.setItem('authToken', token);
+            }
+
             return response.data.user || null;
         } else {
             console.error("Registration failed:", response.data.message);

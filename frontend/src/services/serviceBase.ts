@@ -1,11 +1,12 @@
 import axios from "axios";
 
-export const get = async <T>(url: string) => {
+export const get = async <T>(url: string, p0: { headers: { Authorization: string; }; }) => {
     try {
         console.log("api url", url)
         const response = await axios.get<T>(url, {
             headers: {
                 'Content-Type': 'application/json',
+                ...p0.headers,
             }
         });
         console.log("api response", response);
