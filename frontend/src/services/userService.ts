@@ -1,8 +1,9 @@
-import { IUserData } from "../models/IUsers";
-import { get, post } from "./serviceBase";
+import { IUserData, IUsers } from "../models/IUsers";
+import { /*get*/ post } from "./serviceBase";
 
 const BASE_URL = 'https://express-test-pearl.vercel.app/api/';
 
+/*
 export const getUsers = async (): Promise<IUserData> => {
     try {
         const response = await get<IUserData>(
@@ -22,10 +23,11 @@ export const getUsers = async (): Promise<IUserData> => {
         throw error;
     }
 };
+*/
 
 export const loginUser = async (email: string, password: string): Promise<IUserData | null> => {
     try {
-        const response = await post<{ success: boolean; user?: IUserData; message?: string }>(
+        const response = await post<{ success: boolean; users?: IUsers[]; token?: string; message?: string }>(
             `${BASE_URL}login`,
             { email, password }
         );
@@ -33,7 +35,10 @@ export const loginUser = async (email: string, password: string): Promise<IUserD
         console.log("api response", response.data);
         
         if (response.data.success) {
-            return response.data.user || null;
+            return {
+                users: response.data.users || [],
+                token: response.data.token || '',
+            }
         } else {
             console.error("Login failed:", response.data.message);
             return null; // Indicate failure

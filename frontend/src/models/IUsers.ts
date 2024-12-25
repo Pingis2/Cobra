@@ -10,6 +10,7 @@ export interface IUsers {
 }
 
 export interface IUserData {
+    token: string;
     users?: IUsers[];
     error?: boolean;
 }

@@ -3,9 +3,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 var app = express();
@@ -160,6 +160,12 @@ app.post("/api/login", async (req, res) => {
 
         console.log("Login successful for user:", email);
 
+        const token = jwt.sign(
+            { _id: user._id, email: user.email },
+            proess.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        )
+
         console.log("Response to client:", {
             success: true,
             user: {
@@ -168,6 +174,7 @@ app.post("/api/login", async (req, res) => {
                 lastName: user.lastName,
                 email: user.email,
             },
+            token
         });
 
         return res.status(200).json({
@@ -178,7 +185,8 @@ app.post("/api/login", async (req, res) => {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
-            }
+            },
+            token,
         })
             ;
     } catch (error) {

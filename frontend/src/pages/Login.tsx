@@ -20,8 +20,8 @@ export const Login = () => {
             const data = await loginUser(email, password);
             console.log("login result", data);
             if (data) {
+                localStorage.setItem("token", data.token);
                 navigate("/start-page");
-                localStorage.setItem("user", JSON.stringify(data));
             } else {
                 setError("Wrong email or password");
             }
