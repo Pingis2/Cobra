@@ -12,6 +12,10 @@
   ],
   "routes": [
     {
+      "src": "/api/leaderboard",
+      "dest": "/backend/app.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/backend/app.js"
     },

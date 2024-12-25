@@ -74,38 +74,26 @@ app.use('/', indexRouter);
 
 app.get("/api/leaderboard", async (req, res) => {
     console.log("Fetching users");
-    /*
-    const db = client.db("Users");
-    console.log("Database:", db);
-    
-    if (!db) {
-        console.error("Database not initialized");
-        return res.status(500).send("Database not initialized");
-    }
     try {
-        const users = await db.collection("users").find().toArray();
-        if (users.length === 0) {
-            console.log("No users found in the database");
-        } else {
-            console.log("Fetched users:", users);
+        const db = client.db("Users"); // Ensure your database client is initialized properly
+        if (!db) {
+            console.error("Database not initialized");
+            return res.status(500).send("Database not initialized");
         }
+
+        const users = await db.collection("users").find().toArray();
+
+        if (!users || users.length === 0) {
+            console.log("No users found in the database");
+            return res.status(404).json({ message: "No users found" });
+        }
+
+        console.log("Fetched users:", users);
         res.json({ users });
     } catch (err) {
         console.error("Error getting users", err);
         res.status(500).send("Error getting users");
     }
-
-    return res.status(200).json({
-            message: "Fetched users successfully",
-            success: true,
-            user: {
-                _id: user._id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-            }
-        })
-        */
 })
 
 app.post("/addUser", async (req, res) => {
