@@ -70,10 +70,6 @@ app.use((req, res, next) => {
 });
 
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/index.html"));
-});
-
 app.use('/', indexRouter);
 
 app.get("/api/leaderboard", async (req, res) => {
@@ -246,9 +242,13 @@ app.post("/api/login", async (req, res) => {
     
 });
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/index.html"));
+});
+
 (async () => {
     connectToDatabase();
-    app.listen(5000, () => { console.log("Server is running on port 5000") })
+    app.listen(5000, () => { console.log("Server is running on port 5000 and database is connected.") })
 })();
 
 module.exports = app;
