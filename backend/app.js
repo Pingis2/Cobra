@@ -40,7 +40,7 @@ const connectToDatabase = async () => {
         process.exit(1);  // Exit the process if the connection fails
     }
 };
-connectToDatabase();
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -246,6 +246,9 @@ app.post("/api/login", async (req, res) => {
     
 });
 
-app.listen(5000, () => { console.log("Server is running on port 5000") })
+(async () => {
+    connectToDatabase();
+    app.listen(5000, () => { console.log("Server is running on port 5000") })
+})();
 
 module.exports = app;
