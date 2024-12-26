@@ -38,7 +38,7 @@ export const LogoutButton = () => {
 
     return (
         <>
-            <div>
+            <div className="logout-button">
                 <button onClick={logout} disabled={isLoggingOut}>
                     {isLoggingOut ? "Logging out..." : "Log out"}
                 </button>

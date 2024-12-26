@@ -48,7 +48,12 @@ export const StartPage = () => {
 
     return (
         <>
-            <LogoutButton />
+            
+            <header>
+                <LogoutButton />
+                <p className="user-info">{user?.userName} {user?.country}</p>
+            </header>
+            
             <section>
                 <h1>Start Page</h1>
                 <p>Welcome {user?.userName} to the start page</p>

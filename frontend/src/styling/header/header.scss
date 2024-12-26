@@ -1,3 +1,18 @@
 header {
-    margin-bottom: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+
+    .user-info {
+        margin: 20px 20px 0 0;
+        padding: 10px;
+    }
+
+    .logout-button {
+        margin: 20px 0 0 20px;
+    }
+
+
 }

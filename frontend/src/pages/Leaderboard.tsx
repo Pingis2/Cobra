@@ -32,7 +32,8 @@ export const Leaderboard = () => {
 
     return (
         <>
-            <BackButton	/>
+            <BackButton />
+            
             <div>
                 {backendData === null ? (
                     <p>Loading...</p>
