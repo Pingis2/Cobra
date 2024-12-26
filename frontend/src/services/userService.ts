@@ -107,3 +107,25 @@ export const createUser = async (
         throw error;
     }
 }
+
+export const logoutUser = async (token: string): Promise<boolean> => { 
+    try {
+        const response = await post<{ success: boolean; message?: string }>(
+            `${BASE_URL}logout`,
+            {},
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        console.log("api response", response.data);
+        
+        if (response.data && response.data.success) {
+            return true;
+        } else {
+            console.error("Logout failed:", response.data.message);
+            return false;
+        }
+    } catch (error) {
+        console.error("Error during API call:", error);
+        throw error;
+    }
+}

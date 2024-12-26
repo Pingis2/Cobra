@@ -185,7 +185,17 @@ app.post("/api/login", async (req, res) => {
 });
 
 app.post("/api/logout", (req, res) => {
-    res.json({ message: "Logged out successfully" });
+    const token = req.headers.authorization?.split(" ")[1]; // Extract token from the Authorization header
+
+    if (!token) {
+        return res.status(400).json({ success: false, message: "Token is required" });
+    }
+
+    // Simulate token invalidation or removal logic here (if needed)
+    console.log("Token received for logout:", token);
+
+    // Respond with success
+    res.status(200).json({ success: true, message: "Logged out successfully" });
 });
 
 app.get("/api/get-user", (req, res) => {

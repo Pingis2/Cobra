@@ -23,14 +23,10 @@ export const get = async <T>(url: string, p0: { headers: { Authorization: string
     }
 };
 
-export const post = async <T>(url: string, data: any) => {
+export const post = async <T>(url: string, data: any, config?: any) => {
     try {
         console.log("api url", url)
-        const response = await axios.post<T>(url, data, {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
+        const response = await axios.post<T>(url, data, config);
         console.log("api response", response);
         return response;
     } catch (error) {

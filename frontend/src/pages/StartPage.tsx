@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IUsers } from "../models/IUsers";
 import { getLoggedInUser } from "../services/userService";
+import LogoutButton from "../components/Logout";
 
 export const StartPage = () => {
     const [user, setUser] = useState<IUsers | null>(null);
@@ -46,11 +47,14 @@ export const StartPage = () => {
     }
 
     return (
-        <section>
-            <h1>Start Page</h1>
-            <p>Welcome {user?.userName} to the start page</p>
-            <button onClick={() => handleNavigation('/leaderboard')} type="submit">Leaderboard</button>
-        </section>
+        <>
+            <LogoutButton />
+            <section>
+                <h1>Start Page</h1>
+                <p>Welcome {user?.userName} to the start page</p>
+                <button onClick={() => handleNavigation('/leaderboard')} type="submit">Leaderboard</button>
+            </section>
+        </>
     );
 };
 
