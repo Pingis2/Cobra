@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IUsers } from "../models/IUsers";
-import axios from "axios";
+import { getLoggedInUser } from "../services/userService";
 
 export const StartPage = () => {
     const [user, setUser] = useState<IUsers | null>(null);
@@ -12,25 +12,14 @@ export const StartPage = () => {
 
     const fetchUserData = async () => {
         try {
-            const token = localStorage.getItem('authToken');
+            const token = localStorage.getItem('token');
             if (!token) {
                 setLoading(false);
                 return;
             }
 
-            const response = await axios.get('/api/get-user', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                }
-            });
-
-            if (response.data.users && response.data.users.length > 0) {
-                setUser(response.data.users[0]); // Assuming response contains user data
-            } else {
-                setError('User not found');
-            }
-
-            console.log("api response", response.data.users);
+            const data = await getLoggedInUser(token);
+            setUser(data.user);
         } catch (err) {
             console.error("Error fetching user data:", err);
             setError('Failed to load user data.');

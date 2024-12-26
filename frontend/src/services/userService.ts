@@ -27,20 +27,20 @@ export const getUsers = async (token: string): Promise<IUserData> => {
     }
 };
 
-export const getUser = async (token: string): Promise<IUserData | {error: boolean}> => {
+export const getLoggedInUser = async (token: string): Promise<{ user: IUsers | null }> => {
     try {
-        const response = await get<IUserData>(
+        const response = await get<{ user: IUsers }>(
             `${BASE_URL}get-user`,
             { headers: { Authorization: `Bearer ${token}` } }
         );
 
         console.log("api response", response);
 
-        if (response.data && response.data.users) {
-            return { users: response.data.users, token: token };
+        if (response.data && response.data.user) {
+            return { user: response.data.user };
         } else {
             console.error("No user found in the response");
-            return { error: true, token: '' };
+            return { user: null };
         }
     } catch (error) {
         console.error("Error during API call:", error);

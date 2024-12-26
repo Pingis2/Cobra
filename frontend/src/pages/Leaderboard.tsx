@@ -7,7 +7,7 @@ export const Leaderboard = () => {
     const [, setError] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('authToken'); // Get token from localStorage
+        const token = localStorage.getItem('token'); // Get token from localStorage
 
         if (token) {
             // Pass the token to the getUsers function
@@ -37,7 +37,7 @@ export const Leaderboard = () => {
                 ) : (
                     backendData.map((user) => (
                         <p key={user._id}>
-                            {user.userName}, {user._id}
+                            {user.userName}, {user.highscore}, {user.country}
                         </p>
                     ))
                 )}
