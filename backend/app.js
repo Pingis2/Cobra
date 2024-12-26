@@ -73,9 +73,6 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 
 app.get("/api/leaderboard", async (req, res) => {
-    console.log("Fetching users");
-    res.json({ message: "Testing endpoint" });
-    /*
     try {
         const db = client.db("Users"); // Ensure your database client is initialized properly
         if (!db) {
@@ -96,7 +93,6 @@ app.get("/api/leaderboard", async (req, res) => {
         console.error("Error getting users", err);
         res.status(500).send("Error getting users");
     }
-    */
 })
 
 app.get("api/test", async (req, res) => {
