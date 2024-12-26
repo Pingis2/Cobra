@@ -48,7 +48,7 @@ export const StartPage = () => {
     return (
         <section>
             <h1>Start Page</h1>
-            <p>Welcome {user?.firstName} to the start page</p>
+            <p>Welcome {user?.userName} to the start page</p>
             <button onClick={() => handleNavigation('/leaderboard')} type="submit">Leaderboard</button>
         </section>
     );

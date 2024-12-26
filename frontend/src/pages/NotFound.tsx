@@ -1,6 +1,11 @@
+import { BackButton } from "../components/BackButton";
+
 export const NotFound = () => {
     return (
-        <>NotFound</>
+        <>
+            <BackButton />
+            NotFound
+        </>
     );
 }
 

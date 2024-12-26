@@ -1,2 +1,24 @@
 @use './login/login-form-desktop.scss' as *;
 @use './create-user/create-user.scss' as *;
+@use './header/header.scss' as *;
+@use './footer/footer.scss' as *;
+
+html {
+    height: 100%;
+}
+
+#root {
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+}

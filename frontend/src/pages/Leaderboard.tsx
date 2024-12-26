@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IUsers } from "../models/IUsers";
 import { getUsers } from "../services/userService";
+import { BackButton } from "../components/BackButton";
 
 export const Leaderboard = () => {
     const [backendData, setBackendData] = useState<IUsers[] | null>(null);
@@ -31,6 +32,7 @@ export const Leaderboard = () => {
 
     return (
         <>
+            <BackButton	/>
             <div>
                 {backendData === null ? (
                     <p>Loading...</p>

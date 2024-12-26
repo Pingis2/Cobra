@@ -24,8 +24,8 @@ const client = new MongoClient(MONGODB_URI, {
     },
     // Enable automatic reconnection and retry logic
     maxPoolSize: 10, // Limit the number of connections
-    socketTimeoutMS: 100000, // Timeout after 1 minute if no activity
-    connectTimeoutMS: 100000, // Timeout after 1 minute for initial connection
+    socketTimeoutMS: 600000, // Timeout after 10 minutes if no activity
+    connectTimeoutMS: 600000, // Timeout after 10 minutes for initial connection
     retryWrites: true, // Enable retryable writes for better reliability
 });
 
@@ -72,61 +72,6 @@ app.use((req, res, next) => {
 
 
 app.use('/', indexRouter);
-
-app.get("/api/leaderboard", async (req, res) => {
-    try {
-        const db = client.db("Users"); // Ensure your database client is initialized properly
-        if (!db) {
-            console.error("Database not initialized");
-            return res.status(500).send("Database not initialized");
-        }
-
-        const users = await db.collection("users").find().toArray();
-
-        if (!users || users.length === 0) {
-            console.log("No users found in the database");
-            return res.status(404).json({ message: "No users found" });
-        }
-
-        console.log("Fetched users:", users);
-        res.json({ users });
-    } catch (err) {
-        console.error("Error getting users", err);
-        res.status(500).send("Error getting users");
-    }
-})
-
-app.get("api/test", async (req, res) => {
-    res.json({ message: "Testing endpoint" });
-})
-
-app.get("/api/get-user", (req, res) => {
-    const token = req.headers['authorization']?.split(' ')[1];
-
-    if (!token) {
-        return res.status(401).send("Token is required");
-    }
-
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) {
-            return res.status(401).send("Invalid or expired token");
-        }
-
-        const userId = decoded._id;
-        const db = client.db("Users");
-        db.collection("users").findOne({ _id: new ObjectId(userId) })
-            .then(user => {
-                if (!user) {
-                    return res.status(404).send("User not found");
-                }
-                res.json({ user });
-            })
-            .catch(err => {
-                res.status(500).send("Error fetching user data");
-            });
-    });
-});
-
 
 app.post("/api/add-user", async (req, res) => {
     try {
@@ -237,6 +182,60 @@ app.post("/api/login", async (req, res) => {
         console.error("Error logging in", error);
     }
     
+});
+
+app.post("/api/logout", (req, res) => {
+    res.json({ message: "Logged out successfully" });
+});
+
+app.get("/api/get-user", (req, res) => {
+    const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).send("Token is required");
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).send("Invalid or expired token");
+        }
+
+        const userId = decoded._id;
+        const db = client.db("Users");
+        db.collection("users").findOne({ _id: new ObjectId(userId) })
+            .then(user => {
+                if (!user) {
+                    return res.status(404).send("User not found");
+                }
+                res.json({ user });
+            })
+            .catch(err => {
+                res.status(500).send("Error fetching user data");
+            });
+    });
+});
+
+app.get("/api/leaderboard", async (req, res) => {
+    try {
+        const db = client.db("Users");
+        if (!db) {
+            console.error("Database not initialized");
+            return res.status(500).send("Database not initialized");
+        }
+
+        const users = await db.collection("users").find().toArray();
+
+        if (!users || users.length === 0) {
+            console.log("No users found in the database");
+            return res.status(404).json({ message: "No users found" });
+        }
+
+        console.log("Fetched users:", users);
+        res.json({ users });
+    } catch (err) {
+        console.error("Error getting users", err);
+        res.status(500).send("Error getting users");
+    }
 });
 
 app.get("*", (req, res) => {
