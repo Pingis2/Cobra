@@ -16,7 +16,15 @@
       "dest": "frontend/$1" 
     },
     {
-      "src": "/api/(.*)",
+      "src": "/api/login",
+      "dest": "/backend/app.js"
+    },
+    {
+      "src": "/api/create-user",
+      "dest": "/backend/app.js"
+    },
+    {
+      "src": "/api/leaderboard",
       "dest": "/backend/app.js"
     }
   ]
