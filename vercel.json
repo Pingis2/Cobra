@@ -17,7 +17,8 @@
     },
     {
       "source": "/(.*)",
-      "destination": "/frontend/index.html"
+      "destination": "/frontend/$1"
     }
-  ]
+  ],
+  "cleanUrls": true
 }
