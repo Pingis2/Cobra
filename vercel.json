@@ -19,19 +19,5 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build"
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/leaderboard",
-      "dest": "/backend/app.js"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/backend/app.js"
-    },
-    { 
-      "src": "/(.*)", 
-      "dest": "frontend/$1" 
-    }
   ]
 }
