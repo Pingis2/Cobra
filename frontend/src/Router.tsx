@@ -6,6 +6,7 @@ import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
 import StartPage from "./pages/StartPage";
 import { CreateUser } from "./pages/CreateUser";
+import { StartGamePage } from "./pages/StartGamePage";
 
 
 export const router = createBrowserRouter([
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path: "/create-account",
                 element: <CreateUser />,
+            },
+            {
+                path: "/start-game-page",
+                element: <StartGamePage />,
             }
         ]
     }

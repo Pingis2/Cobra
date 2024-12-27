@@ -7,6 +7,8 @@ export const Home = () => {
         navigate(path);
     }
 
+    localStorage.removeItem("token");
+
     return (
         <>
             Home

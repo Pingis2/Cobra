@@ -11,6 +11,8 @@ export const Login = () => {
     const handleNavigation = (path: string) => {
         navigate(path);
     }
+
+    localStorage.removeItem("token");
     
 
     let handleLogin = async (event: React.FormEvent) => {
@@ -45,8 +47,7 @@ export const Login = () => {
     return (
         <>
             <section className="login-container">
-                <h1>Login</h1>
-                <p>Log in to your account</p>
+                <h2>Log in to your account</h2>
                 <form className="login-form" onSubmit={handleLogin}>
                     <label>
                         Email:
@@ -71,7 +72,7 @@ export const Login = () => {
                 </form>
             
 
-                <p onClick={() => handleNavigation('/create-account')}>Don't have an account? Click to create one</p>
+                <p onClick={() => handleNavigation('/create-account')} className="create-account">Don't have an account? Click to create one</p>
             </section>
         </>
     );
