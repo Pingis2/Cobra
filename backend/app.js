@@ -6,6 +6,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { ObjectId } = require("mongodb");
+const mongoose = require("mongoose");
 
 var indexRouter = require('./routes/index');
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -40,6 +41,22 @@ const connectToDatabase = async () => {
         process.exit(1);  // Exit the process if the connection fails
     }
 };
+
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    console.log("Connected to MongoDB");
+}).catch((err) => {
+    console.error("Error connecting to MongoDB", err);
+});
+
+app.use((req, res, next) => {
+    if (mongoose.connection.readyState !== 1) {  // 1 means connected
+        return res.status(503).send('Database not ready');
+    }
+    next();
+});
 
 
 app.use(logger('dev'));
