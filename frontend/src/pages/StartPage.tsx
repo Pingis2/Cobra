@@ -3,7 +3,8 @@ import LogoutButton from "../components/Logout";
 import { useUser } from "../context/UserContext";
 
 export const StartPage = () => {
-    const { user, loading} = useUser();
+    const { user, loading } = useUser();
+    console.log("user", user);
     const navigate = useNavigate();
 
     if (loading) {
@@ -16,7 +17,6 @@ export const StartPage = () => {
 
     return (
         <>
-            
             <header>
                 <LogoutButton />
                 <p className="user-info">{user?.firstName} {user?.country}</p>

@@ -23,14 +23,11 @@ export const CreateUser = () => {
         event.preventDefault();
         setError("");
         try {
-            // Pass the user data to the createUser function
             const data = await createUser(userName, firstName, lastName, email, password, country, highscore);
             console.log("create user result", data);
 
             if (data) {
-                // Once the user is created, you can navigate and store user info
-                navigate("/start-page");
-                localStorage.setItem("user", JSON.stringify(data));
+                navigate("/login");
             } else {
                 setError("Failed to create user");
             }
@@ -54,66 +51,83 @@ export const CreateUser = () => {
         <>
             <h1>Create Account</h1>
             <section className="create-user-container">
-            <form className="create-user-form" onSubmit={handleCreateUser}>
-                <label htmlFor="firstName">First name:</label>
-                <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                />
+                <form className="create-user-form" onSubmit={handleCreateUser}>
+                    <div className="input-container">
+                        <label htmlFor="firstName">First name:</label>
+                        <input
+                            type="text"
+                            id="firstName"
+                            name="firstName"
+                            className="first-name"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <label htmlFor="lastName">Last name:</label>
-                <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                />
+                    <div className="input-container">
+                        <label htmlFor="lastName">Last name:</label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <label htmlFor="username">Username:</label>
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    required
-                />
+                    <div className="input-container">
+                        <label htmlFor="username">Username:</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            className="user-name"    
+                            value={userName}
+                            onChange={(e) => setUserName(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="text"
-                    id="email"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
+                    <div className="input-container">
+                        <label htmlFor="email">Email:</label>
+                        <input
+                            type="text"
+                            id="email"
+                            name="email"
+                            className="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
+                    <div className="input-container">
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            className="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <label htmlFor="country">Country:</label>
-                <input
-                    type="text"
-                    id="country"
-                    name="country"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    required
-                />
+                    <div className="input-container">
+                        <label htmlFor="country">Country:</label>
+                        <input
+                            type="text"
+                            id="country"
+                            name="country"
+                            className="country"
+                            value={country}
+                            onChange={(e) => setCountry(e.target.value)}
+                            required
+                        />
+                    </div>
                 {error && <p>{error}</p>}
                 <button type="submit">Create User</button>
             </form>

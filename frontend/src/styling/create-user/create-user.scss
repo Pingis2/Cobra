@@ -3,11 +3,30 @@
     .create-user-form {
         display: flex;
         flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            font-size: 1.4rem;
+        }
+
+        button {
+            font-size: 1.4rem;
+            border: 1px solid white;
+
+            &:hover {
+                color: #FFA500;
+            }
+        }
     }
 
     p {
         text-decoration: underline;
         cursor: pointer;
+        font-size: 1.4rem;
 
         &:hover {
             color: #FFA500;

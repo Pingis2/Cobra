@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { loginUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const { setUser } = useUser();
     const navigate = useNavigate();
 
     const handleNavigation = (path: string) => {
         navigate(path);
     }
+    
 
-    localStorage.removeItem("token");
+    //localStorage.removeItem("token");
     
 
     let handleLogin = async (event: React.FormEvent) => {
@@ -23,6 +26,11 @@ export const Login = () => {
             console.log("login result", data);
             if (data && data.token) {
                 localStorage.setItem("token", data.token);
+                if (data.users && data.users.length > 0) {
+                    setUser(data.users[0]);
+                } else {
+                    setError("No users found in response");
+                }
                 navigate("/start-page");
             } else {
                 setError("Wrong email or password");
