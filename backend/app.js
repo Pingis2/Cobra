@@ -22,7 +22,7 @@ const client = new MongoClient(MONGODB_URI, {
         strict: true,
         deprecationErrors: true,
     },
-    maxPoolSize: 10, // Limit the number of connections
+    maxPoolSize: 9, // Limit the number of connections
     socketTimeoutMS: 600000, // Timeout after 10 minutes if no activity
     connectTimeoutMS: 600000, // Timeout after 10 minutes for initial connection
     retryWrites: true, // Enable retryable writes for better reliability
