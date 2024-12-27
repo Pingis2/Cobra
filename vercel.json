@@ -10,18 +10,14 @@
       "use": "@vercel/static-build"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/leaderboard",
-      "dest": "/backend/app.js"
+      "source": "/api/(.*)",
+      "destination": "/backend/app.js"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/backend/app.js"
-    },
-    { 
-      "src": "/(.*)", 
-      "dest": "/frontend/$1" 
+      "source": "/(.*)",
+      "destination": "/frontend/$1"
     }
   ]
 }
