@@ -67,7 +67,7 @@ export const Login = () => {
                         />
                     </label>
                     {error && <p>{error}</p>}
-                    <button type="submit">Login</button>
+                    <button type="submit" className="login-button">Login</button>
                 </form>
             
 

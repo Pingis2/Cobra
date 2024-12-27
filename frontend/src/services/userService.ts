@@ -80,6 +80,7 @@ export const createUser = async (
     email: string,
     password: string,
     country: string,
+    highscore: number
     ): Promise<IUserData | null> => {
     try {
         const response = await post<{ success: boolean; user?: IUserData; message?: string; }>(
@@ -91,6 +92,7 @@ export const createUser = async (
                 email,
                 password,
                 country,
+                highscore
             }
         );
 

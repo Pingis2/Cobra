@@ -22,7 +22,6 @@ const client = new MongoClient(MONGODB_URI, {
         strict: true,
         deprecationErrors: true,
     },
-    // Enable automatic reconnection and retry logic
     maxPoolSize: 10, // Limit the number of connections
     socketTimeoutMS: 600000, // Timeout after 10 minutes if no activity
     connectTimeoutMS: 600000, // Timeout after 10 minutes for initial connection
@@ -103,6 +102,7 @@ app.post("/api/add-user", async (req, res) => {
                 email: user.email,
                 password: user.password,
                 country: user.country,
+                highscore: user.highscore,
             },
             token,
         });

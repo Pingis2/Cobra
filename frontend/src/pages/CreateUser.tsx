@@ -10,6 +10,7 @@ export const CreateUser = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [country, setCountry] = useState("");
+    const [highscore] = useState(0);
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ export const CreateUser = () => {
         setError("");
         try {
             // Pass the user data to the createUser function
-            const data = await createUser(userName, firstName, lastName, email, password, country);
+            const data = await createUser(userName, firstName, lastName, email, password, country, highscore);
             console.log("create user result", data);
 
             if (data) {

@@ -17,7 +17,8 @@ export const Leaderboard = () => {
                     if (data.error) {
                         setError(true);
                     } else {
-                        setBackendData(data.users || []);
+                        const sortedUsers = (data.users || []).sort((a, b) => b.highscore - a.highscore);
+                        setBackendData(sortedUsers);
                     }
                 })
                 .catch((error) => {
