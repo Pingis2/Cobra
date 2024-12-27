@@ -3,11 +3,15 @@ import './App.css'
 import { router } from './Router'
 import './styling/main.scss'
 import { UserProvider } from './context/UserContext'
+import { AppLoader } from './pages/Loader'
 
 function App() {
   return (
+    
     <UserProvider>
-      <RouterProvider router={router} />
+      <AppLoader>
+        <RouterProvider router={router} />
+      </AppLoader>
     </UserProvider>
   )
 }
