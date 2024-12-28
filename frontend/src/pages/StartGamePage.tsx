@@ -1,9 +1,10 @@
+import { useContext } from "react";
 import LogoutButton from "../components/Logout";
-import { useUser } from "../context/UserContext";
+import { UserContext } from "../context/UserContext";
 
 
 export const StartGamePage = () => {
-    const { user } = useUser();
+    const { user } = useContext(UserContext);
 
     return (
         <>

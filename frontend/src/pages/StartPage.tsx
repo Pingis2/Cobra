@@ -1,11 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import LogoutButton from "../components/Logout";
-import { useUser } from "../context/UserContext";
+import { UserContext } from "../context/UserContext";
+import { useContext, useEffect } from "react";
 
 export const StartPage = () => {
-    const { user, loading } = useUser();
+    const { user, loading } = useContext(UserContext);
     console.log("user", user);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!loading && !user) {
+            navigate("/login");
+        }
+    }, [user, loading, navigate]);
 
     if (loading) {
         return <div>Loading...</div>;

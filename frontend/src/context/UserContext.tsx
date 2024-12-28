@@ -14,6 +14,7 @@ export const UserContext = createContext<IUserContext>({
     setUser: () => {},
 });
 
+
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<IUsers | null>(null);
     const [loading, setLoading] = useState<boolean>(true);

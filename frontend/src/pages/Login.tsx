@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { loginUser } from "../services/userService";
+import { useContext, useState } from "react";
+import { getLoggedInUser, loginUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../context/UserContext";
+import { UserContext} from "../context/UserContext";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const { setUser } = useUser();
+    const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleNavigation = (path: string) => {
@@ -22,18 +22,30 @@ export const Login = () => {
         event.preventDefault();
         setError("");
         try {
-            const data = await loginUser(email, password);
-            console.log("login result", data);
-            if (data && data.token) {
-                localStorage.setItem("token", data.token);
-                if (data.users && data.users.length > 0) {
-                    setUser(data.users[0]);
-                } else {
-                    setError("No users found in response");
-                }
-                navigate("/start-page");
+            const loginResponse = await loginUser(email, password);
+            console.log("login result", loginResponse);
+
+            if (loginResponse && loginResponse.token) {
+                localStorage.setItem("token", loginResponse.token);
             } else {
                 setError("Wrong email or password");
+            }
+
+            const token = localStorage.getItem("token");
+
+            if (token) {
+                const fetchedUser = await getLoggedInUser(token || "");
+                console.log("fetched user", fetchedUser);
+
+                if (fetchedUser.user) {
+                    setUser(fetchedUser.user);
+
+                    navigate("/start-page");
+                } else {
+                    setError("No user found in responseee");
+                }
+            } else {
+                setError("No users found in response");
             }
         } catch (error: any) {
             console.error("Error during login:", error);
