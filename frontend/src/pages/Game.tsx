@@ -4,7 +4,7 @@ import LogoutButton from "../components/Logout";
 
 const gameSpeed = 50;
 const renderFps = 1000;
-const cellSize = 20;
+const cellSize = 15;
 
 export const Game = () => {
     const { user } = useContext(UserContext);
@@ -177,8 +177,8 @@ export const Game = () => {
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth < 768) {
-                setCanvasHeight(20);
-                setCanvasWidth(20);
+                setCanvasHeight(25);
+                setCanvasWidth(25);
             } else {
                 setCanvasHeight(40);
                 setCanvasWidth(40);
