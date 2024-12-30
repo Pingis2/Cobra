@@ -17,7 +17,7 @@ export const Game = () => {
     
     const [direction, setDirection] = useState({ x: 1, y: 0 });
     const [gameOver, setGameOver] = useState(false);
-    const [nextDirection, setNextDirection] = useState(direction);
+    const [nextDirection, ] = useState(direction);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
