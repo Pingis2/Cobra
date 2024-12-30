@@ -176,7 +176,7 @@ export const Game = () => {
 
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth < 768) {
                 setCanvasHeight(20);
                 setCanvasWidth(20);
             } else {
@@ -185,9 +185,12 @@ export const Game = () => {
             }
         };
 
+        handleResize();
         window.addEventListener("resize", handleResize);
 
-        return () => window.removeEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        }
     }, []);
 
     const startGame = () => {
