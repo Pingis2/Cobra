@@ -4,9 +4,10 @@ import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
-import StartPage from "./pages/StartPage";
+import StartPage from "./pages/Start";
 import { CreateUser } from "./pages/CreateUser";
-import { StartGamePage } from "./pages/StartGamePage";
+import { StartGamePage } from "./pages/StartGame";
+import { Game } from "./pages/Game";
 
 
 export const router = createBrowserRouter([
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
             {
                 path: "/start-game-page",
                 element: <StartGamePage />,
+            },
+            {
+                path: "/game-page",
+                element: <Game />,
             }
         ]
     }
