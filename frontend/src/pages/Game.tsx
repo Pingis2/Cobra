@@ -5,11 +5,11 @@ import LogoutButton from "../components/Logout";
 const gameSpeed = 50;
 const renderFps = 1000;
 const cellSize = 20;
-const canvasWidth = 40;
-const canvasHeight = 40;
 
 export const Game = () => {
     const { user } = useContext(UserContext);
+    const [canvasWidth, setCanvasWidth] = useState(40);
+    const [canvasHeight, setCanvasHeight] = useState(40);
     const [snake, setSnake] = useState([
         { x: 10, y: 10 },
         { x: 9, y: 10 },
@@ -173,7 +173,22 @@ export const Game = () => {
             window.removeEventListener("touchmove", handleTouchMove);
         }
     }, []);
-    
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth <= 768) {
+                setCanvasHeight(20);
+                setCanvasWidth(20);
+            } else {
+                setCanvasHeight(40);
+                setCanvasWidth(40);
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const startGame = () => {
         setGameStarted(true);
