@@ -151,24 +151,19 @@ export const Game = () => {
             const touch = event.touches[0];
             const deltaX = touch.clientX - startX;
             const deltaY = touch.clientY - startY;
-            let newDirection = direction;
 
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
                 if (deltaX > 0 && direction.x !== -1) {
-                    newDirection = { x: 1, y: 0 }; // Right
+                    setDirection({ x: 1, y: 0 }); // Right
                 } else if (deltaX < 0 && direction.x !== 1) {
-                    newDirection = { x: -1, y: 0 }; // Left
+                    setDirection({ x: -1, y: 0 }); // Left
                 }
             } else {
                 if (deltaY > 0 && direction.y !== -1) {
-                    newDirection = { x: 0, y: 1 }; // Down
+                    setDirection({ x: 0, y: 1 }); // Down
                 } else if (deltaY < 0 && direction.y !== 1) {
-                    newDirection = { x: 0, y: -1 }; // Up
+                    setDirection({ x: 0, y: -1 }); // Up
                 }
-            }
-
-            if (newDirection.x !== -direction.x || newDirection.y !== -direction.y) {
-                setDirection(newDirection);
             }
         };
 
