@@ -140,12 +140,14 @@ export const Game = () => {
         let startY = 0;
 
         const handleTouchStart = (event: TouchEvent) => {
+            event.preventDefault();
             const touch = event.touches[0];
             startX = touch.clientX;
             startY = touch.clientY;
         };
 
         const handleTouchMove = (event: TouchEvent) => {
+            event.preventDefault();
             const touch = event.touches[0];
             const deltaX = touch.clientX - startX;
             const deltaY = touch.clientY - startY;
@@ -165,14 +167,19 @@ export const Game = () => {
             }
         };
 
-        window.addEventListener("touchstart", handleTouchStart);
-        window.addEventListener("touchmove", handleTouchMove);
+        if (gameStarted && !gameOver) {
+            window.addEventListener("touchstart", handleTouchStart, { passive: false });
+            window.addEventListener("touchmove", handleTouchMove, { passive: false });
+        } else {
+            window.removeEventListener("touchstart", handleTouchStart);
+            window.removeEventListener("touchmove", handleTouchMove);
+        }
 
         return () => {
             window.removeEventListener("touchstart", handleTouchStart);
             window.removeEventListener("touchmove", handleTouchMove);
         }
-    }, []);
+    }, [gameStarted, gameOver]);
 
     useEffect(() => {
         const handleResize = () => {
