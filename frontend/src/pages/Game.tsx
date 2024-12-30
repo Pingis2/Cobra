@@ -1,9 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { UserContext } from "../context/UserContext";
+import LogoutButton from "../components/Logout";
 
-const gridSize = 20;
-const cellSize = 20;
+const gridSize = 30;
+const cellSize = 30;
 
 export const Game = () => {
+    const { user } = useContext(UserContext);
     const [snake, setSnake] = useState([
         { x: 10, y: 10 },
         { x: 9, y: 10 },
@@ -17,35 +20,40 @@ export const Game = () => {
     
     const [direction, setDirection] = useState({ x: 1, y: 0 });
     const [gameOver, setGameOver] = useState(false);
-    const [nextDirection, ] = useState(direction);
+    const [gameStarted, setGameStarted] = useState(false);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             const key = event.key;
+            let newDirection = direction;
+
             if (key === "ArrowUp" || key === "w") {
-                setDirection({ x: 0, y: -1 });
+                newDirection = { x: 0, y: -1 };
             } else if (key === "ArrowDown" || key === "s") {
-                setDirection({ x: 0, y: 1 });
+                newDirection = { x: 0, y: 1 };
             } else if (key === "ArrowLeft" || key === "a") {
-                setDirection({ x: -1, y: 0 });
+                newDirection = { x: -1, y: 0 };
             } else if (key === "ArrowRight" || key === "d") {
-                setDirection({ x: 1, y: 0 });
+                newDirection = { x: 1, y: 0 };
+            }
+
+            if (
+                newDirection.x !== -direction.x ||
+                newDirection.y !== -direction.y
+            ) {
+                setDirection(newDirection);
             }
         }
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [direction]);
-
-    useEffect(() => {
-        setDirection(nextDirection);
-    }, [nextDirection]);
+    }, [direction]);;
 
     useEffect(() => {
         let animationFrameId: number;
         let lastUpdateTime = performance.now();
-        const gameSpeed = 100; // Speed in milliseconds
+        const gameSpeed = 100; // Speed in millisecondss
 
         const gameLoop = (currentTime: number) => {
             const deltaTime = currentTime - lastUpdateTime;
@@ -57,8 +65,13 @@ export const Game = () => {
                         y: (prevSnake[0].y + direction.y + gridSize) % gridSize,
                     };
 
-                    if (prevSnake.some((segment) => segment.x === newHead.x && segment.y === newHead.y)) {
+                    if (prevSnake.some(
+                        (segment) =>
+                            segment.x === newHead.x &&
+                            segment.y === newHead.y)
+                    ) {
                         setGameOver(true);
+                        setGameStarted(false);
                         return prevSnake;
                     }
 
@@ -81,12 +94,12 @@ export const Game = () => {
             animationFrameId = requestAnimationFrame(gameLoop);
         };
 
-        if (!gameOver) {
+        if (gameStarted && !gameOver) {
             animationFrameId = requestAnimationFrame(gameLoop);
         }
 
         return () => cancelAnimationFrame(animationFrameId);
-    }, [direction, gameOver, food]);
+    }, [direction, gameOver, food, gameStarted]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -108,7 +121,9 @@ export const Game = () => {
         ctx.fillRect(food.x * cellSize, food.y * cellSize, cellSize, cellSize);
     }, [snake, food]);
 
-    const restartGame = () => {
+    const startGame = () => {
+        setGameStarted(true);
+        setGameOver(false);
         setSnake([
             { x: 10, y: 10 },
             { x: 9, y: 10 },
@@ -120,13 +135,15 @@ export const Game = () => {
             y: Math.floor(Math.random() * gridSize)
         })
         setDirection({ x: 1, y: 0 });
-        setGameOver(false);
     }
 
     return (
         <>
             <div>
-                <h1>Game</h1>
+                <header>
+                    <LogoutButton />
+                    <p className="user-info">{user?.firstName} {user?.country}</p>
+                </header>
                 
                 <canvas
                     ref={canvasRef}
@@ -137,10 +154,15 @@ export const Game = () => {
                         backgroundColor: "#f0f0f0",
                     }}
                 ></canvas>
+                {!gameStarted && (
+                    <div>
+                        <button onClick={startGame} type="button">Start Game</button>
+                    </div>
+                )}
                 {gameOver && (
                     <div>
                         <h2>Game Over!</h2>
-                        <button onClick={restartGame}>Restart</button>
+                        <button onClick={startGame} type="button">Restart</button>
                     </div>
                 )}
             </div>
