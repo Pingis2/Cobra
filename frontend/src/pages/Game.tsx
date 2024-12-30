@@ -2,8 +2,11 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import LogoutButton from "../components/Logout";
 
-const gridSize = 30;
-const cellSize = 30;
+const gameSpeed = 50;
+const renderFps = 1000;
+const cellSize = 20;
+const canvasWidth = 40;
+const canvasHeight = 40;
 
 export const Game = () => {
     const { user } = useContext(UserContext);
@@ -14,14 +17,28 @@ export const Game = () => {
         { x: 7, y: 10 },
     ]);
     const [food, setFood] = useState({ 
-        x: Math.floor(Math.random() * gridSize),
-        y: Math.floor(Math.random() * gridSize)
+        x: Math.floor(Math.random() * canvasWidth),
+        y: Math.floor(Math.random() * canvasHeight)
     });
     
     const [direction, setDirection] = useState({ x: 1, y: 0 });
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    const genereateFood = () => {
+        let newFood = {
+            x: Math.floor(Math.random() * canvasWidth),
+            y: Math.floor(Math.random() * canvasHeight)
+        };
+        while (snake.some(segment => segment.x === newFood.x && segment.y === newFood.y)) {
+            newFood = {
+                x: Math.floor(Math.random() * canvasWidth),
+                y: Math.floor(Math.random() * canvasHeight)
+            };
+        }
+        return newFood;
+    }
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -38,10 +55,7 @@ export const Game = () => {
                 newDirection = { x: 1, y: 0 };
             }
 
-            if (
-                newDirection.x !== -direction.x ||
-                newDirection.y !== -direction.y
-            ) {
+            if (newDirection.x !== -direction.x || newDirection.y !== -direction.y) {
                 setDirection(newDirection);
             }
         }
@@ -53,42 +67,61 @@ export const Game = () => {
     useEffect(() => {
         let animationFrameId: number;
         let lastUpdateTime = performance.now();
-        const gameSpeed = 100; // Speed in millisecondss
+        let lastMoveTime = performance.now();
+        const moveInterval = gameSpeed;
 
         const gameLoop = (currentTime: number) => {
             const deltaTime = currentTime - lastUpdateTime;
 
-            if (deltaTime >= gameSpeed) {
+            if (deltaTime >= 1000 / renderFps) {
+                const canvas = canvasRef.current;
+                const ctx = canvas?.getContext("2d");
+
+                if (ctx && canvas) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    // Draw the snake
+                    ctx.fillStyle = "green";
+                    snake.forEach((segment) => {
+                        ctx.fillRect(segment.x * cellSize, segment.y * cellSize, cellSize, cellSize);
+                    });
+
+                    // Draw the food
+                    ctx.fillStyle = "red";
+                    ctx.fillRect(food.x * cellSize, food.y * cellSize, cellSize, cellSize);
+                }
+                lastUpdateTime = currentTime;
+            }
+
+            if (currentTime - lastMoveTime >= moveInterval) {
                 setSnake((prevSnake) => {
                     const newHead = {
-                        x: (prevSnake[0].x + direction.x + gridSize) % gridSize,
-                        y: (prevSnake[0].y + direction.y + gridSize) % gridSize,
+                        x: prevSnake[0].x + direction.x,
+                        y: prevSnake[0].y + direction.y,
                     };
 
-                    if (prevSnake.some(
-                        (segment) =>
-                            segment.x === newHead.x &&
-                            segment.y === newHead.y)
+                    if (
+                        newHead.x < 0 || newHead.x >= canvasWidth ||
+                        newHead.y < 0 || newHead.y >= canvasHeight ||
+                        prevSnake.some(segment => segment.x === newHead.x && segment.y === newHead.y)
                     ) {
-                        setGameOver(true);
-                        setGameStarted(false);
+                        if (!gameOver) {
+                            setGameOver(true);
+                            setGameStarted(false);
+                        }
                         return prevSnake;
                     }
 
                     const newSnake = [newHead, ...prevSnake];
                     if (newHead.x === food.x && newHead.y === food.y) {
-                        setFood({
-                            x: Math.floor(Math.random() * gridSize),
-                            y: Math.floor(Math.random() * gridSize),
-                        });
+                        setFood(genereateFood());
                     } else {
                         newSnake.pop();
                     }
 
+                    lastMoveTime = currentTime;
                     return newSnake;
                 });
-
-                lastUpdateTime = currentTime;
             }
 
             animationFrameId = requestAnimationFrame(gameLoop);
@@ -99,27 +132,48 @@ export const Game = () => {
         }
 
         return () => cancelAnimationFrame(animationFrameId);
-    }, [direction, gameOver, food, gameStarted]);
+    }, [direction, gameOver, food, gameStarted, snake]);
 
     useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas?.getContext("2d");
 
-        if (!canvas || !ctx) return;
+        let startX = 0;
+        let startY = 0;
 
-        // Clear the canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const handleTouchStart = (event: TouchEvent) => {
+            const touch = event.touches[0];
+            startX = touch.clientX;
+            startY = touch.clientY;
+        };
 
-        // Draw the snake
-        ctx.fillStyle = "green";
-        snake.forEach((segment) => {
-            ctx.fillRect(segment.x * cellSize, segment.y * cellSize, cellSize, cellSize);
-        });
+        const handleTouchMove = (event: TouchEvent) => {
+            const touch = event.touches[0];
+            const deltaX = touch.clientX - startX;
+            const deltaY = touch.clientY - startY;
 
-        // Draw the food
-        ctx.fillStyle = "red";
-        ctx.fillRect(food.x * cellSize, food.y * cellSize, cellSize, cellSize);
-    }, [snake, food]);
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (deltaX > 0 && direction.x !== -1) {
+                    setDirection({ x: 1, y: 0 }); // Right
+                } else if (deltaX < 0 && direction.x !== 1) {
+                    setDirection({ x: -1, y: 0 }); // Left
+                }
+            } else {
+                if (deltaY > 0 && direction.y !== -1) {
+                    setDirection({ x: 0, y: 1 }); // Down
+                } else if (deltaY < 0 && direction.y !== 1) {
+                    setDirection({ x: 0, y: -1 }); // Up
+                }
+            }
+        };
+
+        window.addEventListener("touchstart", handleTouchStart);
+        window.addEventListener("touchmove", handleTouchMove);
+
+        return () => {
+            window.removeEventListener("touchstart", handleTouchStart);
+            window.removeEventListener("touchmove", handleTouchMove);
+        }
+    }, []);
+    
 
     const startGame = () => {
         setGameStarted(true);
@@ -130,11 +184,9 @@ export const Game = () => {
             { x: 8, y: 10 },
             { x: 7, y: 10 },
         ]);
-        setFood({
-            x: Math.floor(Math.random() * gridSize),
-            y: Math.floor(Math.random() * gridSize)
-        })
+        setFood(genereateFood());
         setDirection({ x: 1, y: 0 });
+        
     }
 
     return (
@@ -147,8 +199,8 @@ export const Game = () => {
                 
                 <canvas
                     ref={canvasRef}
-                    width={gridSize * cellSize}
-                    height={gridSize * cellSize}
+                    width={canvasWidth * cellSize}
+                    height={canvasHeight * cellSize}
                     style={{
                         border: "1px solid black",
                         backgroundColor: "#f0f0f0",
