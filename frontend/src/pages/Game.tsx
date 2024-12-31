@@ -1,13 +1,13 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import LogoutButton from "../components/Logout";
+import { useNavigate } from "react-router-dom";
 
-const gameSpeed = 50;
+const gameSpeed = 100;
 const renderFps = 2000;
 const cellSize = 15;
 
 export const Game = () => {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const [canvasWidth, setCanvasWidth] = useState(40);
     const [canvasHeight, setCanvasHeight] = useState(40);
     const [snake, setSnake] = useState([
@@ -16,18 +16,20 @@ export const Game = () => {
         { x: 8, y: 10 },
         { x: 7, y: 10 },
     ]);
-    const [food, setFood] = useState({ 
+    const [food, setFood] = useState({
         x: Math.floor(Math.random() * canvasWidth),
         y: Math.floor(Math.random() * canvasHeight)
     });
-    
+    const [currentScore, setCurrentScore] = useState(0);
     const [direction, setDirection] = useState({ x: 1, y: 0 });
     const directionRef = useRef(direction);
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const navigate = useNavigate();
 
-    const genereateFood = () => {
+    // Generate food --------------------------------------------------------------
+    const generateFood = () => {
         let newFood = {
             x: Math.floor(Math.random() * canvasWidth),
             y: Math.floor(Math.random() * canvasHeight)
@@ -41,6 +43,11 @@ export const Game = () => {
         return newFood;
     }
 
+    useEffect(() => {
+        directionRef.current = direction;
+    }, [direction]);
+
+    // Handle user input (keyboard + touch)
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             const key = event.key;
@@ -60,16 +67,77 @@ export const Game = () => {
                 directionRef.current = newDirection;
                 setDirection(newDirection);
             }
-        }
+        };
+
+        let startX = 0;
+        let startY = 0;
+        let lastTouchMoveTime = 0;
+
+        const handleTouchStart = (event: TouchEvent) => {
+            if (gameStarted && !gameOver) {
+                event.preventDefault();
+            }
+            const touch = event.touches[0];
+            startX = touch.clientX;
+            startY = touch.clientY;
+        };
+
+        const handleTouchMove = (event: TouchEvent) => {
+            if (gameStarted && !gameOver) {
+                event.preventDefault();
+            }
+            const currentTime = performance.now();
+            if (currentTime - lastTouchMoveTime < 100) return;
+
+            lastTouchMoveTime = currentTime;
+            const touch = event.touches[0];
+            const deltaX = touch.clientX - startX;
+            const deltaY = touch.clientY - startY;
+
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (deltaX > 0 && directionRef.current.x !== -1) {
+                    setDirection({ x: 1, y: 0 }); // Right
+                } else if (deltaX < 0 && directionRef.current.x !== 1) {
+                    setDirection({ x: -1, y: 0 }); // Left
+                }
+            } else {
+                if (deltaY > 0 && directionRef.current.y !== -1) {
+                    setDirection({ x: 0, y: 1 }); // Down
+                } else if (deltaY < 0 && directionRef.current.y !== 1) {
+                    setDirection({ x: 0, y: -1 }); // Up
+                }
+            }
+        };
 
         window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [direction]);;
+        window.addEventListener("touchstart", handleTouchStart, { passive: false });
+        window.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+            window.removeEventListener("touchstart", handleTouchStart);
+            window.removeEventListener("touchmove", handleTouchMove);
+        };
+    }, [gameStarted, gameOver]);
 
     useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setCanvasHeight(25);
+                setCanvasWidth(25);
+            } else {
+                setCanvasHeight(40);
+                setCanvasWidth(40);
+            }
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
         let animationFrameId: number;
         let lastUpdateTime = performance.now();
         let lastMoveTime = performance.now();
+        const foodPoints = 100;
         const moveInterval = gameSpeed;
 
         const gameLoop = (currentTime: number) => {
@@ -116,7 +184,8 @@ export const Game = () => {
 
                     const newSnake = [newHead, ...prevSnake];
                     if (newHead.x === food.x && newHead.y === food.y) {
-                        setFood(genereateFood());
+                        setCurrentScore(currentScore + foodPoints);
+                        setFood(generateFood());
                     } else {
                         newSnake.pop();
                     }
@@ -133,104 +202,51 @@ export const Game = () => {
             animationFrameId = requestAnimationFrame(gameLoop);
         }
 
-        return () => cancelAnimationFrame(animationFrameId);
-    }, [direction, gameOver, food, gameStarted, snake]);
-
-
-    useEffect(() => {
-        directionRef.current = direction;
-    }, [direction]);
-
-    let lastTouchMoveTime = 0;
-
-    useEffect(() => {
-        let startX = 0;
-        let startY = 0;
-
-        const handleTouchStart = (event: TouchEvent) => {
-            if (gameStarted && !gameOver) {
-                event.preventDefault();
-            }
-            const touch = event.touches[0];
-            startX = touch.clientX;
-            startY = touch.clientY;
-
-        };
-
-        const handleTouchMove = (event: TouchEvent) => {
-            if (gameStarted && !gameOver) {
-                event.preventDefault();
-            }
-            const currentTime = performance.now();
-            if (currentTime - lastTouchMoveTime < 100) {
-                return;
-            }
-
-            lastTouchMoveTime = currentTime;
-
-            const touch = event.touches[0];
-            const deltaX = touch.clientX - startX;
-            const deltaY = touch.clientY - startY;
-
-            if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                if (deltaX > 0 && directionRef.current.x !== -1) {
-                    setDirection({ x: 1, y: 0 }); // Right
-                } else if (deltaX < 0 && directionRef.current.x !== 1) {
-                    setDirection({ x: -1, y: 0 }); // Left
-                }
-            } else {
-                if (deltaY > 0 && directionRef.current.y !== -1) {
-                    setDirection({ x: 0, y: 1 }); // Down
-                } else if (deltaY < 0 && directionRef.current.y !== 1) {
-                    setDirection({ x: 0, y: -1 }); // Up
-                }
-            }
-        };
-        
-
-        if (gameStarted && !gameOver) {
-            window.addEventListener("touchstart", handleTouchStart, { passive: false });
-            window.addEventListener("touchmove", handleTouchMove, { passive: false });
-        } else {
-            window.removeEventListener("touchstart", handleTouchStart);
-            window.removeEventListener("touchmove", handleTouchMove);
-        }
-
-        return () => {
-            window.removeEventListener("touchstart", handleTouchStart);
-            window.removeEventListener("touchmove", handleTouchMove);
-        }
-    }, [gameStarted, gameOver]);
-
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 768) {
-                setCanvasHeight(25);
-                setCanvasWidth(25);
-            } else {
-                setCanvasHeight(40);
-                setCanvasWidth(40);
-            }
-        };
-
-        handleResize();
-        window.addEventListener("resize", handleResize);
-
         return () => {
             window.removeEventListener("resize", handleResize);
-        }
-    }, []);
+            cancelAnimationFrame(animationFrameId);
+        };
+    }, [gameStarted, gameOver, snake, food, direction, currentScore]);
 
+    useEffect(() => {
+        if (gameOver) {
+            // Prevent multiple updates by checking if the latest score is already set
+            if (user && currentScore !== user.latest_score) {
+                // Update user context only if the score has changed
+                if (currentScore > user.highscore) {
+                    setUser({
+                        ...user,
+                        latest_score: currentScore,
+                        highscore: currentScore, // Set the new highscore if it's higher
+                    });
+                } else {
+                    setUser({
+                        ...user,
+                        latest_score: currentScore,
+                    });
+                }
+            }
+
+            // Navigate to the results page only once
+            if (!user?.latest_score || user.latest_score !== currentScore) {
+                navigate("/results");
+            }
+        }
+    }, [gameOver, currentScore, user?.latest_score, user?.highscore, setUser, navigate]);
+    
+
+    // Start game --------------------------------------------------------------
     const startGame = () => {
         setGameStarted(true);
         setGameOver(false);
+        setCurrentScore(0);
         setSnake([
             { x: 10, y: 10 },
             { x: 9, y: 10 },
             { x: 8, y: 10 },
             { x: 7, y: 10 },
         ]);
-        setFood(genereateFood());
+        setFood(generateFood());
         setDirection({ x: 1, y: 0 });
         
     }
@@ -239,10 +255,11 @@ export const Game = () => {
         <>
             <div>
                 <header>
-                    <LogoutButton />
                     <p className="user-info">{user?.firstName} {user?.country}</p>
                 </header>
                 
+                <p className="current-score">{currentScore}</p>
+                <p className="higscore">{user?.highscore}</p>
                 <canvas
                     ref={canvasRef}
                     width={canvasWidth * cellSize}

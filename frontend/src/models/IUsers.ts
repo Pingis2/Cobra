@@ -7,6 +7,7 @@ export interface IUsers {
     password: string;
     country: string;
     highscore: number;
+    latest_score: number;
 }
 
 export interface IUserData {
