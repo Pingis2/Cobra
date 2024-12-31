@@ -2,8 +2,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import LogoutButton from "../components/Logout";
 
-const gameSpeed = 50;
-const renderFps = 1000;
+const gameSpeed = 100;
+const renderFps = 2000;
 const cellSize = 15;
 
 export const Game = () => {
@@ -22,6 +22,7 @@ export const Game = () => {
     });
     
     const [direction, setDirection] = useState({ x: 1, y: 0 });
+    const directionRef = useRef(direction);
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -43,7 +44,7 @@ export const Game = () => {
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             const key = event.key;
-            let newDirection = direction;
+            let newDirection = directionRef.current;
 
             if (key === "ArrowUp" || key === "w") {
                 newDirection = { x: 0, y: -1 };
@@ -55,7 +56,8 @@ export const Game = () => {
                 newDirection = { x: 1, y: 0 };
             }
 
-            if (newDirection.x !== -direction.x || newDirection.y !== -direction.y) {
+            if (newDirection.x !== -directionRef.current.x || newDirection.y !== -directionRef.current.y) {
+                directionRef.current = newDirection;
                 setDirection(newDirection);
             }
         }
@@ -134,8 +136,12 @@ export const Game = () => {
         return () => cancelAnimationFrame(animationFrameId);
     }, [direction, gameOver, food, gameStarted, snake]);
 
-    useEffect(() => {
 
+    useEffect(() => {
+        directionRef.current = direction;
+    }, [direction]);
+
+    useEffect(() => {
         let startX = 0;
         let startY = 0;
 
@@ -144,6 +150,7 @@ export const Game = () => {
             const touch = event.touches[0];
             startX = touch.clientX;
             startY = touch.clientY;
+
         };
 
         const handleTouchMove = (event: TouchEvent) => {
@@ -153,19 +160,20 @@ export const Game = () => {
             const deltaY = touch.clientY - startY;
 
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                if (deltaX > 0 && direction.x !== -1) {
+                if (deltaX > 0 && directionRef.current.x !== -1) {
                     setDirection({ x: 1, y: 0 }); // Right
-                } else if (deltaX < 0 && direction.x !== 1) {
+                } else if (deltaX < 0 && directionRef.current.x !== 1) {
                     setDirection({ x: -1, y: 0 }); // Left
                 }
             } else {
-                if (deltaY > 0 && direction.y !== -1) {
+                if (deltaY > 0 && directionRef.current.y !== -1) {
                     setDirection({ x: 0, y: 1 }); // Down
-                } else if (deltaY < 0 && direction.y !== 1) {
+                } else if (deltaY < 0 && directionRef.current.y !== 1) {
                     setDirection({ x: 0, y: -1 }); // Up
                 }
             }
         };
+        
 
         if (gameStarted && !gameOver) {
             window.addEventListener("touchstart", handleTouchStart, { passive: false });
