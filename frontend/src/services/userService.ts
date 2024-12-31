@@ -1,5 +1,5 @@
 import { IUserData, IUsers } from "../models/IUsers";
-import { get, post } from "./serviceBase";
+import { get, post, put } from "./serviceBase";
 
 const BASE_URL = 'https://express-test-pearl.vercel.app/api/';
 
@@ -125,6 +125,28 @@ export const logoutUser = async (token: string): Promise<boolean> => {
         } else {
             console.error("Logout failed:", response.data.message);
             return false;
+        }
+    } catch (error) {
+        console.error("Error during API call:", error);
+        throw error;
+    }
+}
+
+export const updateUserScore = async (token: string, score: number): Promise<IUserData | null> => {
+    try {
+        const response = await put<{ success: boolean; user?: IUserData; message?: string }>(
+            `${BASE_URL}update-score`,
+            { score },
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        console.log("api response", response.data);
+        
+        if (response.data.success) {
+            return response.data.user || null;
+        } else {
+            console.error("Score update failed:", response.data.message);
+            return null;
         }
     } catch (error) {
         console.error("Error during API call:", error);

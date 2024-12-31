@@ -248,6 +248,36 @@ app.get("/api/leaderboard", async (req, res) => {
     }
 });
 
+app.put("/api/update-highscore", async (req, res) => {
+    const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).send("Token is required");
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).send("Invalid or expired token");
+        }
+
+        const userId = decoded._id;
+        const db = client.db("Users");
+        db.collection("users").updateOne(
+            { _id: new ObjectId(userId) },
+            { $set: { highscore: req.body.highscore } }
+        )
+            .then(result => {
+                if (result.matchedCount === 0) {
+                    return res.status(404).send("User not found");
+                }
+                res.json({ success: true });
+            })
+            .catch(err => {
+                res.status(500).send("Error updating highscore");
+            });
+    });
+});
+
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });

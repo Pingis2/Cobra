@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { updateUserScore } from "../services/userService";
 
 const gameSpeed = 100;
 const renderFps = 2000;
@@ -209,29 +210,34 @@ export const Game = () => {
     }, [gameStarted, gameOver, snake, food, direction, currentScore]);
 
     useEffect(() => {
-        if (gameOver) {
-            // Prevent multiple updates by checking if the latest score is already set
-            if (user && currentScore !== user.latest_score) {
-                // Update user context only if the score has changed
-                if (currentScore > user.highscore) {
-                    setUser({
-                        ...user,
-                        latest_score: currentScore,
-                        highscore: currentScore, // Set the new highscore if it's higher
-                    });
-                } else {
-                    setUser({
-                        ...user,
-                        latest_score: currentScore,
-                    });
+        const updateScore = async () => {
+            if (gameOver) {
+                // Prevent multiple updates by checking if the latest score is already set
+                if (user && currentScore !== user.latest_score) {
+                    // Update user context only if the score has changed
+                    if (currentScore > user.highscore) {
+                        await updateUserScore(user.userName, currentScore);
+                        setUser({
+                            ...user,
+                            latest_score: currentScore,
+                            highscore: currentScore, // Set the new highscore if it's higher
+                        });
+                    } else {
+                        setUser({
+                            ...user,
+                            latest_score: currentScore,
+                        });
+                    }
+                }
+
+                // Navigate to the results page only once
+                if (!user?.latest_score || user.latest_score !== currentScore) {
+                    navigate("/results");
                 }
             }
-
-            // Navigate to the results page only once
-            if (!user?.latest_score || user.latest_score !== currentScore) {
-                navigate("/results");
-            }
         }
+        updateScore();
+        
     }, [gameOver, currentScore, user?.latest_score, user?.highscore, setUser, navigate]);
     
 

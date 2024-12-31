@@ -34,3 +34,15 @@ export const post = async <T>(url: string, data: any, config?: any) => {
         throw error;
     }
 }
+
+export const put = async <T>(url: string, data: any, config?: any) => {
+    try {
+        console.log("api url", url)
+        const response = await axios.put<T>(url, data, config);
+        console.log("api response", response);
+        return response;
+    } catch (error) {
+        console.error("Error during API call:", error);
+        throw error;
+    }
+}
