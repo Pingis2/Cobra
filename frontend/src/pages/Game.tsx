@@ -1,5 +1,5 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { UserContext } from "../context/UserContext";
+import { useEffect, useRef, useState } from "react";
+import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { updateUserScore } from "../services/userService";
 
@@ -8,7 +8,7 @@ const renderFps = 2000;
 const cellSize = 15;
 
 export const Game = () => {
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser } = useUser();
     const [canvasWidth, setCanvasWidth] = useState(40);
     const [canvasHeight, setCanvasHeight] = useState(40);
     const [snake, setSnake] = useState([
@@ -27,6 +27,8 @@ export const Game = () => {
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    const token = localStorage.getItem("token");
     const navigate = useNavigate();
 
     // Generate food --------------------------------------------------------------
@@ -215,8 +217,8 @@ export const Game = () => {
                 // Prevent multiple updates by checking if the latest score is already set
                 if (user && currentScore !== user.latest_score) {
                     // Update user context only if the score has changed
-                    if (currentScore > user.highscore) {
-                        await updateUserScore(user.userName, currentScore);
+                    if (token && currentScore > user.highscore) {
+                        await updateUserScore(token, currentScore);
                         setUser({
                             ...user,
                             latest_score: currentScore,
@@ -264,8 +266,8 @@ export const Game = () => {
                     <p className="user-info">{user?.firstName} {user?.country}</p>
                 </header>
                 
-                <p className="current-score">{currentScore}</p>
-                <p className="higscore">{user?.highscore}</p>
+                <p className="higscore">Highscore: {user?.highscore}</p>
+                <p className="current-score">Current score: {currentScore}</p>
                 <canvas
                     ref={canvasRef}
                     width={canvasWidth * cellSize}

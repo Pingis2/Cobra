@@ -23,7 +23,8 @@ export const Results = () => {
         <div>
             <h1>Game over</h1>
             <h2>Results</h2>
-            <p>{user?.highscore} {user?.latest_score}</p>
+            <p>Highscore: {user?.highscore}</p>
+            <p>latest score: {user?.latest_score}</p>
             <div>
                 
                 <button onClick={() => handleNavigation("/game-page")} type="button">Play again</button>

@@ -132,11 +132,16 @@ export const logoutUser = async (token: string): Promise<boolean> => {
     }
 }
 
-export const updateUserScore = async (token: string, score: number): Promise<IUserData | null> => {
+export const updateUserScore = async (token: string, highscore: number): Promise<IUserData | null> => {
+    if (!token) {
+        console.error("Token in missing");
+        return null
+    }
+
     try {
         const response = await put<{ success: boolean; user?: IUserData; message?: string }>(
-            `${BASE_URL}update-score`,
-            { score },
+            `${BASE_URL}update-highscore`,
+            { highscore },
             { headers: { Authorization: `Bearer ${token}` } }
         );
 
