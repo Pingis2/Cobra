@@ -274,12 +274,6 @@ export const Game = () => {
                         <button onClick={startGame} type="button">Start Game</button>
                     </div>
                 )}
-                {gameOver && (
-                    <div>
-                        <h2>Game Over!</h2>
-                        <button onClick={startGame} type="button">Restart</button>
-                    </div>
-                )}
             </div>
         </>
     )
