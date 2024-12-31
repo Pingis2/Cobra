@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import LogoutButton from "../components/Logout";
 
-const gameSpeed = 100;
+const gameSpeed = 50;
 const renderFps = 2000;
 const cellSize = 15;
 
@@ -141,12 +141,16 @@ export const Game = () => {
         directionRef.current = direction;
     }, [direction]);
 
+    let lastTouchMoveTime = 0;
+
     useEffect(() => {
         let startX = 0;
         let startY = 0;
 
         const handleTouchStart = (event: TouchEvent) => {
-            event.preventDefault();
+            if (gameStarted && !gameOver) {
+                event.preventDefault();
+            }
             const touch = event.touches[0];
             startX = touch.clientX;
             startY = touch.clientY;
@@ -154,7 +158,16 @@ export const Game = () => {
         };
 
         const handleTouchMove = (event: TouchEvent) => {
-            event.preventDefault();
+            if (gameStarted && !gameOver) {
+                event.preventDefault();
+            }
+            const currentTime = performance.now();
+            if (currentTime - lastTouchMoveTime < 100) {
+                return;
+            }
+
+            lastTouchMoveTime = currentTime;
+
             const touch = event.touches[0];
             const deltaX = touch.clientX - startX;
             const deltaY = touch.clientY - startY;
