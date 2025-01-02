@@ -3,7 +3,7 @@ import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { updateUserScore } from "../services/userService";
 
-const gameSpeed = 100;
+const gameSpeed = 30;
 const renderFps = 2000;
 const cellSize = 15;
 
@@ -262,12 +262,15 @@ export const Game = () => {
     return (
         <>
             <div>
-                <header>
-                    <p className="user-info">{user?.firstName} {user?.country}</p>
+                <header className="header-without-back-button">
+                    <div className="user-logout">
+                        <p className="user-info">{user?.firstName} {user?.country}</p>
+                    </div>
                 </header>
-                
-                <p className="higscore">Highscore: {user?.highscore}</p>
-                <p className="current-score">Current score: {currentScore}</p>
+                <div className="score">
+                    <p className="current-score">Current score: {currentScore}</p>
+                    <p className="higscore">Highscore: {user?.highscore}</p>
+                </div>
                 <canvas
                     ref={canvasRef}
                     width={canvasWidth * cellSize}

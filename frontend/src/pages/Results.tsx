@@ -16,20 +16,23 @@ export const Results = () => {
 
     return (
         <>
-        <header>
-            <LogoutButton />
-            <p className="user-info">{user?.firstName} {user?.country}</p>
-        </header>
-        <div>
-            <h1>Game over</h1>
-            <h2>Results</h2>
-            <p>Highscore: {user?.highscore}</p>
-            <p>latest score: {user?.latest_score}</p>
+            <header className="header-without-back-button">
+                <div className="user-logout">
+                    <p className="user-info">{user?.firstName} {user?.country}</p>
+                    <LogoutButton />
+                </div>
+            </header>
             <div>
-                
-                <button onClick={() => handleNavigation("/game-page")} type="button">Play again</button>
-                <button onClick={() => handleNavigation("/start-page")} type="button">Back to home</button>
-            </div>
+                <h1>Game over</h1>
+                <h2>Results</h2>
+                <div className="score">
+                    <p>latest score: {user?.latest_score}</p>
+                    <p>Highscore: {user?.highscore}</p>
+                </div>
+                <div className="nav-buttons">
+                    <button onClick={() => handleNavigation("/game-page")} type="button">Play again</button>
+                    <button onClick={() => handleNavigation("/start-page")} type="button">Back to home</button>
+                </div>
             </div>
         </>
     )

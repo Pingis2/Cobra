@@ -18,15 +18,27 @@ export const StartPage = () => {
         return <div>Loading...</div>;
     }
 
+    const countryImage = () => {
+        if (user?.country === "England") {
+            return <img src="../src/assets/images/dropdown-flags/england-flag.png" alt="England flag" className="user-country" />;
+        } else if (user?.country === "Sweden") {
+            return <img src="../src/assets/images/dropdown-flags/sweden-flag.png" alt="Sweden flag" className="user-country" />;
+        } else if (user?.country === "USA") {
+            return <img src="../src/assets/images/dropdown-flags/usa-flag.png" alt="USA flag" className="user-country" />;
+        }
+    }
+
     const handleNavigation = (path: string) => {
         navigate(path);
     };
 
     return (
         <>
-            <header>
-                <LogoutButton />
-                <p className="user-info">{user?.firstName} {user?.country}</p>
+            <header className="header-without-back-button">
+                <div className="user-logout">
+                    <p className="user-info">{user?.firstName} {countryImage()}</p>
+                    <LogoutButton />
+                </div>
             </header>
             
             <section>
