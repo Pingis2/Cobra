@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { updateUserScore } from "../services/userService";
+import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
+import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
+import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
 
 const gameSpeed = 30;
 const renderFps = 2000;
@@ -30,6 +33,16 @@ export const Game = () => {
 
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
+
+    const countryImage = () => {
+        if (user?.country === "England") {
+            return <img src={EnglandFlag} alt="England flag" className="user-country" />;
+        } else if (user?.country === "Sweden") {
+            return <img src={SwedenFlag} alt="Sweden flag" className="user-country" />;
+        } else if (user?.country === "USA") {
+            return <img src={AmericanFlag} alt="USA flag" className="user-country" />;
+        }
+    }
 
     // Generate food --------------------------------------------------------------
     const generateFood = () => {
@@ -264,7 +277,7 @@ export const Game = () => {
             <div>
                 <header className="header-without-back-button">
                     <div className="user-logout">
-                        <p className="user-info">{user?.firstName} {user?.country}</p>
+                        <p className="user-info">{user?.firstName} {countryImage()}</p>
                     </div>
                 </header>
                 <div className="score">

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../services/userService";
+import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
+import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
+import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
 
 
 export const CreateUser = () => {
@@ -144,26 +147,26 @@ export const CreateUser = () => {
                         {showDropdown && 
                             <div className="dropdown">
                                 <ul>
-                                    <li onClick={() => setCountry({ name: "Sweden", flag: "../src/assets/images/dropdown-flags/sweden-flag.png" })}>
+                                    <li onClick={() => setCountry({ name: "Sweden", flag: SwedenFlag })}>
                                         <p>Sweden</p>
                                         <img
-                                            src="../src/assets/images/dropdown-flags/sweden-flag.png"
+                                            src={SwedenFlag}
                                             alt="Sweden flag"
                                             className="dropdown-flag"
                                         />
                                     </li>
-                                    <li onClick={() => setCountry({ name: "USA", flag: "../src/assets/images/dropdown-flags/american-flag.png" })}>
+                                    <li onClick={() => setCountry({ name: "USA", flag: AmericanFlag })}>
                                         <p>USA</p>
                                         <img
-                                            src="../src/assets/images/dropdown-flags/american-flag.png"
+                                            src={AmericanFlag}
                                             alt="USA flag"
                                             className="dropdown-flag"
                                         />
                                     </li>
-                                    <li onClick={() => setCountry({ name:"England", flag: "../src/assets/images/dropdown-flags/england-flag.png" })}>
+                                    <li onClick={() => setCountry({ name:"England", flag: EnglandFlag })}>
                                         <p>England</p>
                                         <img
-                                            src="../src/assets/images/dropdown-flags/england-flag.png"
+                                            src={EnglandFlag}
                                             alt="USA flag"
                                             className="dropdown-flag"
                                         />
