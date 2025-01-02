@@ -1,0 +1,8 @@
+@use '../mixins/mixin-font.scss' as *;
+
+div {
+    
+    p {
+        @include main-font;
+    }
+}

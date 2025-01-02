@@ -1,26 +1,64 @@
-.login-container {
-    .login-form {
+@use '../mixins/mixin-font.scss' as *;
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 700px;
+    @include main-font;
+
+    h2 {
+        font-size: 2.5rem;
+        margin-bottom: 100px;
+    }
+
+    .login-container {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        align-items: center;
 
-        input {
-            margin-left: 20px;
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            width: 450px;
+
+            .form-label {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+
+                p {
+                    margin: 0;
+                    font-size: 1.5rem;
+                }
+
+                input {
+                    width: 300px;
+                    font-size: 1.5rem;
+                }
+            }
         }
 
         .login-button {
             margin: 40px auto 0 auto;
-            width: 100px;
+            width: auto;
+            padding: 10px 40px;
+            font-size: 1.5rem;
         }
-    }
 
-    .create-account {
-        text-decoration: underline;
-        cursor: pointer;
+        .create-account {
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 1.5rem;
 
-        &:hover {
-            color: #FFA500;
+            &:hover {
+                color: #FFA500;
+            }
         }
     }
 }
+
+
 

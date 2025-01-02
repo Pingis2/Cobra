@@ -1,4 +1,7 @@
+@use '../mixins/mixin-font.scss' as *;
+
 .create-user-container {
+    margin-top: 100px;
     
     .create-user-form {
         display: flex;
@@ -8,14 +11,52 @@
         
         .input-container {
             display: flex;
-            flex-direction: column;
-            width: 300px;
+            flex-direction: row;
+            width: 400px;
             font-size: 1.4rem;
+            @include main-font;
+            justify-content: space-between;
+
+            input {
+                width: 200px;
+            }
+        }
+
+        .dropdown-container {
+            display: flex;
+            flex-direction: row;
+            font-size: 1.4rem;
+            @include main-font;
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+        
+                li {
+                    display: flex;
+                    flex-direction: row;
+        
+                    p {
+                        margin: 0;
+                    }
+        
+                    img {
+                        width: 30px;
+                        height: auto;
+                    }
+                }
+            }
+
+            .hidden {
+                display: none;
+            }
         }
 
         button {
             font-size: 1.4rem;
             border: 1px solid white;
+            @include main-font;
 
             &:hover {
                 color: #FFA500;
@@ -26,7 +67,8 @@
     p {
         text-decoration: underline;
         cursor: pointer;
-        font-size: 1.4rem;
+        font-size: 1.2rem;
+        @include main-font;
 
         &:hover {
             color: #FFA500;

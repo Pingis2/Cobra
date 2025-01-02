@@ -1,7 +1,14 @@
 export const Footer = () => {
     return (
         <>
-            <footer>Footer</footer>
+            <ul>
+                <li>
+                    Privacy policy
+                </li>
+                <li>
+                    Github project
+                </li>
+            </ul>
         </>
     );
 }

@@ -116,20 +116,32 @@ export const CreateUser = () => {
                         />
                     </div>
 
-                    <div className="input-container">
+                    <div className="dropdown-container">
                         <label htmlFor="country">Country:</label>
-                        <input
-                            type="text"
-                            id="country"
-                            name="country"
-                            className="country"
-                            value={country}
-                            onChange={(e) => setCountry(e.target.value)}
-                            required
-                        />
+                        <div className="chosen-country">Choose a country</div>
+                        <div className="dropdown hidden">
+                            <ul>
+                                <li>
+                                    <p>Sweden</p>
+                                    <img
+                                        src="../src/assets/images/dropdown-flags/sweden-162433_640.png"
+                                        alt="Sweden flag"
+                                        className="dropdown-flag"
+                                    />
+                                </li>
+                                <li>
+                                    <p>USA</p>
+                                    <img
+                                        src="../src/assets/images/dropdown-flags/american-flag-2043285_640.png"
+                                        alt="USA flag"
+                                        className="dropdown-flag"
+                                    />
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 {error && <p>{error}</p>}
-                <button type="submit">Create User</button>
+                <button type="submit">Create account</button>
             </form>
 
                 <p onClick={() => handleNavigation('/login')}>Already have an account? Click here to log in</p>

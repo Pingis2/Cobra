@@ -66,33 +66,36 @@ export const Login = () => {
 
     return (
         <>
-            <section className="login-container">
+            <section className="login-page">
                 <h2>Log in to your account</h2>
-                <form className="login-form" onSubmit={handleLogin}>
-                    <label>
-                        Email:
-                        <input
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </label>
-                    <label>
-                        Password:
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </label>
-                    {error && <p>{error}</p>}
-                    <button type="submit" className="login-button">Login</button>
-                </form>
-            
+                <section className="login-container">
+                    <form className="login-form" onSubmit={handleLogin}>
+                        <label className="form-label">
+                            <p>Email:</p>
+                            <input
+                                type="text"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </label>
+                        <label className="form-label">
+                            <p>Password:</p>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </label>
+                        {error && <p>{error}</p>}
 
-                <p onClick={() => handleNavigation('/create-account')} className="create-account">Don't have an account? Click to create one</p>
+                        <button type="submit" className="login-button">Login</button>
+                    </form>
+                
+
+                    <p onClick={() => handleNavigation('/create-account')} className="create-account">Don't have an account? Click to create one</p>
+                </section>
             </section>
         </>
     );

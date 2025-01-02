@@ -3,28 +3,27 @@
 @use './header/header.scss' as *;
 @use './footer/footer.scss' as *;
 @use './game/game.scss' as *;
+@use './start/start.scss' as *;
+@use './leaderboard/leaderboard.scss' as *;
 
 html {
     height: 100%;
 }
 
-main {
-    width: 100%;
-}
 #root {
-    min-height: 100%;
+    min-height: 100vh;
     width: 100%;
     margin: 0;
     padding: 0;
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100%;
 }
 
 footer {
