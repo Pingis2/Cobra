@@ -28,7 +28,7 @@ export const CreateUser = () => {
         setError("");
         try {
             const data = await createUser(userName, firstName, lastName, email, password, country.name, highscore);
-            console.log("create user result", data);
+            console.log("password being sent", password);
 
             if (data) {
                 navigate("/login");
@@ -147,7 +147,10 @@ export const CreateUser = () => {
                         {showDropdown && 
                             <div className="dropdown">
                                 <ul>
-                                    <li onClick={() => setCountry({ name: "Sweden", flag: SwedenFlag })}>
+                                    <li onClick={() => {
+                                        setCountry({ name: "Sweden", flag: SwedenFlag })
+                                        setShowDropdown(false);
+                                    }}>
                                         <p>Sweden</p>
                                         <img
                                             src={SwedenFlag}
@@ -155,7 +158,10 @@ export const CreateUser = () => {
                                             className="dropdown-flag"
                                         />
                                     </li>
-                                    <li onClick={() => setCountry({ name: "USA", flag: AmericanFlag })}>
+                                    <li onClick={() => {
+                                        setCountry({ name: "USA", flag: AmericanFlag })
+                                        setShowDropdown(false);
+                                    }}>
                                         <p>USA</p>
                                         <img
                                             src={AmericanFlag}
@@ -163,7 +169,10 @@ export const CreateUser = () => {
                                             className="dropdown-flag"
                                         />
                                     </li>
-                                    <li onClick={() => setCountry({ name:"England", flag: EnglandFlag })}>
+                                    <li onClick={() => {
+                                        setCountry({ name: "England", flag: EnglandFlag })
+                                        setShowDropdown(false);
+                                    }}>
                                         <p>England</p>
                                         <img
                                             src={EnglandFlag}

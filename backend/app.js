@@ -6,6 +6,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { ObjectId } = require("mongodb");
+const bcrypt = require("bcrypt");
 
 var indexRouter = require('./routes/index');
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -76,7 +77,16 @@ app.post("/api/add-user", async (req, res) => {
     try {
         const db = client.db("Users");
         const user = req.body;
-        const result = await db.collection("users").insertOne(user);
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(user.password, salt);
+
+        const hashedUser = { ...user, password: hashedPassword };
+
+        user.password = hashedPassword;
+
+        const result = await db.collection("users").insertOne(hashedUser);
+
         console.log("Inserted user:", result);
 
         const JWT_SECRET = process.env.JWT_SECRET;
@@ -100,7 +110,6 @@ app.post("/api/add-user", async (req, res) => {
                 lastName: user.lastName,
                 username: user.username,
                 email: user.email,
-                password: user.password,
                 country: user.country,
                 highscore: user.highscore,
             },
@@ -185,16 +194,14 @@ app.post("/api/login", async (req, res) => {
 });
 
 app.post("/api/logout", (req, res) => {
-    const token = req.headers.authorization?.split(" ")[1]; // Extract token from the Authorization header
+    const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
         return res.status(400).json({ success: false, message: "Token is required" });
     }
 
-    // Simulate token invalidation or removal logic here (if needed)
     console.log("Token received for logout:", token);
 
-    // Respond with success
     res.status(200).json({ success: true, message: "Logged out successfully" });
 });
 
