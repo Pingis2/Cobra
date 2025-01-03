@@ -13,7 +13,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/frontend/index.html"
+      "destination": "/"
     },
     {
       "source": "/api/(.*)",
