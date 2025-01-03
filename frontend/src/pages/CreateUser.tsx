@@ -88,7 +88,8 @@ export const CreateUser = () => {
     return (
         <>
             {loading ? (
-                <p>Creating account, please wait...</p>
+                <p>Creating account, please wait<span className="dots"></span>
+                </p>
             ) : (
                 <>
                     <h1>Create Account</h1>

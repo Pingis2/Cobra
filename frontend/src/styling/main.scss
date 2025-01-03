@@ -6,6 +6,7 @@
 @use './start/start.scss' as *;
 @use './leaderboard/leaderboard.scss' as *;
 @use './result/result.scss' as *;
+@use './loading/loading.scss' as *;
 
 html {
     height: 100%;

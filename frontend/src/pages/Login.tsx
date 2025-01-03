@@ -15,7 +15,7 @@ export const Login = () => {
         navigate(path);
     }
 
-    const retryLogin = async (email: string, password: string, retries: number = 10, delay: number = 2000) => {
+    const retryLogin = async (email: string, password: string, retries: number = 15, delay: number = 2000) => {
         for (let attempt = 0; attempt < retries; attempt++) {
             try {
                 const response = await loginUser(email, password);
@@ -86,7 +86,8 @@ export const Login = () => {
         <>
             <section className="login-page">
                 {loading ? (
-                    <p>Logging in, please wait...</p>
+                    <p>Logging in, please wait <span className="dots"></span>
+                    </p>
                 ) : (
                     <>
                         <h2>Log in to your account</h2>
