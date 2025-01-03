@@ -6,7 +6,7 @@ import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
 import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
 import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
 
-const gameSpeed = 30;
+const gameSpeed = 100;
 const renderFps = 2000;
 const cellSize = 15;
 
