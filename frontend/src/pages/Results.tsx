@@ -38,7 +38,7 @@ export const Results = () => {
             <div>
                 <h1>Game over</h1>
                 <h2>Results</h2>
-                <div className="score">
+                <div className="result-score">
                     <p>latest score: {user?.latest_score}</p>
                     <p>Highscore: {user?.highscore}</p>
                 </div>
