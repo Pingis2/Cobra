@@ -277,7 +277,7 @@ export const Game = () => {
             <div>
                 <header className="header-without-back-button">
                     <div className="user-logout">
-                        <p className="user-info">{user?.firstName} {countryImage()}</p>
+                        <p className="user-info">{user?.userName} {countryImage()}</p>
                     </div>
                 </header>
                 <div className="score">

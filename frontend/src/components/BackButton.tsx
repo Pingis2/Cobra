@@ -1,7 +1,7 @@
 export const BackButton = () => {
     return (
         <>
-            <button onClick={() => window.history.back()}>Back</button>
+            <button type="submit" onClick={() => window.history.back()} className="back-button">Back</button>
         </>
     );
 }

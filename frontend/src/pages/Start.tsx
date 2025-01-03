@@ -13,7 +13,7 @@ export const StartPage = () => {
 
     useEffect(() => {
         if (!loading && !user) {
-            navigate("/login");
+            navigate("/");
         }
     }, [user, loading, navigate]);
 
@@ -39,7 +39,7 @@ export const StartPage = () => {
         <>
             <header className="header-without-back-button">
                 <div className="user-logout">
-                    <p className="user-info">{user?.firstName} {countryImage()}</p>
+                    <p className="user-info">{user?.userName} {countryImage()}</p>
                     <LogoutButton />
                 </div>
             </header>
