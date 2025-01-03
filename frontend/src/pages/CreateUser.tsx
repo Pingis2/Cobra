@@ -70,6 +70,10 @@ export const CreateUser = () => {
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                             required
+                            minLength={2}
+                            maxLength={20}
+                            pattern="[A-Öa-ö]+$"
+                            title="First name should only contain letters between 2 and 20 characters"
                         />
                     </div>
 
@@ -82,6 +86,10 @@ export const CreateUser = () => {
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
                             required
+                            minLength={2}
+                            maxLength={30}
+                            pattern="[A-Öa-ö]+$"
+                            title="Last name should only contain letters between 2 and 30 characters"
                         />
                     </div>
 
@@ -95,6 +103,10 @@ export const CreateUser = () => {
                             value={userName}
                             onChange={(e) => setUserName(e.target.value)}
                             required
+                            minLength={4}
+                            maxLength={20}
+                            pattern="[A-Öa-ö0-9]+$"
+                            title="Username should only contain letters and numbers between 4 and 20 characters"
                         />
                     </div>
 
@@ -108,6 +120,10 @@ export const CreateUser = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
+                            minLength={5}
+                            maxLength={50}
+                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                            title="Email should be in the format"
                         />
                     </div>
 
@@ -121,6 +137,9 @@ export const CreateUser = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
+                            minLength={8}
+                            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                            title="Password must contain at least 8 characters, one letter, one number and one special character"
                         />
                     </div>
 
