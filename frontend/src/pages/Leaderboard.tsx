@@ -16,13 +16,29 @@ export const Leaderboard = () => {
     const [, setError] = useState(false);
     const { user } = useUser();
 
+    const retryFetchUsers= async (token: string, retries: number = 15, delay: number = 2000) => {
+            for (let attempt = 0; attempt < retries; attempt++) {
+                try {
+                    const response = await getUsers(token);
+                    return response; // Successful login
+                } catch (error) {
+                    if (attempt < retries - 1) {
+                        console.error(`Retrying login (${attempt + 1}/${retries})...`);
+                        await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
+                    } else {
+                        throw error; // Throw error after max retries
+                    }
+                }
+            }
+        };
+
     useEffect(() => {
         const token = localStorage.getItem('token');
 
         if (token) {
-            getUsers(token)
+            retryFetchUsers(token)
                 .then((data) => {
-                    if (data.error) {
+                    if (!data || data.error) {
                         setError(true);
                     } else {
                         const sortedUsers = (data.users || []).sort((a, b) => b.highscore - a.highscore);
@@ -84,7 +100,7 @@ export const Leaderboard = () => {
                                             <p>{user.highscore}</p>
                                             {countryImage(user)}
                                         </div>
-                                        <img src={FirstPlace} alt="First place podium" />
+                                        <img src={FirstPlace} alt="First place podium" className="podium-image"/>
                                     </li>
                                 ))}
                                 {backendData.slice(2, 3).map((user) => (
