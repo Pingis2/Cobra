@@ -173,7 +173,7 @@ export const CreateUser = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
                                     minLength={8}
-                                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                    pattern="^(?=.*[A-ÅÄÖa-åäö])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&åäö-]{8,}$"
                                     title="Password must contain at least 8 characters, one letter, one number and one special character"
                                 />
                             </div>
