@@ -19,6 +19,23 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [user, setUser] = useState<IUsers | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
+
+    const retryGetUser = async (token:string, retries: number = 10, delay: number = 2000) => {
+        for (let attempt = 0; attempt < retries; attempt++) {
+            try {
+                const response = await getLoggedInUser(token);
+                return response; // Successful login
+            } catch (error) {
+                if (attempt < retries - 1) {
+                    console.error(`Retrying login (${attempt + 1}/${retries})...`);
+                    await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
+                } else {
+                    throw error; // Throw error after max retries
+                }
+            }
+        }
+    };
+
     useEffect(() => {
         const fetchUserData = async () => {
             const token = localStorage.getItem("token");
@@ -28,8 +45,10 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
             } 
 
             try {
-                const data = await getLoggedInUser(token);
-                setUser(data.user);
+                const data = await retryGetUser(token);
+                if (data) {
+                    setUser(data.user);
+                }
             } catch (error) {
                 console.error("Error fetching user data:", error);
             } finally {
@@ -41,10 +60,17 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }, []);
 
     return (
-        <UserContext.Provider value={{ user, loading, setUser }}>
-            { children }
-        </UserContext.Provider>
+        <>
+            {loading? (
+                <div>Loading...</div>
+            ):(
+                <UserContext.Provider value={{ user, loading, setUser }}>
+                    { children }
+                </UserContext.Provider>
+            )}
+        </>
     );
+        
 };
 
 export const useUser = () => useContext(UserContext);

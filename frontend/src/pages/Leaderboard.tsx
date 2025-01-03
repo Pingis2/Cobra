@@ -100,45 +100,53 @@ export const Leaderboard = () => {
                             </ul>
                         </div>
 
-                            <div className="other-users">
-                                <ul className="user-data-list">
-                                    <li>
-                                        <p>Rank</p>
+                        <div className="other-users">
+                            <ul className="user-data-list">
+                                <li>
+                                    <p>Rank</p>
+                                    <ul>
                                         {backendData.slice(3).map((user, index) => (
                                             <li key={`rank-${user._id}`}>
                                                 <p>{index + 4}</p>
                                             </li>
                                         ))}
-                                    </li>
+                                    </ul>
+                                </li>
 
-                                    <li>
-                                        <p>Name</p>
+                                <li>
+                                    <p>Name</p>
+                                    <ul>
                                         {backendData.slice(3).map((user) => (
                                             <li key={`name-${user._id}`}>
                                                 <p>{user.userName}</p>
                                             </li>
                                         ))}
-                                    </li>
+                                    </ul>
+                                </li>
 
-                                    <li>
-                                        <p>Score</p>
+                                <li>
+                                    <p>Score</p>
+                                    <ul>
                                         {backendData.slice(3).map((user) => (
                                             <li key={`score-${user._id}`}>
                                                 <p>{user.highscore}</p>
                                             </li>
                                         ))}
-                                    </li>
+                                    </ul>
+                                </li>
 
-                                    <li>
-                                        <p>Country</p>
+                                <li>
+                                    <p>Country</p>
+                                    <ul>
                                         {backendData.slice(3).map((user) => (
                                             <li key={`country-${user._id}`}>
                                                 {countryImage(user)}
                                             </li>
                                         ))}
-                                    </li>
-                                </ul>
-                            </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                         
                     </>
                 )}
