@@ -24,10 +24,33 @@ const client = new MongoClient(MONGODB_URI, {
         deprecationErrors: true,
     },
     maxPoolSize: 20, // Limit the number of connections
-    socketTimeoutMS: 600000, // Timeout after 10 minutes if no activity
-    connectTimeoutMS: 600000, // Timeout after 10 minutes for initial connection
+    minPoolSize: 5, // Minimum number of connections
+    socketTimeoutMS: 300000, // Timeout after 5 minutes if no activity
+    connectTimeoutMS: 300000, // Timeout after 5 minutes for initial connection
+    heartbeatFrequencyMS: 10000, // Send a heartbeat every 10 seconds
     retryWrites: true, // Enable retryable writes for better reliability
 });
+
+const initializedDatabase = async (db) => {
+    try {
+        const collections = await db.listCollections({ name: "users" }).toArray();
+        if (collections.length > 0) {
+            console.log("Collections found:", collections);
+            return;
+        }
+
+        const usersCollection = db.collection("users");
+        const existingUsers = await usersCollection.find().toArray();
+        if (existingUsers.length > 0) {
+            console.log("Users found:", existingUsers);
+            return;
+        }
+    }
+    catch (error) {
+        console.error("Error initializing database:", error);
+        process.exit(1);
+    }
+}
 
 
 const connectToDatabase = async () => {
@@ -36,12 +59,31 @@ const connectToDatabase = async () => {
         const db = client.db();
         app.locals.db = db;
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
+
+        await initializedDatabase(db);
+        keepDatabaseAlive();
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
         process.exit(1);  // Exit the process if the connection fails
     }
 };
 
+const keepDatabaseAlive = async () => {
+    setInterval(async () => {
+        try {
+            await client.db().command({ ping: 1 });
+            console.log("Pinged the database");
+        } catch (error) {
+            console.error("Error pinging the database:", error);
+        }
+    }, 300000);
+}
+
+process.on("SIGINT", async () => {
+    console.log("Closing MongoDB connection");
+    await client.close();
+    process.exit(0);
+});
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -291,8 +333,10 @@ app.get("*", (req, res) => {
 });
 
 (async () => {
-    connectToDatabase();
-    app.listen(5000, () => { console.log("Server is running on port 5000 and database is connected.") })
+    await connectToDatabase();
+    app.listen(5000, () => {
+        console.log("Server is running on port 5000 and database is connected.")
+    })
 })();
 
 module.exports = app;
