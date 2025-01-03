@@ -49,7 +49,7 @@ export const StartPage = () => {
                 <div className="user-buttons">
                     <p>Welcome {user?.firstName} to the start page</p>
                     <nav className="nav-buttons">
-                        <button onClick={() => handleNavigation('/start-game-page')} type="submit">Start Playing</button>
+                        <button onClick={() => handleNavigation('/start-game')} type="submit">Start Playing</button>
                         <button onClick={() => handleNavigation('/leaderboard')} type="submit">Leaderboard</button>
                     </nav>
                 </div>

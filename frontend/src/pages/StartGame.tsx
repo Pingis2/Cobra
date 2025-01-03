@@ -40,9 +40,11 @@ export const StartGamePage = () => {
             </header>
 
             <div>
-                <h1>Start Game</h1>
+                <h1>Cobra</h1>
+                <p>Normal snake rules apply</p>
+                <p>Your score will be saved after the game is over</p>
                 <p>Click the button below to start the game.</p>
-                <button type="button" onClick={() => handleNavigation("/game-page")}>Start Game</button>
+                <button type="button" onClick={() => handleNavigation("/game")}>Start Game</button>
             </div>
         </>
     );

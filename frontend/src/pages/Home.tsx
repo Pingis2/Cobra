@@ -12,7 +12,7 @@ export const Home = () => {
     return (
         <>
             Home
-            <button onClick={() => handleNavigation('/login')} type="submit">Login</button>
+            <button onClick={() => handleNavigation('/')} type="submit">Login</button>
         </>
     );
 }

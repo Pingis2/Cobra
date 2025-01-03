@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Leaderboard } from "./pages/Leaderboard";
 import { Layout } from "./pages/Layout";
-import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/Login";
 import StartPage from "./pages/Start";
@@ -19,15 +18,11 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home />,
+                element: <Login />,
             },
             {
                 path: "/leaderboard",
                 element: <Leaderboard />,
-            },
-            {
-                path: "/login",
-                element: <Login />,
             },
             {
                 path: "/start-page",
@@ -38,11 +33,11 @@ export const router = createBrowserRouter([
                 element: <CreateUser />,
             },
             {
-                path: "/start-game-page",
+                path: "/start-game",
                 element: <StartGamePage />,
             },
             {
-                path: "/game-page",
+                path: "/game",
                 element: <Game />,
             },
             {

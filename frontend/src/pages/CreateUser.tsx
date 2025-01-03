@@ -31,7 +31,7 @@ export const CreateUser = () => {
             console.log("password being sent", password);
 
             if (data) {
-                navigate("/login");
+                navigate("/");
             } else {
                 setError("Failed to create user");
             }
@@ -207,7 +207,7 @@ export const CreateUser = () => {
                 <button type="submit">Create account</button>
             </form>
 
-                <p onClick={() => handleNavigation('/login')} className="login-link">Already have an account? Click here to log in</p>
+                <p onClick={() => handleNavigation('/')} className="login-link">Already have an account? Click here to log in</p>
             </section>
         </>
     );

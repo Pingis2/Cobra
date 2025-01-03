@@ -43,7 +43,7 @@ export const Results = () => {
                     <p>Highscore: {user?.highscore}</p>
                 </div>
                 <div className="nav-buttons">
-                    <button onClick={() => handleNavigation("/game-page")} type="button">Play again</button>
+                    <button onClick={() => handleNavigation("/game")} type="button">Play again</button>
                     <button onClick={() => handleNavigation("/start-page")} type="button">Back to home</button>
                 </div>
             </div>

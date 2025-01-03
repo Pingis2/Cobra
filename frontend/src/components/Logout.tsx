@@ -24,7 +24,7 @@ export const LogoutButton = () => {
             if (success) {
                 localStorage.removeItem("token"); 
                 setLogoutSuccess(true);
-                navigate('/login');
+                navigate('/');
             } else {
                 setLogoutSuccess(false);
             }
