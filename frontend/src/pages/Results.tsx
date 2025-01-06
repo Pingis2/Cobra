@@ -9,6 +9,8 @@ import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
 export const Results = () => {
     const { user } = useUser();
     console.log(user?.latestScore);
+    console.log(user?.highscore);
+    
     
     const navigate = useNavigate();
 

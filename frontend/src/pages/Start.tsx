@@ -47,7 +47,7 @@ export const StartPage = () => {
             <section>
                 <h1>Start Page</h1>
                 <div className="user-buttons">
-                    <p>Welcome {user?.firstName} to the start page</p>
+                    <p>Welcome {user?.userName} to the start page</p>
                     <nav className="nav-buttons">
                         <button onClick={() => handleNavigation('/start-game')} type="submit">Start Playing</button>
                         <button onClick={() => handleNavigation('/leaderboard')} type="submit">Leaderboard</button>

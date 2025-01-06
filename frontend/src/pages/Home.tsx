@@ -5,9 +5,10 @@ export const Home = () => {
 
     const handleNavigation = (path: string) => {
         navigate(path);
+        localStorage.removeItem("token");
     }
 
-    localStorage.removeItem("token");
+    
 
     return (
         <>
