@@ -5,6 +5,7 @@ import { updateUserScore } from "../services/userService";
 import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
 import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
 import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
+import { PlayButtons } from "../components/PlayButtons";
 
 const gameSpeed = 100;
 const renderFps = 2000;
@@ -90,6 +91,10 @@ export const Game = () => {
         let lastTouchMoveTime = 0;
 
         const handleTouchStart = (event: TouchEvent) => {
+            if ((event.target as HTMLElement).closest('.play-buttons')) {
+                return;
+            }
+            
             if (gameStarted && !gameOver) {
                 event.preventDefault();
             }
@@ -99,6 +104,10 @@ export const Game = () => {
         };
 
         const handleTouchMove = (event: TouchEvent) => {
+            if ((event.target as HTMLElement).closest('.play-buttons')) {
+                return;
+            }
+
             if (gameStarted && !gameOver) {
                 event.preventDefault();
             }
@@ -274,31 +283,35 @@ export const Game = () => {
 
     return (
         <>
-            <div>
-                <header className="header-without-back-button">
-                    <div className="user-logout">
-                        <p className="user-info">{user?.userName} {countryImage()}</p>
-                    </div>
-                </header>
-                <div className="score">
-                    <p className="current-score">Current score: {currentScore}</p>
-                    <p className="higscore">Highscore: {user?.highscore}</p>
+            <header className="header-without-back-button">
+                <div className="user-logout">
+                    <p className="user-info">{user?.userName} {countryImage()}</p>
                 </div>
-                <canvas
-                    ref={canvasRef}
-                    width={canvasWidth * cellSize}
-                    height={canvasHeight * cellSize}
-                    style={{
-                        border: "1px solid black",
-                        backgroundColor: "#f0f0f0",
-                    }}
-                ></canvas>
-                {!gameStarted && (
-                    <div>
-                        <button onClick={startGame} type="button">Start Game</button>
-                    </div>
-                )}
+            </header>
+            <div className="score">
+                <p className="current-score">Current score: {currentScore}</p>
+                <p className="higscore">Highscore: {user?.highscore}</p>
             </div>
+            <canvas
+                ref={canvasRef}
+                width={canvasWidth * cellSize}
+                height={canvasHeight * cellSize}
+                style={{
+                    border: "1px solid black",
+                    backgroundColor: "#f0f0f0",
+                }}
+            ></canvas>
+            {!gameStarted && (
+                <div>
+                    <button onClick={startGame} type="button">Start Game</button>
+                </div>
+            )}
+            <PlayButtons
+                direction={direction}
+                setDirection={setDirection}
+                gameStarted={gameStarted}
+                gameOver={gameOver}
+            />
         </>
     )
 }

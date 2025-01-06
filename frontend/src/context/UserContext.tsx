@@ -20,7 +20,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [loading, setLoading] = useState<boolean>(true);
 
 
-    const retryGetUser = async (token:string, retries: number = 10, delay: number = 2000) => {
+    const retryGetUser = async (token:string, retries: number = 15, delay: number = 2000) => {
         for (let attempt = 0; attempt < retries; attempt++) {
             try {
                 const response = await getLoggedInUser(token);
@@ -66,7 +66,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return (
         <>
             {loading? (
-                <div>Loading...</div>
+                <div>Fetching user data <span className="dots"></span></div>
             ):(
                 <UserContext.Provider value={{ user, loading, setUser }}>
                     { children }
