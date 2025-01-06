@@ -78,7 +78,7 @@ export const Leaderboard = () => {
             
             <div className="podium">
                 {backendData === null ? (
-                    <p>Loading...</p>
+                    <p className="loading-text">Loading<span className="dots"></span></p>
                 ) : (
                     <>
                         <div className="podium-top">

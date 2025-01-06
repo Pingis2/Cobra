@@ -90,7 +90,7 @@ export const Login = () => {
         <>
             <section className="login-page">
                 {loading ? (
-                    <p>Logging in, please wait <span className="dots"></span>
+                    <p className="loading-text">Logging in, please wait <span className="dots"></span>
                     </p>
                 ) : (
                     <>
