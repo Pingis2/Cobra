@@ -1,12 +1,13 @@
-@use './login/login.scss' as *;
-@use './create-user/create-user.scss' as *;
-@use './header/header.scss' as *;
-@use './footer/footer.scss' as *;
-@use './game/game.scss' as *;
-@use './start/start.scss' as *;
-@use './leaderboard/leaderboard.scss' as *;
-@use './result/result.scss' as *;
-@use './loading/loading.scss' as *;
+@use './pages/login/login.scss' as *;
+@use './pages/create-user/create-user.scss' as *;
+@use './pages/game/game.scss' as *;
+@use './pages/start/start.scss' as *;
+@use './pages/leaderboard/leaderboard.scss' as *;
+@use './pages/result/result.scss' as *;
+
+@use './components/header/header.scss' as *;
+@use './components/footer/footer.scss' as *;
+@use './components/loading/loading.scss' as *;
 
 html {
     height: 100%;
