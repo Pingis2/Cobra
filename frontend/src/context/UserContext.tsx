@@ -56,8 +56,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
             }
         };
 
-        fetchUserData();
-    }, []);
+        if (location.pathname !== "/" || "create-user") {
+            fetchUserData();
+        } else {
+            setLoading(false);
+        }
+    }, [location.pathname]);
 
     return (
         <>
