@@ -8,7 +8,7 @@ import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
 
 export const Results = () => {
     const { user } = useUser();
-    console.log(user?.latest_score);
+    console.log(user?.latestScore);
     
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ export const Results = () => {
                 <h1>Game over</h1>
                 <h2>Results</h2>
                 <div className="result-score">
-                    <p>latest score: {user?.latest_score}</p>
+                    <p>latest score: {user?.latestScore}</p>
                     <p>Highscore: {user?.highscore}</p>
                 </div>
                 <div className="nav-buttons">

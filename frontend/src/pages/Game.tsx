@@ -237,32 +237,32 @@ export const Game = () => {
         const updateScore = async () => {
             if (gameOver) {
                 // Prevent multiple updates by checking if the latest score is already set
-                if (user && currentScore !== user.latest_score) {
+                if (user && currentScore !== user.latestScore) {
                     // Update user context only if the score has changed
                     if (token && currentScore > user.highscore) {
                         await updateUserScore(token, currentScore);
                         setUser({
                             ...user,
-                            latest_score: currentScore,
+                            latestScore: currentScore,
                             highscore: currentScore, // Set the new highscore if it's higher
                         });
                     } else {
                         setUser({
                             ...user,
-                            latest_score: currentScore,
+                            latestScore: currentScore,
                         });
                     }
                 }
 
                 // Navigate to the results page only once
-                if (!user?.latest_score || user.latest_score !== currentScore) {
+                if (!user?.latestScore || user.latestScore !== currentScore) {
                     navigate("/results");
                 }
             }
         }
         updateScore();
         
-    }, [gameOver, currentScore, user?.latest_score, user?.highscore, setUser, navigate]);
+    }, [gameOver, currentScore, user?.latestScore, user?.highscore, setUser, navigate]);
     
 
     // Start game --------------------------------------------------------------
@@ -289,7 +289,7 @@ export const Game = () => {
                 </div>
             </header>
             <div className="score">
-                <p className="current-score">Current score: {user?.latest_score}</p>
+                <p className="current-score">Current score: {currentScore}</p>
                 <p className="higscore">Highscore: {user?.highscore}</p>
             </div>
             <section className="game-container">
