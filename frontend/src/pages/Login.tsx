@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getLoggedInUser, loginUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
 import { UserContext} from "../context/UserContext";
@@ -10,6 +10,10 @@ export const Login = () => {
     const { setUser } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        localStorage.removeItem("token");
+    }, []);
 
     const handleNavigation = (path: string) => {
         navigate(path);
@@ -36,7 +40,6 @@ export const Login = () => {
         event.preventDefault();
         setError("");
         setLoading(true);
-        localStorage.removeItem("token");
 
         try {
             const loginResponse = await retryLogin(email, password);
