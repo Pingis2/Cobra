@@ -292,26 +292,31 @@ export const Game = () => {
                 <p className="current-score">Current score: {currentScore}</p>
                 <p className="higscore">Highscore: {user?.highscore}</p>
             </div>
-            <canvas
-                ref={canvasRef}
-                width={canvasWidth * cellSize}
-                height={canvasHeight * cellSize}
-                style={{
-                    border: "1px solid black",
-                    backgroundColor: "#f0f0f0",
-                }}
-            ></canvas>
-            {!gameStarted && (
-                <div>
-                    <button onClick={startGame} type="button">Start Game</button>
-                </div>
+            <section className="game-container">
+                <canvas
+                    ref={canvasRef}
+                    width={canvasWidth * cellSize}
+                    height={canvasHeight * cellSize}
+                    style={{
+                        border: "1px solid black",
+                        backgroundColor: "#f0f0f0",
+                    }}
+                >
+                </canvas>
+                {!gameStarted && (
+                    <button onClick={startGame} type="button" className="start-game-button">Start Game</button>
+                )}
+            </section>
+            
+            {window.innerWidth < 768 && (
+                <PlayButtons
+                    direction={direction}
+                    setDirection={setDirection}
+                    gameStarted={gameStarted}
+                    gameOver={gameOver}
+                />
             )}
-            <PlayButtons
-                direction={direction}
-                setDirection={setDirection}
-                gameStarted={gameStarted}
-                gameOver={gameOver}
-            />
+            
         </>
     )
 }

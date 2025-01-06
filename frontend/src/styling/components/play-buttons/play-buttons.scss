@@ -1,0 +1,34 @@
+.play-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto 2rem auto;
+    height: 125px;
+    width: 200px;
+    position: relative;
+
+    button {
+        border: 1px solid white;
+        padding: 15px 15px;
+    }
+
+    .play-button-up {
+        position: absolute;
+    }
+
+    .play-button-down {
+        position: absolute;
+        top: 70px;
+    }
+
+    .play-button-right {
+        position: absolute;
+        top: 35px;
+        right: 3%;
+    }
+
+    .play-button-left {
+        position: absolute;
+        top: 35px;
+        left: 3%;
+    }
+}
