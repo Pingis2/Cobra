@@ -300,6 +300,7 @@ app.get("/api/leaderboard", async (req, res) => {
 
 app.put("/api/update-user-score", async (req, res) => {
     const token = req.headers['authorization']?.split(' ')[1];
+    console.log("latest score", req.body.latestScore);
 
     if (!token) {
         return res.status(401).send("Token is required");
