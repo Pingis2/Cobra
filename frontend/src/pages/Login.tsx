@@ -36,6 +36,7 @@ export const Login = () => {
         event.preventDefault();
         setError("");
         setLoading(true);
+        localStorage.removeItem("token");
 
         try {
             const loginResponse = await retryLogin(email, password);
