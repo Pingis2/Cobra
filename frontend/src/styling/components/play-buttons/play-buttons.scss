@@ -8,7 +8,7 @@
 
     button {
         border: 1px solid white;
-        padding: 15px 15px;
+        padding: 3px 5px;
     }
 
     .play-button-up {
@@ -23,12 +23,13 @@
     .play-button-right {
         position: absolute;
         top: 35px;
-        right: 0%;
+        right: 20%;
+        
     }
 
     .play-button-left {
         position: absolute;
         top: 35px;
-        left: 3%;
+        left: 20%;
     }
 }

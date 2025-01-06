@@ -17,6 +17,7 @@ export const CreateUser = () => {
     const [error, setError] = useState("");
     const [showDropdown, setShowDropdown] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [latestScore] = useState(0);
 
     const navigate = useNavigate();
 
@@ -32,18 +33,19 @@ export const CreateUser = () => {
         password: string,
         country: string,
         highscore: number,
+        latestScore: number,
         retries: number = 10,
         delay: number = 2000) => {
             for (let attempt = 0; attempt < retries; attempt++) {
                 try {
-                    const response = await createUser(userName, firstName, lastName, email, password, country, highscore);
-                    return response; // Successful login
+                    const response = await createUser(userName, firstName, lastName, email, password, country, highscore, latestScore);
+                    return response;
                 } catch (error) {
                     if (attempt < retries - 1) {
                         console.error(`Retrying login (${attempt + 1}/${retries})...`);
-                        await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
+                        await new Promise((resolve) => setTimeout(resolve, delay));
                     } else {
-                        throw error; // Throw error after max retries
+                        throw error;
                     }
                 }
             }
@@ -55,7 +57,7 @@ export const CreateUser = () => {
         setLoading(true);
 
         try {
-            const data = await retryCreateUser(userName, firstName, lastName, email, password, country.name, highscore);
+            const data = await retryCreateUser(userName, firstName, lastName, email, password, country.name, highscore, latestScore);
             console.log("password being sent", password);
 
             if (data) {

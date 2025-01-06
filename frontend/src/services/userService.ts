@@ -79,7 +79,8 @@ export const createUser = async (
     email: string,
     password: string,
     country: string,
-    highscore: number
+    highscore: number,
+    latestScore: number
     ): Promise<IUserData | null> => {
     try {
         const response = await post<{ success: boolean; user?: IUserData; message?: string; }>(
@@ -91,7 +92,8 @@ export const createUser = async (
                 email,
                 password,
                 country,
-                highscore
+                highscore,
+                latestScore
             }
         );
 
@@ -139,7 +141,7 @@ export const updateUserScore = async (token: string, highscore: number): Promise
 
     try {
         const response = await put<{ success: boolean; user?: IUserData; message?: string }>(
-            `${BASE_URL}update-highscore`,
+            `${BASE_URL}update-user-score`,
             { highscore },
             { headers: { Authorization: `Bearer ${token}` } }
         );

@@ -30,7 +30,7 @@ export const PlayButtons = ({ direction, setDirection, gameStarted, gameOver }: 
                     title="Move up"
                     onClick={() => handleButtonPress({ x: 0, y: -1 })}
                 >
-                    🔼
+                    <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 6V18M12 6L7 11M12 6L17 11" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg>
                 </button>
                 <button
                     type="button"
@@ -38,7 +38,7 @@ export const PlayButtons = ({ direction, setDirection, gameStarted, gameOver }: 
                     title="Move down"
                     onClick={() => handleButtonPress({ x: 0, y: 1 })}
                 >
-                    🔽
+                    <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 6V18M12 18L7 13M12 18L17 13" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg>
                 </button>
                 <button
                     type="button"
@@ -46,7 +46,7 @@ export const PlayButtons = ({ direction, setDirection, gameStarted, gameOver }: 
                     title="Move left"
                     onClick={() => handleButtonPress({ x: -1, y: 0 })}
                 >
-                    ◀️
+                    <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg>
                 </button>
                 <button
                     type="button"
@@ -54,7 +54,7 @@ export const PlayButtons = ({ direction, setDirection, gameStarted, gameOver }: 
                     title="Move right"
                     onClick={() => handleButtonPress({ x: 1, y: 0 })}
                 >
-                    ▶️
+                    <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> </g></svg>
                 </button>
             </div>
         </>

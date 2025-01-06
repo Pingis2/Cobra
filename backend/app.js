@@ -298,7 +298,7 @@ app.get("/api/leaderboard", async (req, res) => {
     }
 });
 
-app.put("/api/update-highscore", async (req, res) => {
+app.put("/api/update-user-score", async (req, res) => {
     const token = req.headers['authorization']?.split(' ')[1];
 
     if (!token) {
@@ -314,7 +314,7 @@ app.put("/api/update-highscore", async (req, res) => {
         const db = client.db("Users");
         db.collection("users").updateOne(
             { _id: new ObjectId(userId) },
-            { $set: { highscore: req.body.highscore } }
+            { $set: { highscore: req.body.highscore, latest_score: req.body.latest_score} }
         )
             .then(result => {
                 if (result.matchedCount === 0) {
