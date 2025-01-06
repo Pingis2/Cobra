@@ -289,7 +289,7 @@ export const Game = () => {
                 </div>
             </header>
             <div className="score">
-                <p className="current-score">Current score: {currentScore}</p>
+                <p className="current-score">Current score: {user?.latest_score}</p>
                 <p className="higscore">Highscore: {user?.highscore}</p>
             </div>
             <section className="game-container">
