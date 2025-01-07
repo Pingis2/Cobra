@@ -43,12 +43,14 @@ export const Results = () => {
             </header>
             <div>
                 <h1>Game over</h1>
-                <h2>Results</h2>
-                <div className="result-score">
-                    <p>Latest score: {user?.latestScore}</p>
-                    <p>Time: {formattedTime}</p>
-                    <p>Highscore: {user?.highscore}</p>
-                </div>
+                <section className="results-container">
+                    <h2>Results: </h2>
+                    <ul className="results">
+                        <li>Score: {user?.latestScore}</li>
+                        <li>Time: {formattedTime}</li>
+                        <li>Highscore: {user?.highscore}</li>
+                    </ul>
+                </section>
                 <div className="nav-buttons">
                     <button onClick={() => handleNavigation("/game")} type="button">Play again</button>
                     <button onClick={() => handleNavigation("/start-page")} type="button">Back to home</button>

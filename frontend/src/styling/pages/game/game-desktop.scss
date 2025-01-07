@@ -1,9 +1,13 @@
+@use '../../mixins/mixin-font.scss' as *;
+
 @media (min-width: 1024px) {
-    .score {
+    .stats-container {
+        @include main-font;
         display: flex;
         flex-direction: row;
         justify-content: center;
         gap: 50px;
+        font-size: 1.5rem;
     }
 
     .game-container {
@@ -14,6 +18,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            font-size: 1.5rem;
         }
 
         .countdown {

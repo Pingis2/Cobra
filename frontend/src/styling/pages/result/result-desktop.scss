@@ -1,6 +1,28 @@
+@use '../../mixins/mixin-font.scss' as *;
+
 @media (min-width: 1024px) {
-    .result-score {
-        font-size: 1.5rem;
+    .results-container {
+        width: 300px;
+        margin: 100px auto 0 auto;
+        text-align: left;
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        .results {
+            font-size: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            @include main-font;
+            list-style: none;
+            padding: 0;
+            width: 300px;
+            margin: 0 auto 50px auto;
+            align-items: flex-start;
+
+        }
     }
 
     .nav-buttons {

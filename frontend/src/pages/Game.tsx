@@ -323,7 +323,7 @@ export const Game = () => {
                     <p className="user-info">{user?.userName} {countryImage()}</p>
                 </div>
             </header>
-            <div className="score">
+            <div className="stats-container">
                 <p className="current-score">Current score: {currentScore}</p>
                 <p className="timer">Time: {formatTime(timer)}</p>
                 <p className="higscore">Highscore: {user?.highscore}</p>
