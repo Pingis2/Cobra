@@ -20,7 +20,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [loading, setLoading] = useState<boolean>(true);
 
 
-    const retryGetUser = async (token:string, retries: number = 15, delay: number = 2000) => {
+    const retryGetUser = async (token:string, retries: number = 15, delay: number = 1000) => {
         for (let attempt = 0; attempt < retries; attempt++) {
             try {
                 const response = await getLoggedInUser(token);

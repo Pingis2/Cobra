@@ -7,8 +7,6 @@ export const Home = () => {
         navigate(path);
     }
 
-    
-
     return (
         <>
             Home

@@ -46,12 +46,12 @@ export const Login = () => {
             console.log("login result", loginResponse);
 
             if (loginResponse && loginResponse.token) {
-                sessionStorage.setItem("token", loginResponse.token);
+                localStorage.setItem("token", loginResponse.token);
             } else {
                 setError("Wrong email or password");
             }
 
-            const token = sessionStorage.getItem("token");
+            const token = localStorage.getItem("token");
 
             if (token) {
                 const fetchedUser = await getLoggedInUser(token || "");

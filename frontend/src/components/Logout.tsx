@@ -8,7 +8,7 @@ export const LogoutButton = () => {
     const navigate = useNavigate();
 
     const logout = async () => {
-        const token = sessionStorage.getItem("token"); // or get the token from your auth state or context
+        const token = localStorage.getItem("token"); // or get the token from your auth state or context
 
         if (!token) {
             console.error("No token found, user is not logged in.");
@@ -22,7 +22,7 @@ export const LogoutButton = () => {
             const success = await logoutUser(token);
 
             if (success) {
-                sessionStorage.removeItem("token");
+                localStorage.removeItem("token");
                 setLogoutSuccess(true);
                 navigate('/');
             } else {
