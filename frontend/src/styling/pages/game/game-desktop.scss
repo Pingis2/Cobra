@@ -1,17 +1,28 @@
-.score {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 100px;
-}
+@media (min-width: 1024px) {
+    .score {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 50px;
+    }
 
-.game-container {
-    position: relative;
-}
+    .game-container {
+        position: relative;
 
-.start-game-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+        .start-game-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .countdown {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            color: black;
+        }
+    }
 }

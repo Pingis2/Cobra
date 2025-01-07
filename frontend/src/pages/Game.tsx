@@ -31,6 +31,7 @@ export const Game = () => {
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
     const [countdown, setCountdown] = useState(0);
+    const [timer, setTimer] = useState(0);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     const token = localStorage.getItem("token");
@@ -278,12 +279,30 @@ export const Game = () => {
         }, 1000);
     };
     
+    const startTimer = () => {
+        setTimer(0);
+        const intervaldId = setInterval(() => {
+            setTimer((prev) => {
+                if (prev === 0) {
+                    clearInterval(intervaldId);
+                }
+                return prev + 1;
+            });
+        }, 1000);
+    }
+
+    const formatTime = (timeInSeconds: number) => {
+        const minutes = Math.floor(timeInSeconds / 60);
+        const seconds = timeInSeconds % 60;
+        return `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    }
 
     // Start game --------------------------------------------------------------
     const startGame = () => {
         setGameStarted(true);
         setGameOver(false);
         setCurrentScore(0);
+        startTimer();
         setSnake([
             { x: 10, y: 10 },
             { x: 9, y: 10 },
@@ -304,6 +323,7 @@ export const Game = () => {
             </header>
             <div className="score">
                 <p className="current-score">Current score: {currentScore}</p>
+                <p className="timer">Timer: {formatTime(timer)}</p>
                 <p className="higscore">Highscore: {user?.highscore}</p>
             </div>
             <section className="game-container">
@@ -321,7 +341,7 @@ export const Game = () => {
                     <button onClick={startCountdown} type="button" className="start-game-button">Start Game</button>
                 )}
                 {!gameStarted && countdown > 0 && (
-                    <div className="countdown">{countdown}</div> // Display countdown
+                    <div className="countdown">{countdown}</div>
                 )}
             </section>
             
