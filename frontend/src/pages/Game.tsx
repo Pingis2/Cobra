@@ -240,7 +240,7 @@ export const Game = () => {
                 if (user && currentScore !== user.latestScore) {
                     // Update user context only if the score has changed
                     if (token && currentScore > user.highscore) {
-                        await updateUserScore(token, user.latestScore, currentScore);
+                        await updateUserScore(token, currentScore);
                         setUser({
                             ...user,
                             latestScore: currentScore,
