@@ -10,11 +10,10 @@
       "use": "@vercel/static-build"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/[^.]+",
-      "dest": "/",
-      "status": 200
+      "source": "/(.*)",
+      "destination": "/frontend/index.html"
     }
   ],
   "cleanUrls": true
