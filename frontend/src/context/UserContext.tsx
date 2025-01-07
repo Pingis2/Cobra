@@ -20,7 +20,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const [loading, setLoading] = useState<boolean>(true);
 
 
-    const retryGetUser = async (token:string, retries: number = 15, delay: number = 1000) => {
+    const retryGetUser = async (token:string, retries: number = 15, delay: number = 2000) => {
         for (let attempt = 0; attempt < retries; attempt++) {
             try {
                 const response = await getLoggedInUser(token);
@@ -38,7 +38,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const token = sessionStorage.getItem("token");
+            const token = localStorage.getItem("token");
             if (!token) {
                 setLoading(false);
                 return;
@@ -61,6 +61,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         } else {
             setLoading(false);
         }
+        
+        fetchUserData();
     }, [location.pathname]);
 
     return (

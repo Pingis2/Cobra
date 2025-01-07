@@ -14,6 +14,7 @@ export const Login = () => {
     useEffect(() => {
         localStorage.removeItem("token");
     }, []);
+    
 
     const handleNavigation = (path: string) => {
         navigate(path);

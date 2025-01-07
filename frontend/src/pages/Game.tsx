@@ -30,6 +30,7 @@ export const Game = () => {
     const directionRef = useRef(direction);
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
+    const [countdown, setCountdown] = useState(0);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     const token = localStorage.getItem("token");
@@ -263,6 +264,19 @@ export const Game = () => {
         updateScore();
         
     }, [gameOver, currentScore, user?.latestScore, user?.highscore, setUser, navigate]);
+
+    const startCountdown = () => {
+        setCountdown(3); // Start countdown at 3 seconds
+        const intervalId = setInterval(() => {
+            setCountdown((prev) => {
+                if (prev === 1) {
+                    clearInterval(intervalId);
+                    startGame(); // Start game after countdown
+                }
+                return prev - 1;
+            });
+        }, 1000);
+    };
     
 
     // Start game --------------------------------------------------------------
@@ -303,8 +317,11 @@ export const Game = () => {
                     }}
                 >
                 </canvas>
-                {!gameStarted && (
-                    <button onClick={startGame} type="button" className="start-game-button">Start Game</button>
+                {!gameStarted && countdown === 0 && (
+                    <button onClick={startCountdown} type="button" className="start-game-button">Start Game</button>
+                )}
+                {!gameStarted && countdown > 0 && (
+                    <div className="countdown">{countdown}</div> // Display countdown
                 )}
             </section>
             
