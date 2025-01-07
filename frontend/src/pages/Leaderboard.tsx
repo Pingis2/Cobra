@@ -33,7 +33,7 @@ export const Leaderboard = () => {
         };
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = sessionStorage.getItem('token');
 
         if (token) {
             retryFetchUsers(token)
