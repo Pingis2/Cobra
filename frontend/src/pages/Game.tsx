@@ -246,12 +246,14 @@ export const Game = () => {
                         setUser({
                             ...user,
                             latestScore: currentScore,
-                            highscore: currentScore, // Set the new highscore if it's higher
+                            highscore: currentScore,
+                            timer: timer
                         });
                     } else {
                         setUser({
                             ...user,
                             latestScore: currentScore,
+                            timer: timer 
                         });
                     }
                 }
@@ -264,7 +266,7 @@ export const Game = () => {
         }
         updateScore();
         
-    }, [gameOver, currentScore, user?.latestScore, user?.highscore, setUser, navigate]);
+    }, [gameOver, currentScore, user?.latestScore, user?.highscore, setUser, navigate, timer]);
 
     const startCountdown = () => {
         setCountdown(3); // Start countdown at 3 seconds
@@ -323,7 +325,7 @@ export const Game = () => {
             </header>
             <div className="score">
                 <p className="current-score">Current score: {currentScore}</p>
-                <p className="timer">Timer: {formatTime(timer)}</p>
+                <p className="timer">Time: {formatTime(timer)}</p>
                 <p className="higscore">Highscore: {user?.highscore}</p>
             </div>
             <section className="game-container">

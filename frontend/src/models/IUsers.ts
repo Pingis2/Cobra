@@ -8,6 +8,7 @@ export interface IUsers {
     country: string;
     highscore: number;
     latestScore: number;
+    timer: number;
 }
 
 export interface IUserData {

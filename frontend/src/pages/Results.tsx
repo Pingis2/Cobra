@@ -5,6 +5,12 @@ import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
 import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
 import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
 
+const formatTime = (timeInSeconds: number | undefined): string => {
+    if (timeInSeconds === undefined) return "N/A";
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+};
 
 export const Results = () => {
     const { user } = useUser();
@@ -25,6 +31,7 @@ export const Results = () => {
         }
     }
     
+    const formattedTime = formatTime(user?.timer);
 
     return (
         <>
@@ -38,7 +45,8 @@ export const Results = () => {
                 <h1>Game over</h1>
                 <h2>Results</h2>
                 <div className="result-score">
-                    <p>latest score: {user?.latestScore}</p>
+                    <p>Latest score: {user?.latestScore}</p>
+                    <p>Time: {formattedTime}</p>
                     <p>Highscore: {user?.highscore}</p>
                 </div>
                 <div className="nav-buttons">
