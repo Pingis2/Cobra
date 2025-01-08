@@ -33,8 +33,8 @@ export const Game = () => {
     const [gameSpeed, setGameSpeed] = useState(50);
     const [slowApple, setSlowApple] = useState({ x: -1, y: -1 });
     const [fastApple, setFastApple] = useState({ x: -1, y: -1 });
-    const [slowAppleTimer, setSlowAppleTimer] = useState<NodeJS.Timeout | null>(null);
-    const [fastAppleTimer, setFastAppleTimer] = useState<NodeJS.Timeout | null>(null);
+    const [slowAppleTimer, setSlowAppleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
+    const [fastAppleTimer, setFastAppleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
 
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
