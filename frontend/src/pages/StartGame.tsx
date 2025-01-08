@@ -3,9 +3,7 @@ import LogoutButton from "../components/Logout";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { BackButton } from "../components/BackButton";
-import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
-import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
-import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
+import { CountryFlag } from "../components/CountryFlag";
 
 
 export const StartGamePage = () => {
@@ -16,16 +14,6 @@ export const StartGamePage = () => {
         navigate(path);
     };
 
-    const countryImage = () => {
-        if (user?.country === "England") {
-            return <img src={EnglandFlag} alt="England flag" className="user-country" />;
-        } else if (user?.country === "Sweden") {
-            return <img src={SwedenFlag} alt="Sweden flag" className="user-country" />;
-        } else if (user?.country === "USA") {
-            return <img src={AmericanFlag} alt="USA flag" className="user-country" />;
-        }
-    }
-
     return (
         <>
             <header className="header-with-back-button">
@@ -33,7 +21,7 @@ export const StartGamePage = () => {
                     <BackButton />
                 </div>
                 <div className="user-logout">
-                    <p className="user-info">{user?.userName} {countryImage()}</p>
+                    <p className="user-info">{user?.userName} {user && <CountryFlag user={user} />}</p>
                     <LogoutButton />
                 </div>
             </header>

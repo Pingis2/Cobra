@@ -1,9 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import LogoutButton from "../components/Logout";
-import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
-import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
-import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
+import { CountryFlag } from "../components/CountryFlag";
 
 const formatTime = (timeInSeconds: number | undefined): string => {
     if (timeInSeconds === undefined) return "N/A";
@@ -20,16 +18,6 @@ export const Results = () => {
     const handleNavigation = (path: string) => {
         navigate(path);
     }
-
-    const countryImage = () => {
-        if (user?.country === "England") {
-            return <img src={EnglandFlag} alt="England flag" className="user-country" />;
-        } else if (user?.country === "Sweden") {
-            return <img src={SwedenFlag} alt="Sweden flag" className="user-country" />;
-        } else if (user?.country === "USA") {
-            return <img src={AmericanFlag} alt="USA flag" className="user-country" />;
-        }
-    }
     
     const formattedTime = formatTime(user?.timer);
 
@@ -37,7 +25,7 @@ export const Results = () => {
         <>
             <header className="header-without-back-button">
                 <div className="user-logout">
-                    <p className="user-info">{user?.userName} {countryImage()}</p>
+                    <p className="user-info">{user?.userName} {user && <CountryFlag user={user} />}</p>
                     <LogoutButton />
                 </div>
             </header>

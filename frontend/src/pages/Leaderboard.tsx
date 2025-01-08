@@ -5,11 +5,9 @@ import { BackButton } from "../components/BackButton";
 import FirstPlace from "../assets/images/leaderboard-podium/first-place.png";
 import SecondPlace from "../assets/images/leaderboard-podium/second-place.png";
 import ThirdPlace from "../assets/images/leaderboard-podium/third-place.png";
-import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
-import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
-import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
 import LogoutButton from "../components/Logout";
 import { useUser } from "../context/UserContext";
+import { CountryFlag } from "../components/CountryFlag";
 
 export const Leaderboard = () => {
     const [backendData, setBackendData] = useState<IUsers[] | null>(null);
@@ -55,22 +53,16 @@ export const Leaderboard = () => {
         }
     }, []);
 
-    const countryImage = (user: IUsers) => {
-        if (user?.country === "England") {
-            return <img src={EnglandFlag} alt="England flag" className="user-country" />;
-        } else if (user?.country === "Sweden") {
-            return <img src={SwedenFlag} alt="Sweden flag" className="user-country" />;
-        } else if (user?.country === "USA") {
-            return <img src={AmericanFlag} alt="USA flag" className="user-country" />;
-        }
-    }
-
     return (
         <>
             <header className="header-with-back-button">
                 <BackButton />
                 <div className="user-logout">
-                    <p className="user-info">{user?.userName} {user && countryImage(user)}</p>
+                    <p
+                        className="user-info">
+                        {user?.userName}
+                        {user && <CountryFlag user={user} />}
+                    </p>
                     <LogoutButton />
                 </div>
             </header>
@@ -88,7 +80,7 @@ export const Leaderboard = () => {
                                         <div className="second-place-user">
                                             <p className="username">{user.userName}</p>
                                             <p>{user.highscore}</p>
-                                            {countryImage(user)}
+                                            <CountryFlag user={user} />
                                         </div>
                                         <img src={SecondPlace} alt="Second place podium" className="podium-image" />
                                     </li>
@@ -98,7 +90,7 @@ export const Leaderboard = () => {
                                         <div className="first-place-user">
                                             <p className="username">{user.userName}</p>
                                             <p>{user.highscore}</p>
-                                            {countryImage(user)}
+                                            <CountryFlag user={user} />
                                         </div>
                                         <img src={FirstPlace} alt="First place podium" className="podium-image"/>
                                     </li>
@@ -108,7 +100,7 @@ export const Leaderboard = () => {
                                         <div className="third-place-user">
                                             <p className="username">{user.userName}</p>
                                             <p>{user.highscore}</p>
-                                            {countryImage(user)}
+                                            <CountryFlag user={user} />
                                         </div>
                                         <img src={ThirdPlace} alt="Third place podium" className="podium-image"/>
                                     </li>
@@ -156,7 +148,7 @@ export const Leaderboard = () => {
                                     <ul>
                                         {backendData.slice(3).map((user) => (
                                             <li key={`country-${user._id}`}>
-                                                {countryImage(user)}
+                                                <CountryFlag user={user} />
                                             </li>
                                         ))}
                                     </ul>

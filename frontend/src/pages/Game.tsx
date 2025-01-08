@@ -2,12 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { updateUserScore } from "../services/userService";
-import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
-import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
-import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
 import { PlayButtons } from "../components/PlayButtons";
+import { CountryFlag } from "../components/CountryFlag";
 
-const gameSpeed = 100;
+const gameSpeed = 50;
 const renderFps = 2000;
 const cellSize = 15;
 
@@ -37,16 +35,6 @@ export const Game = () => {
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
 
-    const countryImage = () => {
-        if (user?.country === "England") {
-            return <img src={EnglandFlag} alt="England flag" className="user-country" />;
-        } else if (user?.country === "Sweden") {
-            return <img src={SwedenFlag} alt="Sweden flag" className="user-country" />;
-        } else if (user?.country === "USA") {
-            return <img src={AmericanFlag} alt="USA flag" className="user-country" />;
-        }
-    }
-
     // Generate food --------------------------------------------------------------
     const generateFood = () => {
         let newFood = {
@@ -72,13 +60,13 @@ export const Game = () => {
             const key = event.key;
             let newDirection = directionRef.current;
 
-            if (key === "ArrowUp" || key === "w") {
+            if (key === "ArrowUp" || key === "w" || key === "W") {
                 newDirection = { x: 0, y: -1 };
-            } else if (key === "ArrowDown" || key === "s") {
+            } else if (key === "ArrowDown" || key === "s" || key === "S") {
                 newDirection = { x: 0, y: 1 };
-            } else if (key === "ArrowLeft" || key === "a") {
+            } else if (key === "ArrowLeft" || key === "a" || key === "A") {
                 newDirection = { x: -1, y: 0 };
-            } else if (key === "ArrowRight" || key === "d") {
+            } else if (key === "ArrowRight" || key === "d" || key === "D") {
                 newDirection = { x: 1, y: 0 };
             }
 
@@ -320,7 +308,7 @@ export const Game = () => {
         <>
             <header className="header-without-back-button">
                 <div className="user-logout">
-                    <p className="user-info">{user?.userName} {countryImage()}</p>
+                    <p className="user-info">{user?.userName} {user && <CountryFlag user={user} />}</p>
                 </div>
             </header>
             <div className="stats-container">
