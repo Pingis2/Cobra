@@ -12,7 +12,7 @@ export const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
     }, []);
     
 
@@ -47,12 +47,12 @@ export const Login = () => {
             console.log("login result", loginResponse);
 
             if (loginResponse && loginResponse.token) {
-                localStorage.setItem("token", loginResponse.token);
+                sessionStorage.setItem("token", loginResponse.token);
             } else {
                 setError("Wrong email or password");
             }
 
-            const token = localStorage.getItem("token");
+            const token = sessionStorage.getItem("token");
 
             if (token) {
                 const fetchedUser = await getLoggedInUser(token || "");

@@ -31,7 +31,7 @@ export const Leaderboard = () => {
         };
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = sessionStorage.getItem('token');
 
         if (token) {
             retryFetchUsers(token)
@@ -48,7 +48,7 @@ export const Leaderboard = () => {
                     setError(true);
                 });
         } else {
-            console.error("No token found in localStorage");
+            console.error("No token found in sessionStorage");
             setError(true);
         }
     }, []);
