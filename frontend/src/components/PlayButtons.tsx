@@ -17,6 +17,15 @@ export const PlayButtons = ({ direction, setDirection, gameStarted, gameOver }: 
 
     const handleButtonPress = (newDirection: { x: number, y: number }) => {
         if (gameStarted && !gameOver) {
+
+            if (
+                (directionRef.current.x === 1 && newDirection.x === -1) ||
+                (directionRef.current.x === -1 && newDirection.x === 1) ||
+                (directionRef.current.y === 1 && newDirection.y === -1) ||
+                (directionRef.current.y === -1 && newDirection.y === 1)
+            ) {
+                return;
+            }
             setDirection(newDirection);
         }
     }

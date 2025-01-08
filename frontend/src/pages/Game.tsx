@@ -5,7 +5,6 @@ import { updateUserScore } from "../services/userService";
 import { PlayButtons } from "../components/PlayButtons";
 import { CountryFlag } from "../components/CountryFlag";
 
-const gameSpeed = 50;
 const renderFps = 2000;
 const cellSize = 15;
 
@@ -31,6 +30,11 @@ export const Game = () => {
     const [countdown, setCountdown] = useState(0);
     const [timer, setTimer] = useState(0);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [gameSpeed, setGameSpeed] = useState(50);
+    const [slowApple, setSlowApple] = useState({ x: -1, y: -1 });
+    const [fastApple, setFastApple] = useState({ x: -1, y: -1 });
+    const [slowAppleTimer, setSlowAppleTimer] = useState<NodeJS.Timeout | null>(null);
+    const [fastAppleTimer, setFastAppleTimer] = useState<NodeJS.Timeout | null>(null);
 
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
@@ -48,6 +52,34 @@ export const Game = () => {
             };
         }
         return newFood;
+    };
+
+    // Power ups --------------------------------------------------------------
+
+    // Generate slow apple --------------------------------------------------------------
+    const generateSlowApple = () => {
+        const newSlowApple = generateFood();
+        setSlowApple(newSlowApple)
+        if (slowAppleTimer) {
+            clearTimeout(slowAppleTimer);
+        }
+        const timer = setTimeout(() => {
+            setSlowApple({ x: -1, y: -1 });
+        }, 15000);
+        setSlowAppleTimer(timer);
+    };
+
+    // Generete fast apple --------------------------------------------------------------
+    const generateFastApple = () => {
+        const newFastApple = generateFood();
+        setFastApple(newFastApple)
+        if (fastAppleTimer) {
+            clearTimeout(fastAppleTimer);
+        }
+        const timer = setTimeout(() => {
+            setFastApple({ x: -1, y: -1 });
+        }, 15000);
+        setFastAppleTimer(timer);
     }
 
     useEffect(() => {
@@ -152,8 +184,10 @@ export const Game = () => {
         let animationFrameId: number;
         let lastUpdateTime = performance.now();
         let lastMoveTime = performance.now();
-        const foodPoints = 100;
-        const moveInterval = gameSpeed;
+        const normalFoodPoints = 100;
+        const slowApplePoints = 80;
+        const fastApplePoints = 150;
+
 
         const gameLoop = (currentTime: number) => {
             const deltaTime = currentTime - lastUpdateTime;
@@ -174,11 +208,19 @@ export const Game = () => {
                     // Draw the food
                     ctx.fillStyle = "red";
                     ctx.fillRect(food.x * cellSize, food.y * cellSize, cellSize, cellSize);
+
+                    // Draw slow apple
+                    ctx.fillStyle = "yellow";
+                    ctx.fillRect(slowApple.x * cellSize, slowApple.y * cellSize, cellSize, cellSize);
+
+                    // Draw fast apple
+                    ctx.fillStyle = "blue";
+                    ctx.fillRect(fastApple.x * cellSize, fastApple.y * cellSize, cellSize, cellSize);
                 }
                 lastUpdateTime = currentTime;
             }
 
-            if (currentTime - lastMoveTime >= moveInterval) {
+            if (currentTime - lastMoveTime >= gameSpeed) {
                 setSnake((prevSnake) => {
                     const newHead = {
                         x: prevSnake[0].x + direction.x,
@@ -199,9 +241,20 @@ export const Game = () => {
 
                     const newSnake = [newHead, ...prevSnake];
                     if (newHead.x === food.x && newHead.y === food.y) {
-                        setCurrentScore(currentScore + foodPoints);
+                        setCurrentScore(currentScore + normalFoodPoints);
                         setFood(generateFood());
-                    } else {
+                    } else if (newHead.x === slowApple.x && newHead.y === slowApple.y) {
+                        setCurrentScore(currentScore + slowApplePoints);
+                        setGameSpeed(100);
+                        setTimeout(() => setGameSpeed(50), 5000);
+                        setSlowApple({ x: -1, y: -1 });
+                    } else if (newHead.x === fastApple.x && newHead.y === fastApple.y) {
+                        setCurrentScore(currentScore + fastApplePoints);
+                        setGameSpeed(25);
+                        setTimeout(() => setGameSpeed(50), 5000);
+                        setFastApple({ x: -1, y: -1 });
+                    }
+                    else {
                         newSnake.pop();
                     }
 
@@ -222,6 +275,17 @@ export const Game = () => {
             cancelAnimationFrame(animationFrameId);
         };
     }, [gameStarted, gameOver, snake, food, direction, currentScore]);
+
+    useEffect(() => {
+        const powerUpInterval = setInterval(() => {
+            generateSlowApple();
+            generateFastApple();
+        }, 30000);
+
+        return () => {
+            clearInterval(powerUpInterval);
+        };
+    }, [])
 
     useEffect(() => {
         const updateScore = async () => {
@@ -256,6 +320,8 @@ export const Game = () => {
         
     }, [gameOver, currentScore, user?.latestScore, user?.highscore, setUser, navigate, timer]);
 
+
+    //Timer and countdown --------------------------------------------------------------
     const startCountdown = () => {
         setCountdown(3); // Start countdown at 3 seconds
         const intervalId = setInterval(() => {
