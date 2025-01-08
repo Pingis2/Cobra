@@ -13,11 +13,11 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "backend/app.js"
+      "destination": "backend/api/$1"
     },
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/frontend/index.html"
     }
   ],
   "cleanUrls": true
