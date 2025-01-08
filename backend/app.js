@@ -129,8 +129,6 @@ app.post("/api/add-user", async (req, res) => {
 
         const result = await db.collection("users").insertOne(hashedUser);
 
-        console.log("Inserted user:", result);
-
         const JWT_SECRET = process.env.JWT_SECRET;
 
         if (!JWT_SECRET) {
@@ -181,8 +179,6 @@ app.post("/api/login", async (req, res) => {
         const usersCollection = db.collection("users");
         const user = await usersCollection.findOne({ email });
 
-        console.log("Received login attempt:", { email, password });
-
         if (!user) {
             console.log("User not found:", email);
             return res.status(404).send("User not found");
@@ -193,10 +189,6 @@ app.post("/api/login", async (req, res) => {
             console.log("Invalid password for user:", email);
             return res.status(401).send("Invalid password");
         }
-
-        console.log("Login successful for user:", email);
-
-        console.log("JWT_SECRET", process.env.JWT_SECRET);
         
 
         const token = jwt.sign(
@@ -243,8 +235,6 @@ app.post("/api/logout", (req, res) => {
         return res.status(400).json({ success: false, message: "Token is required" });
     }
 
-    console.log("Token received for logout:", token);
-
     res.status(200).json({ success: true, message: "Logged out successfully" });
 });
 
@@ -290,7 +280,6 @@ app.get("/api/leaderboard", async (req, res) => {
             return res.status(404).json({ message: "No users found" });
         }
 
-        console.log("Fetched users:", users);
         res.json({ users });
     } catch (err) {
         console.error("Error getting users", err);

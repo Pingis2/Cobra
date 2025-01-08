@@ -56,7 +56,6 @@ export const CreateUser = () => {
 
         try {
             const data = await retryCreateUser(userName, firstName, lastName, email, password, country.name, highscore);
-            console.log("password being sent", password);
 
             if (data) {
                 navigate("/");

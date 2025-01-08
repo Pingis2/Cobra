@@ -6,7 +6,6 @@ import { CountryFlag } from "../components/CountryFlag";
 
 export const StartPage = () => {
     const { user, loading } = useContext(UserContext);
-    console.log("user", user);
     const navigate = useNavigate();
 
     useEffect(() => {

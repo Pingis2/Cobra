@@ -12,8 +12,6 @@ export const getUsers = async (token: string): Promise<IUserData> => {
             }
         );
 
-        console.log("api response", response);
-
         if (response.data && response.data.users) {
             return { users: response.data.users, token: response.data.token };
         } else {
@@ -32,8 +30,6 @@ export const getLoggedInUser = async (token: string): Promise<{ user: IUsers | n
             `${BASE_URL}get-user`,
             { headers: { Authorization: `Bearer ${token}` } }
         );
-
-        console.log("api response", response);
 
         if (response.data && response.data.user) {
             return { user: response.data.user };
@@ -54,8 +50,6 @@ export const loginUser = async (email: string, password: string): Promise<IUserD
             `${BASE_URL}login`,
             { email, password }
         );
-
-        console.log("api response", response.data);
         
         if (response.data.success) {
             return {
@@ -93,9 +87,7 @@ export const createUser = async (
                 country,
                 highscore,
             }
-        );
-
-        console.log("api response", response.data);
+        );;
         
         if (response.data.success) {
             return response.data.user || null;
@@ -116,8 +108,6 @@ export const logoutUser = async (token: string): Promise<boolean> => {
             {},
             { headers: { Authorization: `Bearer ${token}` } }
         );
-
-        console.log("api response", response.data);
         
         if (response.data && response.data.success) {
             return true;
@@ -143,8 +133,6 @@ export const updateUserScore = async (token: string, highscore: number): Promise
             { highscore },
             { headers: { Authorization: `Bearer ${token}` } }
         );
-
-        console.log("api response", response.data);
         
         if (response.data.success) {
             return response.data.user || null;
