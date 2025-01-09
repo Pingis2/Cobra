@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { updateUserScore } from "../services/userService";
 import { PlayButtons } from "../components/PlayButtons";
 import { CountryFlag } from "../components/CountryFlag";
+import { Jungle } from "../components/Jungle";
 
 const renderFps = 2000;
 const cellSize = 15;
@@ -376,6 +377,7 @@ export const Game = () => {
                 <div className="user-logout">
                     <p className="user-info">{user?.userName} {user && <CountryFlag user={user} />}</p>
                 </div>
+                <Jungle />
             </header>
             <div className="stats-container">
                 <p className="current-score">Current score: {currentScore}</p>

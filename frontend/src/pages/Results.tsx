@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import LogoutButton from "../components/Logout";
 import { CountryFlag } from "../components/CountryFlag";
+import { Jungle } from "../components/Jungle";
 
 const formatTime = (timeInSeconds: number | undefined): string => {
     if (timeInSeconds === undefined) return "N/A";
@@ -28,6 +29,7 @@ export const Results = () => {
                     <p className="user-info">{user?.userName} {user && <CountryFlag user={user} />}</p>
                     <LogoutButton />
                 </div>
+                <Jungle />
             </header>
             <div>
                 <h1>Game over</h1>
