@@ -1,0 +1,32 @@
+.jungle-1 {
+    position: absolute;
+    top: 0;
+    right: 40px;
+    z-index: -1;
+    height: 150px;
+}
+
+.jungle-2 {
+    position: absolute;
+    top: 0;
+    left: -100px;
+    z-index: -1;
+    height: 200px;
+}
+
+.jungle-3 {
+    position: absolute;
+    top: 0;
+    right: -20px;
+    height: 230px;
+    z-index: -1;
+}
+
+.jungle-4 {
+    position: absolute;
+    top: -40px;
+    left: 20px;
+    height: 130px;
+    transform: rotateY(180deg);
+    z-index: -1;
+}

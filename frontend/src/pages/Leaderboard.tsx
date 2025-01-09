@@ -8,6 +8,7 @@ import ThirdPlace from "../assets/images/leaderboard-podium/third-place.png";
 import LogoutButton from "../components/Logout";
 import { useUser } from "../context/UserContext";
 import { CountryFlag } from "../components/CountryFlag";
+import { Jungle } from "../components/Jungle";
 
 export const Leaderboard = () => {
     const [backendData, setBackendData] = useState<IUsers[] | null>(null);
@@ -65,6 +66,7 @@ export const Leaderboard = () => {
                     </p>
                     <LogoutButton />
                 </div>
+                <Jungle />
             </header>
             
             
