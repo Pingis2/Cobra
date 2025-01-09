@@ -4,6 +4,7 @@ import { createUser } from "../services/userService";
 import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
 import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
 import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
+import CanadaFlag from "../assets/images/dropdown-flags/canada-flag.png";
 
 
 export const CreateUser = () => {
@@ -100,6 +101,7 @@ export const CreateUser = () => {
                                     type="text"
                                     id="firstName"
                                     name="firstName"
+                                    placeholder="Mark" 
                                     className="first-name"
                                     value={firstName}
                                     onChange={(e) => setFirstName(e.target.value)}
@@ -117,6 +119,7 @@ export const CreateUser = () => {
                                     type="text"
                                     id="lastName"
                                     name="lastName"
+                                    placeholder="Smith"
                                     value={lastName}
                                     onChange={(e) => setLastName(e.target.value)}
                                     required
@@ -133,6 +136,7 @@ export const CreateUser = () => {
                                     type="text"
                                     id="username"
                                     name="username"
+                                    placeholder="MarkSmith12"
                                     className="user-name"
                                     value={userName}
                                     onChange={(e) => setUserName(e.target.value)}
@@ -151,13 +155,14 @@ export const CreateUser = () => {
                                     id="email"
                                     name="email"
                                     className="email"
+                                    placeholder="mark@email.com"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
                                     minLength={5}
                                     maxLength={50}
                                     pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                                    title="Email should be in the format"
+                                    title="Email should be in the format test@email.com"
                                 />
                             </div>
 
@@ -168,6 +173,7 @@ export const CreateUser = () => {
                                     id="password"
                                     name="password"
                                     className="password"
+                                    placeholder="Password123!"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
@@ -226,10 +232,21 @@ export const CreateUser = () => {
                                                 setCountry({ name: "England", flag: EnglandFlag })
                                                 setShowDropdown(false);
                                             }}>
-                                                <p>England</p>
+                                            <p>England</p>
+                                            <img
+                                                src={EnglandFlag}
+                                                alt="England flag"
+                                                className="dropdown-flag"
+                                            />
+                                            </li>
+                                            <li onClick={() => {
+                                                setCountry({ name: "Canada", flag: CanadaFlag })
+                                                setShowDropdown(false);
+                                            }}>
+                                                <p>Canada</p>
                                                 <img
-                                                    src={EnglandFlag}
-                                                    alt="USA flag"
+                                                    src={CanadaFlag}
+                                                    alt="Canadian flag"
                                                     className="dropdown-flag"
                                                 />
                                             </li>

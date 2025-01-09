@@ -1,6 +1,7 @@
 import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
 import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
 import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
+import CanadaFlag from "../assets/images/dropdown-flags/canada-flag.png";
 import { IUsers } from "../models/IUsers";
 
 interface CountryFlagProps {
@@ -17,6 +18,8 @@ export const CountryFlag = ({user}: CountryFlagProps) => {
             return SwedenFlag;
         } else if (user?.country === "USA") {
             return AmericanFlag;
+        } else if (user?.country === "Canada") {
+            return CanadaFlag;
         }
     }
 
