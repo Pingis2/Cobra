@@ -34,6 +34,39 @@
             }
         }
 
+        .jungle-1 {
+            position: absolute;
+            top: 0;
+            right: 450px;
+            height: 300px;
+            z-index: -1;
+        }
+
+        .jungle-2 {
+            position: absolute;
+            top: 0;
+            left: -20px;
+            height: 350px;
+            z-index: -1;
+        }
+
+        .jungle-3 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 400px;
+            z-index: -1;
+        }
+
+        .jungle-4 {
+            position: absolute;
+            top: -40px;
+            left: 500px;
+            height: 250px;
+            transform: rotateY(180deg);
+            z-index: -1;
+        }
+
     }
 
     .header-without-back-button {
@@ -64,6 +97,36 @@
                     margin: 0 0 0 5px;
                 }
             }
+        }
+
+        .jungle-1 {
+            position: absolute;
+            top: 0;
+            right: 450px;
+            z-index: -1;
+        }
+
+        .jungle-2 {
+            position: absolute;
+            top: 0;
+            left: -20px;
+            z-index: -1;
+        }
+
+        .jungle-3 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: -1;
+        }
+
+        .jungle-4 {
+            position: absolute;
+            top: -40px;
+            left: 500px;
+            height: 150px;
+            transform: rotateY(180deg);
+            z-index: -1;
         }
     }
 }
