@@ -1,3 +1,39 @@
+@use '../../mixins/mixin-font.scss' as *;
+
 @media (min-width: 1024px) {
-    
+    .instructions-container {
+        @include main-font;
+        width: 600px;
+        margin: 0 auto 50px auto;
+
+        h1 {
+            font-size: 4rem;
+        }
+
+        .instructions-1 {
+            font-size: 2rem;
+            margin-top: 1rem;
+        }
+
+        .instructions-2 {
+            font-size: 2rem;
+            margin: 1rem auto 0 auto;
+            text-align: center;
+        }
+
+        .instructions-3 {
+            font-size: 2rem;
+            margin: 1rem auto 0 auto;
+            text-align: center;
+        }
+
+        .instructions-4 {
+            font-size: 1.5rem;
+            margin: 50px 0 30px 0;
+        }
+
+        button {
+            font-size: 1.5rem;
+        }
+    }
 }
