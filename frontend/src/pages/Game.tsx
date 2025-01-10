@@ -37,10 +37,14 @@ export const Game = () => {
     const [fastApple, setFastApple] = useState({ x: -1, y: -1 });
     const [slowAppleTimer, setSlowAppleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
     const [fastAppleTimer, setFastAppleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
-    const eatingSound = useRef(new Audio(EatingSound));
 
     const token = sessionStorage.getItem("token");
     const navigate = useNavigate();
+
+    const playEatingSound = () => {
+        const sound = new Audio(EatingSound);
+        sound.play();
+    };
 
     // Generate food --------------------------------------------------------------
     const generateFood = () => {
@@ -246,19 +250,19 @@ export const Game = () => {
                     if (newHead.x === food.x && newHead.y === food.y) {
                         setCurrentScore(currentScore + normalFoodPoints);
                         setFood(generateFood());
-                        eatingSound.current.play();
+                        playEatingSound();
                     } else if (newHead.x === slowApple.x && newHead.y === slowApple.y) {
                         setCurrentScore(currentScore + slowApplePoints);
                         setGameSpeed(100);
                         setTimeout(() => setGameSpeed(50), 5000);
                         setSlowApple({ x: -1, y: -1 });
-                        eatingSound.current.play();
+                        playEatingSound();
                     } else if (newHead.x === fastApple.x && newHead.y === fastApple.y) {
                         setCurrentScore(currentScore + fastApplePoints);
                         setGameSpeed(25);
                         setTimeout(() => setGameSpeed(50), 5000);
                         setFastApple({ x: -1, y: -1 });
-                        eatingSound.current.play();
+                        playEatingSound();
                     }
                     else {
                         newSnake.pop();
