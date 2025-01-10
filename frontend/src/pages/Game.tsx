@@ -153,20 +153,36 @@ export const Game = () => {
             const deltaX = touch.clientX - startX;
             const deltaY = touch.clientY - startY;
 
+            let newDirection = directionRef.current;
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
                 if (deltaX > 0 && directionRef.current.x !== -1) {
-                    setDirection({ x: 1, y: 0 }); // Right
-                    MovementSounds().movementRight();
+                    newDirection = { x: 1, y: 0 }; // Right
                 } else if (deltaX < 0 && directionRef.current.x !== 1) {
-                    setDirection({ x: -1, y: 0 }); // Left
-                    MovementSounds().movementLeft();
+                    newDirection = { x: -1, y: 0 }; // Left
                 }
             } else {
                 if (deltaY > 0 && directionRef.current.y !== -1) {
-                    setDirection({ x: 0, y: 1 }); // Down
-                    MovementSounds().movementDown();
+                    newDirection = { x: 0, y: 1 }; // Down
                 } else if (deltaY < 0 && directionRef.current.y !== 1) {
-                    setDirection({ x: 0, y: -1 }); // Up
+                    newDirection = { x: 0, y: -1 }; // Up
+                }
+            }
+
+            if (
+                newDirection.x !== directionRef.current.x ||
+                newDirection.y !== directionRef.current.y
+            ) {
+                directionRef.current = newDirection;
+                setDirection(newDirection);
+
+                // Play the appropriate movement sound
+                if (newDirection.x === 1) {
+                    MovementSounds().movementRight();
+                } else if (newDirection.x === -1) {
+                    MovementSounds().movementLeft();
+                } else if (newDirection.y === 1) {
+                    MovementSounds().movementDown();
+                } else if (newDirection.y === -1) {
                     MovementSounds().movementUp();
                 }
             }

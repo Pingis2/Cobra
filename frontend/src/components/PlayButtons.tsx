@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-
+import { MovementSounds } from "./MovementSounds";
 
 interface PlayButtonsProps {
     direction: { x: number, y: number };
@@ -26,6 +26,17 @@ export const PlayButtons = ({ direction, setDirection, gameStarted, gameOver }: 
             ) {
                 return;
             }
+
+            if (newDirection.y === -1) {
+                MovementSounds().movementUp();
+            } else if (newDirection.y === 1) {
+                MovementSounds().movementDown();
+            } else if (newDirection.x === -1) {
+                MovementSounds().movementLeft();
+            } else if (newDirection.x === 1) {
+                MovementSounds().movementRight();
+            }
+
             setDirection(newDirection);
         }
     }
