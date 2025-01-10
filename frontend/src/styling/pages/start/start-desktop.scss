@@ -4,10 +4,13 @@
     
     section {
         @include main-font;
+        display: flex;
+        flex-direction: column;
 
         h1 {
             font-size: 4rem;
             text-align: center;
+            margin-top: 150px;
         }
 
         .user-buttons {

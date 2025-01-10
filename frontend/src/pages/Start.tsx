@@ -34,7 +34,7 @@ export const StartPage = () => {
             </header>
             
             <section>
-                <h1>Start Page</h1>
+                <h1>Start</h1>
                 <div className="user-buttons">
                     <p>Welcome {user?.userName} to the start page</p>
                     <nav className="nav-buttons">
