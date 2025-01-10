@@ -6,6 +6,7 @@ import { PlayButtons } from "../components/PlayButtons";
 import { CountryFlag } from "../components/CountryFlag";
 import { Jungle } from "../components/Jungle";
 import EatingSound from '../assets/sounds/eating-sound.wav';
+import { MovementSounds } from "../components/MovementSounds";
 
 const renderFps = 2000;
 const cellSize = 15;
@@ -101,12 +102,16 @@ export const Game = () => {
 
             if (key === "ArrowUp" || key === "w" || key === "W") {
                 newDirection = { x: 0, y: -1 };
+                MovementSounds().movementUp();
             } else if (key === "ArrowDown" || key === "s" || key === "S") {
                 newDirection = { x: 0, y: 1 };
+                MovementSounds().movementDown();
             } else if (key === "ArrowLeft" || key === "a" || key === "A") {
                 newDirection = { x: -1, y: 0 };
+                MovementSounds().movementLeft();
             } else if (key === "ArrowRight" || key === "d" || key === "D") {
                 newDirection = { x: 1, y: 0 };
+                MovementSounds().movementRight();
             }
 
             if (newDirection.x !== -directionRef.current.x || newDirection.y !== -directionRef.current.y) {
