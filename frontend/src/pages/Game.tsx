@@ -7,6 +7,9 @@ import { CountryFlag } from "../components/CountryFlag";
 import { Jungle } from "../components/Jungle";
 import EatingSound from '../assets/sounds/eating-sound.wav';
 import { MovementSounds } from "../components/MovementSounds";
+import AppleImage from '../assets/images/apples/red-apple.png';
+import SlowAppleImage from '../assets/images/apples/yellow-apple.png';
+import FastAppleImage from '../assets/images/apples/blue-apple.png';
 
 const renderFps = 2000;
 const cellSize = 15;
@@ -38,6 +41,15 @@ export const Game = () => {
     const [fastApple, setFastApple] = useState({ x: -1, y: -1 });
     const [slowAppleTimer, setSlowAppleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
     const [fastAppleTimer, setFastAppleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
+
+    const appleImg = useRef(new Image());
+    appleImg.current.src = AppleImage;
+
+    const slowAppleImg = useRef(new Image());
+    slowAppleImg.current.src = SlowAppleImage;
+
+    const fastAppleImg = useRef(new Image());
+    fastAppleImg.current.src = FastAppleImage;
 
     const token = sessionStorage.getItem("token");
     const navigate = useNavigate();
@@ -238,16 +250,13 @@ export const Game = () => {
                     });
 
                     // Draw the food
-                    ctx.fillStyle = "red";
-                    ctx.fillRect(food.x * cellSize, food.y * cellSize, cellSize, cellSize);
+                    ctx.drawImage(appleImg.current, food.x * cellSize, food.y * cellSize, cellSize, cellSize);
 
                     // Draw slow apple
-                    ctx.fillStyle = "yellow";
-                    ctx.fillRect(slowApple.x * cellSize, slowApple.y * cellSize, cellSize, cellSize);
+                    ctx.drawImage(slowAppleImg.current, slowApple.x * cellSize, slowApple.y * cellSize, cellSize, cellSize);
 
                     // Draw fast apple
-                    ctx.fillStyle = "blue";
-                    ctx.fillRect(fastApple.x * cellSize, fastApple.y * cellSize, cellSize, cellSize);
+                    ctx.drawImage(fastAppleImg.current, fastApple.x * cellSize, fastApple.y * cellSize, cellSize, cellSize);
                 }
                 lastUpdateTime = currentTime;
             }

@@ -1,7 +1,7 @@
 @use '../../mixins/mixin-font.scss' as *;
 
 
-section {
+.start-container {
     @include main-font;
 
     h1 {

@@ -33,7 +33,7 @@ export const StartPage = () => {
                 <Jungle />
             </header>
             
-            <section>
+            <section className="start-container">
                 <h1>Start</h1>
                 <div className="user-buttons">
                     <p>Welcome {user?.userName} to the start page</p>

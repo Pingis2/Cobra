@@ -2,7 +2,7 @@
 
 @media (min-width: 1024px) {
     
-    section {
+    .start-container {
         @include main-font;
         display: flex;
         flex-direction: column;
