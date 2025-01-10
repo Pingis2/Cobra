@@ -1,0 +1,77 @@
+.bird-container {
+    position: absolute;
+    top: 50%;
+    left: -50px;
+    will-change: transform;
+
+    animation: fly-across 10s linear forwards;
+}
+
+.bird-1 {
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells.svg);
+    background-size: auto 30px;
+    width: 21px;
+    height: 30px;
+    will-change: background-position;
+
+    animation-name: fly-cycle;
+    animation-duration: 0.8s;
+    animation-delay: -0.5s;
+    animation-timing-function: steps(10);
+    animation-iteration-count: infinite;
+
+    filter: invert(1) brightness(2);
+}
+
+.bird-2 {
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells.svg);
+    background-size: auto 30px;
+    width: 21px;
+    height: 30px;
+    will-change: background-position;
+
+    animation-name: fly-cycle;
+    animation-duration: 0.8s;
+    animation-delay: 0s;
+    animation-timing-function: steps(10);
+    animation-iteration-count: infinite;
+
+    filter: invert(1) brightness(2);
+    position: relative;
+    top: 0;
+    left: -60px;
+}
+
+.bird-3 {
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells.svg);
+    background-size: auto 30px;
+    width: 21px;
+    height: 30px;
+    will-change: background-position;
+
+    animation-name: fly-cycle;
+    animation-duration: 0.8s;
+    animation-delay: -0.2s;
+    animation-timing-function: steps(10);
+    animation-iteration-count: infinite;
+
+    filter: invert(1) brightness(2);
+    position: relative;
+    top: -20px;
+    left: -15px;
+}
+
+@keyframes fly-cycle {
+    100% {
+        background-position: -216px 0;
+    }
+}
+
+@keyframes fly-across {
+    0% {
+        transform: translateX(-50px);
+    }
+    100% {
+        transform: translateX(110vw);
+    }
+}

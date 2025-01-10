@@ -94,7 +94,7 @@ export const Game = () => {
         directionRef.current = direction;
     }, [direction]);
 
-    // Handle user input (keyboard + touch)
+    // Handle user input (keyboard + touch) --------------------------------------------------------------
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             const key = event.key;

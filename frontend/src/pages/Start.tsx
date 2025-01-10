@@ -4,6 +4,7 @@ import { UserContext } from "../context/UserContext";
 import { useContext, useEffect } from "react";
 import { CountryFlag } from "../components/CountryFlag";
 import { Jungle } from "../components/Jungle";
+import { FlyingBirds } from "../components/FlyingBirds";
 export const StartPage = () => {
     const { user, loading } = useContext(UserContext);
     const navigate = useNavigate();
@@ -41,6 +42,7 @@ export const StartPage = () => {
                         <button onClick={() => handleNavigation('/leaderboard')} type="submit">Leaderboard</button>
                     </nav>
                 </div>
+                <FlyingBirds />
             </section>
         </>
     );

@@ -11,6 +11,7 @@
 @use './components/loading/loading.scss' as *;
 @use './components/play-buttons/play-buttons.scss' as *;
 @use './components/jungle/jungle.scss' as *;
+@use './components/flying-birds/flying-birds.scss' as *;
 
 html {
     height: 100%;
@@ -30,6 +31,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100%;
+    overflow-x: hidden;
 }
 
 footer {
