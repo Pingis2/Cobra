@@ -156,14 +156,18 @@ export const Game = () => {
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
                 if (deltaX > 0 && directionRef.current.x !== -1) {
                     setDirection({ x: 1, y: 0 }); // Right
+                    MovementSounds().movementRight();
                 } else if (deltaX < 0 && directionRef.current.x !== 1) {
                     setDirection({ x: -1, y: 0 }); // Left
+                    MovementSounds().movementLeft();
                 }
             } else {
                 if (deltaY > 0 && directionRef.current.y !== -1) {
                     setDirection({ x: 0, y: 1 }); // Down
+                    MovementSounds().movementDown();
                 } else if (deltaY < 0 && directionRef.current.y !== 1) {
                     setDirection({ x: 0, y: -1 }); // Up
+                    MovementSounds().movementUp();
                 }
             }
         };
