@@ -5,6 +5,7 @@ import { updateUserScore } from "../services/userService";
 import { PlayButtons } from "../components/PlayButtons";
 import { CountryFlag } from "../components/CountryFlag";
 import { Jungle } from "../components/Jungle";
+import EatingSound from '../assets/sounds/eating-sound.wav';
 
 const renderFps = 2000;
 const cellSize = 15;
@@ -36,6 +37,7 @@ export const Game = () => {
     const [fastApple, setFastApple] = useState({ x: -1, y: -1 });
     const [slowAppleTimer, setSlowAppleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
     const [fastAppleTimer, setFastAppleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
+    const eatingSound = useRef(new Audio(EatingSound));
 
     const token = sessionStorage.getItem("token");
     const navigate = useNavigate();
@@ -244,16 +246,19 @@ export const Game = () => {
                     if (newHead.x === food.x && newHead.y === food.y) {
                         setCurrentScore(currentScore + normalFoodPoints);
                         setFood(generateFood());
+                        eatingSound.current.play();
                     } else if (newHead.x === slowApple.x && newHead.y === slowApple.y) {
                         setCurrentScore(currentScore + slowApplePoints);
                         setGameSpeed(100);
                         setTimeout(() => setGameSpeed(50), 5000);
                         setSlowApple({ x: -1, y: -1 });
+                        eatingSound.current.play();
                     } else if (newHead.x === fastApple.x && newHead.y === fastApple.y) {
                         setCurrentScore(currentScore + fastApplePoints);
                         setGameSpeed(25);
                         setTimeout(() => setGameSpeed(50), 5000);
                         setFastApple({ x: -1, y: -1 });
+                        eatingSound.current.play();
                     }
                     else {
                         newSnake.pop();
