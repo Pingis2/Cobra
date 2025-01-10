@@ -274,8 +274,8 @@ export const Game = () => {
                         prevSnake.some(segment => segment.x === newHead.x && segment.y === newHead.y)
                     ) {
                         if (!gameOver) {
-                            setGameOver(true);
-                            setGameStarted(false);
+                            stopGame();
+
                         }
                         return prevSnake;
                     }
@@ -391,6 +391,8 @@ export const Game = () => {
         }, 1000);
     }
 
+    const [timerIntervalId, setTimerIntervalId] = useState<ReturnType<typeof setInterval> | null>(null);
+
     const formatTime = (timeInSeconds: number) => {
         const minutes = Math.floor(timeInSeconds / 60);
         const seconds = timeInSeconds % 60;
@@ -413,6 +415,24 @@ export const Game = () => {
         setDirection({ x: 1, y: 0 });
         
     }
+
+    const stopGame = () => {
+        setGameStarted(false);
+        setGameOver(true);
+        if (timerIntervalId) {
+            clearInterval(timerIntervalId);
+            setTimerIntervalId(null); // Clear the interval ID state
+        }
+    };
+
+    // Cleanup interval on component unmount
+    useEffect(() => {
+        return () => {
+            if (timerIntervalId) {
+                clearInterval(timerIntervalId);
+            }
+        };
+    }, [timerIntervalId]);
 
     return (
         <>
