@@ -73,6 +73,6 @@
     }
 
     100% {
-        transform: translateX(110vw);
+        transform: translateX(calc(100vw + 110px));
     }
 }
