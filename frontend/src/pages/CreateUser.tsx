@@ -142,9 +142,9 @@ export const CreateUser = () => {
                                     onChange={(e) => setUserName(e.target.value)}
                                     required
                                     minLength={4}
-                                    maxLength={20}
+                                    maxLength={15}
                                     pattern="[A-Öa-ö0-9]+$"
-                                    title="Username should only contain letters and numbers between 4 and 20 characters"
+                                    title="Username should only contain letters and numbers between 4 and 15 characters"
                                 />
                             </div>
 

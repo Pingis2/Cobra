@@ -123,7 +123,7 @@ export const Leaderboard = () => {
                                     </ul>
                                 </li>
 
-                                <li>
+                                <li className="user-name">
                                     <p>Name</p>
                                     <ul>
                                         {backendData.slice(3).map((user) => (
