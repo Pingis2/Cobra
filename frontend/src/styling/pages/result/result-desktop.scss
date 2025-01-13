@@ -43,7 +43,7 @@
             }
 
             .leaderboard {
-                padding: 0;
+                padding-left: 35px;
                 width: 320px;
                 margin: 0;
                 text-align: left;
@@ -55,6 +55,12 @@
 
                 .user {
                     font-size: 2rem;
+
+                    .user-country {
+                        margin-left: 10px;
+                        width: auto;
+                        height: 30px;
+                    }
                 }
             }
         }
