@@ -373,6 +373,7 @@ export const Game = () => {
                 if (prev === 1) {
                     clearInterval(intervalId);
                     startGame(); // Start game after countdown
+                    startTimer();
                 }
                 return prev - 1;
             });
@@ -381,14 +382,14 @@ export const Game = () => {
     
     const startTimer = () => {
         setTimer(0);
+        if (timerIntervalId) {
+            clearInterval(timerIntervalId);
+        }
         const intervaldId = setInterval(() => {
-            setTimer((prev) => {
-                if (prev === 0) {
-                    clearInterval(intervaldId);
-                }
-                return prev + 1;
-            });
+            setTimer((prev) => prev + 1);
         }, 1000);
+        setTimerIntervalId(intervaldId);
+        console.log(timerIntervalId);
     }
 
     const [timerIntervalId, setTimerIntervalId] = useState<ReturnType<typeof setInterval> | null>(null);
@@ -404,7 +405,6 @@ export const Game = () => {
         setGameStarted(true);
         setGameOver(false);
         setCurrentScore(0);
-        startTimer();
         setSnake([
             { x: 10, y: 10 },
             { x: 9, y: 10 },
