@@ -24,47 +24,46 @@ export const Results = () => {
     const handleNavigation = (path: string) => {
         navigate(path);
     }
-
-     
     
-        const retryFetchUsers= async (token: string, retries: number = 15, delay: number = 2000) => {
-                for (let attempt = 0; attempt < retries; attempt++) {
-                    try {
-                        const response = await getUsers(token);
-                        return response; // Successful login
-                    } catch (error) {
-                        if (attempt < retries - 1) {
-                            console.error(`Retrying login (${attempt + 1}/${retries})...`);
-                            await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
-                        } else {
-                            throw error; // Throw error after max retries
-                        }
-                    }
+    const retryFetchUsers= async (token: string, retries: number = 15, delay: number = 2000) => {
+        for (let attempt = 0; attempt < retries; attempt++) {
+            try {
+                const response = await getUsers(token);
+                return response; // Successful login
+            } catch (error) {
+                if (attempt < retries - 1) {
+                    console.error(`Getting leaderboard users (${attempt + 1}/${retries})...`);
+                    await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
+                } else {
+                    throw error; // Throw error after max retries
                 }
-            };
-    
-        useEffect(() => {
-            const token = sessionStorage.getItem('token');
-    
-            if (token) {
-                retryFetchUsers(token)
-                    .then((data) => {
-                        if (!data || data.error) {
-                            setError(true);
-                        } else {
-                            const sortedUsers = (data.users || []).sort((a, b) => b.highscore - a.highscore);
-                            setBackendData(sortedUsers);
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Error during API call:", error);
-                        setError(true);
-                    });
-            } else {
-                console.error("No token found in sessionStorage");
-                setError(true);
             }
-        }, []);
+        }
+        console.log(user?.latestScore);
+    };
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('token');
+
+        if (token) {
+            retryFetchUsers(token)
+                .then((data) => {
+                    if (!data || data.error) {
+                        setError(true);
+                    } else {
+                        const sortedUsers = (data.users || []).sort((a, b) => b.highscore - a.highscore);
+                        setBackendData(sortedUsers);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error during API call:", error);
+                    setError(true);
+                });
+        } else {
+            console.error("No token found in sessionStorage");
+            setError(true);
+        }
+    }, []);
     
     const formattedTime = formatTime(user?.timer);
 

@@ -33,6 +33,7 @@ export const Game = () => {
     const directionRef = useRef(direction);
     const [gameOver, setGameOver] = useState(false);
     const [gameStarted, setGameStarted] = useState(false);
+    const [contextUpdated, setContextUpdated] = useState(false);
     const [countdown, setCountdown] = useState(0);
     const [timer, setTimer] = useState(0);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -331,39 +332,40 @@ export const Game = () => {
         };
     }, [])
 
-    useEffect(() => {
-        const updateScore = async () => {
-            if (gameOver) {
-                // Prevent multiple updates by checking if the latest score is already set
-                if (user && currentScore !== user.latestScore) {
-                    // Update user context only if the score has changed
-                    if (token && currentScore > user.highscore) {
-                        await updateUserScore(token, currentScore);
-                        setUser({
-                            ...user,
-                            latestScore: currentScore,
-                            highscore: currentScore,
-                            timer: timer
-                        });
-                    } else {
-                        setUser({
-                            ...user,
-                            latestScore: currentScore,
-                            timer: timer 
-                        });
-                    }
-                }
-
-                // Navigate to the results page only once
-                if (!user?.latestScore || user.latestScore !== currentScore) {
-                    navigate("/results");
+    const updateScore = async () => {
+        if (gameOver) {
+            // Prevent multiple updates by checking if the latest score is already set
+            if (user && currentScore !== user.latestScore) {
+                // Update user context only if the score has changed
+                if (token && currentScore > user.highscore) {
+                    await updateUserScore(token, currentScore);
+                    setUser({
+                        ...user,
+                        latestScore: currentScore,
+                        highscore: currentScore,
+                        timer: timer
+                    });
+                } else {
+                    setUser({
+                        ...user,
+                        latestScore: currentScore,
+                        timer: timer
+                    });
                 }
             }
+            setContextUpdated(true);
         }
+    };
+    
+    useEffect(() => {
         updateScore();
-        
     }, [gameOver, currentScore, user?.latestScore, user?.highscore, setUser, navigate, timer]);
 
+    useEffect(() => {
+        if (contextUpdated) {
+            navigate("/results"); // Navigate to results page after context is updated
+        }
+    }, [contextUpdated, navigate]);
 
     //Timer and countdown --------------------------------------------------------------
     const startCountdown = () => {
@@ -389,7 +391,6 @@ export const Game = () => {
             setTimer((prev) => prev + 1);
         }, 1000);
         setTimerIntervalId(intervaldId);
-        console.log(timerIntervalId);
     }
 
     const [timerIntervalId, setTimerIntervalId] = useState<ReturnType<typeof setInterval> | null>(null);

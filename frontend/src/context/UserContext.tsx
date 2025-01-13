@@ -36,34 +36,35 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     };
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            const token = sessionStorage.getItem("token");
-            if (!token) {
-                setLoading(false);
-                return;
-            } 
+    const fetchUserData = async () => {
+        const token = sessionStorage.getItem("token");
+        if (!token) {
+            setLoading(false);
+            return;
+        }
 
-            try {
-                const data = await retryGetUser(token);
-                if (data) {
-                    setUser(data.user);
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            } finally {
-                setLoading(false);
+        try {
+            const data = await retryGetUser(token);
+            if (data) {
+                setUser(data.user);
             }
-        };
-
-        if (location.pathname !== "/" || "create-user") {
-            fetchUserData();
-        } else {
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+        } finally {
             setLoading(false);
         }
-        
+    };
+
+    useEffect(() => {
         fetchUserData();
-    }, [location.pathname]);
+
+        // Refresh user data every 15 minutes
+        const intervalId = setInterval(() => {
+            fetchUserData();
+        }, 5 * 60 * 1000); // 15 minutes
+
+        return () => clearInterval(intervalId);
+    }, []);
 
     return (
         <>
