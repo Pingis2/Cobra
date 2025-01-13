@@ -90,19 +90,17 @@ export const Results = () => {
                     </section>
                     <section className="leaderboard-container">
                         <h2>Top 5 leaderboard</h2>
-                        <ol className="leaderboard">
-                            {backendData === null ? (
-                                <p className="loading-text">Loading<span className="dots"></span></p>
-                            ) : (
-                                <>
-                                    <li className="user">{backendData[0]?.userName} - {backendData[0]?.highscore}</li>
-                                    <li className="user">{backendData[1]?.userName} - {backendData[1]?.highscore}</li>
-                                    <li className="user">{backendData[2]?.userName} - {backendData[2]?.highscore}</li>
-                                    <li className="user">{backendData[3]?.userName} - {backendData[2]?.highscore}</li>
-                                    <li className="user">{backendData[4]?.userName} - {backendData[2]?.highscore}</li>
-                                </>
-                            )}
-                        </ol>
+                        {backendData === null ? (
+                            <p className="loading-text">Loading<span className="dots"></span></p>
+                        ) : (
+                            <ol className="leaderboard">
+                                <li className="user">{backendData[0]?.userName} - {backendData[0]?.highscore}</li>
+                                <li className="user">{backendData[1]?.userName} - {backendData[1]?.highscore}</li>
+                                <li className="user">{backendData[2]?.userName} - {backendData[2]?.highscore}</li>
+                                <li className="user">{backendData[3]?.userName} - {backendData[2]?.highscore}</li>
+                                <li className="user">{backendData[4]?.userName} - {backendData[2]?.highscore}</li>
+                            </ol>
+                        )}
                     </section>
                 </div>
                 <div className="nav-buttons">
