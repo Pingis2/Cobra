@@ -5,6 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { BackButton } from "../components/BackButton";
 import { CountryFlag } from "../components/CountryFlag";
 import { Jungle } from "../components/Jungle";
+//import WASDKeysImage from '../assets/images/keys/wasd-keys.png';
+//import ArrowKeysImage from '../assets/images/keys/arrow-keys.png';
+import WASDKeysWhiteImage from '../assets/images/keys/wasd-keys-white.png';
+import ArrowKeysWhiteImage from '../assets/images/keys/arrow-keys-white.png';
+import AppleImage from '../assets/images/apples/red-apple.png';
+import SlowAppleImage from '../assets/images/apples/yellow-apple.png';
+import FastAppleImage from '../assets/images/apples/blue-apple.png'
 
 
 export const StartGamePage = () => {
@@ -30,9 +37,49 @@ export const StartGamePage = () => {
 
             <div className="instructions-container">
                 <h1>Cobra</h1>
-                <p className="instructions-1">Normal snake rules apply</p>
-                <p className="instructions-2">Use the arrow keys or "W, A, S, D" to move the snake. <br></br> If on mobile you can swipe the screen or use the buttons below</p>
-                <p className="instructions-3">Your score will be saved after the game is over</p>
+                <div className="instructions">
+                    <section className="movement-instructions">
+                        <h2>Movement</h2>
+                        <div className="keys-instructions">
+                            <ul className="keys-container">
+                                <li className="arrow-keys-container">
+                                    <img src={ArrowKeysWhiteImage} alt="Arrow keys" className="keys-image" />
+                                    <p className="instructions-1">Use the arrow keys</p>
+                                </li>
+                                <li>
+                                    <p className="instructions-1">or</p>
+                                </li>
+                                <li className="wasd-keys-container">
+                                    <img src={WASDKeysWhiteImage} alt="WASD keys" className="keys-image" />
+                                    <p className="instructions-1">"W, A, S, D" to move the snake</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="phone-instructions">
+                            <p>If on mobile you can swipe the screen or use the buttons below</p>
+                        </div>
+                    </section>
+                    <span className="seperation-line"></span>
+                    <section className="points-instructions">
+                        <h2>Point system and rules</h2>
+                        <p>Normal snake rules apply</p>
+                        <ul>
+                            <li className="apple-container">
+                                <img src={AppleImage} alt="Red apple" className="apple-image" />
+                                <p>The red apple is normal and gives you 100 points</p>
+                            </li>
+                            <li className="apple-container">
+                                <img src={SlowAppleImage} alt="Yellow apple" className="apple-image" />
+                                <p>The yellow apple makes you go slower for 5 seconds and it gives you 80 points</p>
+                            </li>
+                            <li className="apple-container">
+                                <img src={FastAppleImage} alt="Blue apple" className="apple-image" />
+                                <p>The blue apple makes you go faster for 5 seconds and it gives you 150 points</p>
+                            </li>
+                        </ul>
+                        <p className="score-saved">Your score will be saved after the game is over</p>
+                    </section>
+                </div>
                 <p className="instructions-4">Click the button below to start the game.</p>
                 <button type="button" onClick={() => handleNavigation("/game")}>Start Game</button>
             </div>
