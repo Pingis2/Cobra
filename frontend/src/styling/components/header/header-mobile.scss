@@ -22,7 +22,7 @@
 
         .user-info {
             margin: 0 10px 0 0;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -30,7 +30,7 @@
             justify-content: space-between;
 
             .user-country {
-                height: 15px;
+                height: 25px;
                 width: auto;
                 margin-left: 5px;
             }
@@ -53,7 +53,7 @@
     .user-logout {
         display: flex;
         flex-direction: row;
-        margin: 20px 20px 0 0;
+        margin: 10px 20px 0 0;
         align-items: center;
 
         .user-info {
