@@ -13,7 +13,6 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 
 var app = express();
 
-//const MONGODB_URI = "mongodb+srv://antonschyberg08:Dajmkryss1234@cluster0.vcd7gi2.mongodb.net/mymongodb?retryWrites=true&w=majority&appName=Cluster0";
 const MONGODB_URI = process.env.MONGODB_URI;
 
 const client = new MongoClient(MONGODB_URI, {
