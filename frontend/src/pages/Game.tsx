@@ -303,7 +303,6 @@ export const Game = () => {
                     ) {
                         if (!gameOver) {
                             stopGame();
-
                         }
                         return prevSnake;
                     }
@@ -451,6 +450,14 @@ export const Game = () => {
             clearInterval(timerIntervalId);
             setTimerIntervalId(null); // Clear the interval ID state
         }
+        if (slowAppleTimer) {
+            clearTimeout(slowAppleTimer);
+            setSlowAppleTimer(null);
+        }
+        if (fastAppleTimer) {
+            clearTimeout(fastAppleTimer);
+            setFastAppleTimer(null);
+        }
     };
 
     // Cleanup interval on component unmount
@@ -458,6 +465,12 @@ export const Game = () => {
         return () => {
             if (timerIntervalId) {
                 clearInterval(timerIntervalId);
+            }
+            if (slowAppleTimer) {
+                clearTimeout(slowAppleTimer);
+            }
+            if (fastAppleTimer) {
+                clearTimeout(fastAppleTimer);
             }
         };
     }, [timerIntervalId]);
