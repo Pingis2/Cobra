@@ -173,7 +173,7 @@ export const Game = () => {
         let lastTouchMoveTime = 0;
 
         const handleTouchStart = (event: TouchEvent) => {
-            if ((event.target as HTMLElement).closest('.play-buttons')) {
+            if ((event.target as HTMLElement).closest('.play-buttons') || (event.target as HTMLElement).closest('.sound-icon')) {
                 return;
             }
             
@@ -186,7 +186,7 @@ export const Game = () => {
         };
 
         const handleTouchMove = (event: TouchEvent) => {
-            if ((event.target as HTMLElement).closest('.play-buttons')) {
+            if ((event.target as HTMLElement).closest('.play-buttons') || (event.target as HTMLElement).closest('.sound-icon')) {
                 return;
             }
 
@@ -507,6 +507,7 @@ export const Game = () => {
                     setDirection={setDirection}
                     gameStarted={gameStarted}
                     gameOver={gameOver}
+                    soundOn={soundOn}
                 />
             )}
             

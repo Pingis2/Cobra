@@ -6,9 +6,10 @@ interface PlayButtonsProps {
     setDirection: (newDirection: { x: number, y: number }) => void;
     gameStarted: boolean;
     gameOver: boolean;
+    soundOn: boolean;
 }
 
-export const PlayButtons = ({ direction, setDirection, gameStarted, gameOver }: PlayButtonsProps) => {
+export const PlayButtons = ({ direction, setDirection, gameStarted, gameOver, soundOn }: PlayButtonsProps) => {
     const directionRef = useRef(direction);
 
     useEffect(() => {
@@ -27,14 +28,16 @@ export const PlayButtons = ({ direction, setDirection, gameStarted, gameOver }: 
                 return;
             }
 
-            if (newDirection.y === -1) {
-                MovementSounds().movementUp();
-            } else if (newDirection.y === 1) {
-                MovementSounds().movementDown();
-            } else if (newDirection.x === -1) {
-                MovementSounds().movementLeft();
-            } else if (newDirection.x === 1) {
-                MovementSounds().movementRight();
+            if (soundOn) {
+                if (newDirection.y === -1) {
+                    MovementSounds().movementUp();
+                } else if (newDirection.y === 1) {
+                    MovementSounds().movementDown();
+                } else if (newDirection.x === -1) {
+                    MovementSounds().movementLeft();
+                } else if (newDirection.x === 1) {
+                    MovementSounds().movementRight();
+                }
             }
 
             setDirection(newDirection);
