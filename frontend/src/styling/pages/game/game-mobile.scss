@@ -37,4 +37,9 @@
     height: 25px;
     top: 0;
     right: -160px;
+
+    &:active {
+        filter: invert(0.9) brightness(1);
+        transform: scale(0.95);
+    }
 }

@@ -38,5 +38,14 @@
         top: -600px;
         right: -330px;
         height: 30px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:active {
+            filter: invert(0.9) brightness(1);
+            transform: scale(0.95);
+        }
     }
 }
