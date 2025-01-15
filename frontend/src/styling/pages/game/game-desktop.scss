@@ -30,4 +30,13 @@
             color: black;
         }
     }
+
+    .sound-icon {
+        filter: invert(1) brightness(2);
+        position: relative;
+        width: auto;
+        top: -600px;
+        right: -330px;
+        height: 30px;
+    }
 }

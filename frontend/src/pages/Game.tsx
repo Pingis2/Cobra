@@ -10,6 +10,8 @@ import { MovementSounds } from "../components/MovementSounds";
 import AppleImage from '../assets/images/apples/red-apple.png';
 import SlowAppleImage from '../assets/images/apples/yellow-apple.png';
 import FastAppleImage from '../assets/images/apples/blue-apple.png';
+import SoundOnImage from '../assets/images/sound-icons/icon-1628258_640.png';
+import SoundOffImage from '../assets/images/sound-icons/mute-1628277_640.png';
 
 const renderFps = 2000;
 const cellSize = 15;
@@ -42,6 +44,8 @@ export const Game = () => {
     const [fastApple, setFastApple] = useState({ x: -1, y: -1 });
     const [slowAppleTimer, setSlowAppleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
     const [fastAppleTimer, setFastAppleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
+    const [soundOn, setSoundOn] = useState(true);
+    const soundOnRef = useRef(soundOn);
 
     const appleImg = useRef(new Image());
     appleImg.current.src = AppleImage;
@@ -55,9 +59,32 @@ export const Game = () => {
     const token = sessionStorage.getItem("token");
     const navigate = useNavigate();
 
+    const toggleSound = () => {
+        setSoundOn((prevSoundOn) => {
+            soundOnRef.current = !prevSoundOn;
+            return !prevSoundOn;
+        })
+    }
+
+    const playMovementSound = (direction: { x: number, y: number }) => {
+        if (!soundOnRef.current) return;
+        
+        if (direction.x === 1) {
+            MovementSounds().movementRight();
+        } else if (direction.x === -1) {
+            MovementSounds().movementLeft();
+        } else if (direction.y === 1) {
+            MovementSounds().movementDown();
+        } else if (direction.y === -1) {
+            MovementSounds().movementUp();
+        }
+    }
+
     const playEatingSound = () => {
-        const sound = new Audio(EatingSound);
-        sound.play();
+        if (soundOn) {
+            const sound = new Audio(EatingSound);
+            sound.play();
+        }
     };
 
     // Generate food --------------------------------------------------------------
@@ -107,29 +134,37 @@ export const Game = () => {
         directionRef.current = direction;
     }, [direction]);
 
+    useEffect(() => {
+        soundOnRef.current = soundOn;
+    }, [soundOn]);
+
     // Handle user input (keyboard + touch) --------------------------------------------------------------
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             const key = event.key;
             let newDirection = directionRef.current;
 
-            if (key === "ArrowUp" || key === "w" || key === "W") {
+            if (key === "ArrowUp" || key === "w" || key === "W" && directionRef.current.y !== 1) {
                 newDirection = { x: 0, y: -1 };
-                MovementSounds().movementUp();
-            } else if (key === "ArrowDown" || key === "s" || key === "S") {
+                //MovementSounds().movementUp();
+            } else if (key === "ArrowDown" || key === "s" || key === "S" && directionRef.current.y !== -1) {
                 newDirection = { x: 0, y: 1 };
-                MovementSounds().movementDown();
-            } else if (key === "ArrowLeft" || key === "a" || key === "A") {
+                //MovementSounds().movementDown();
+            } else if (key === "ArrowLeft" || key === "a" || key === "A" && directionRef.current.x !== 1) {
                 newDirection = { x: -1, y: 0 };
-                MovementSounds().movementLeft();
-            } else if (key === "ArrowRight" || key === "d" || key === "D") {
+                //MovementSounds().movementLeft();
+            } else if (key === "ArrowRight" || key === "d" || key === "D" && directionRef.current.x !== -1) {
                 newDirection = { x: 1, y: 0 };
-                MovementSounds().movementRight();
+                //MovementSounds().movementRight();
             }
 
-            if (newDirection.x !== -directionRef.current.x || newDirection.y !== -directionRef.current.y) {
+            if (
+                newDirection.x !== -directionRef.current.x ||
+                newDirection.y !== -directionRef.current.y
+            ) {
                 directionRef.current = newDirection;
                 setDirection(newDirection);
+                playMovementSound(newDirection);
             }
         };
 
@@ -187,17 +222,9 @@ export const Game = () => {
             ) {
                 directionRef.current = newDirection;
                 setDirection(newDirection);
-
+                playMovementSound(newDirection);
                 // Play the appropriate movement sound
-                if (newDirection.x === 1) {
-                    MovementSounds().movementRight();
-                } else if (newDirection.x === -1) {
-                    MovementSounds().movementLeft();
-                } else if (newDirection.y === 1) {
-                    MovementSounds().movementDown();
-                } else if (newDirection.y === -1) {
-                    MovementSounds().movementUp();
-                }
+                
             }
         };
 
@@ -466,6 +493,13 @@ export const Game = () => {
                     <div className="countdown">{countdown}</div>
                 )}
             </section>
+            <img
+                src={soundOn ? SoundOnImage : SoundOffImage}
+                alt="Sound on/off"
+                className="sound-icon"
+                onClick={toggleSound}
+            />
+            
             
             {window.innerWidth < 768 && (
                 <PlayButtons

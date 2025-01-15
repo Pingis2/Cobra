@@ -29,3 +29,12 @@
         color: black;
     }
 }
+
+.sound-icon {
+    filter: invert(1) brightness(2);
+    position: relative;
+    width: auto;
+    height: 25px;
+    top: 0;
+    left: 160px;
+}
