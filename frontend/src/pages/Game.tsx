@@ -46,6 +46,7 @@ export const Game = () => {
     const [fastAppleTimer, setFastAppleTimer] = useState<ReturnType<typeof setTimeout> | null>(null);
     const [soundOn, setSoundOn] = useState(true);
     const soundOnRef = useRef(soundOn);
+    const [, setAppleIntervalId] = useState<ReturnType<typeof setInterval> | null>(null);
 
     const appleImg = useRef(new Image());
     appleImg.current.src = AppleImage;
@@ -347,6 +348,7 @@ export const Game = () => {
         };
     }, [gameStarted, gameOver, snake, food, direction, currentScore]);
 
+    /*
     useEffect(() => {
         const powerUpInterval = setInterval(() => {
             generateSlowApple();
@@ -357,6 +359,7 @@ export const Game = () => {
             clearInterval(powerUpInterval);
         };
     }, [])
+    */
 
     const updateScore = async () => {
         if (gameOver) {
@@ -441,6 +444,11 @@ export const Game = () => {
         setFood(generateFood());
         setDirection({ x: 1, y: 0 });
         
+        const appleInterval = setInterval(() => {
+            generateSlowApple();
+            generateFastApple();
+        }, 30000);
+        setAppleIntervalId(appleInterval);
     }
 
     const stopGame = () => {
