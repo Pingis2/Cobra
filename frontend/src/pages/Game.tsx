@@ -12,8 +12,6 @@ import SlowAppleImage from '../assets/images/apples/yellow-apple.png';
 import FastAppleImage from '../assets/images/apples/blue-apple.png';
 import SoundOnImage from '../assets/images/sound-icons/icon-1628258_640.png';
 import SoundOffImage from '../assets/images/sound-icons/mute-1628277_640.png';
-//import ThemeSong from '../assets/music/Cobra-theme.wav';
-import ThemeSong from '../assets/music/Cobra-theme-mp3.mp3';
 
 const renderFps = 2000;
 const cellSize = 15;
@@ -49,7 +47,6 @@ export const Game = () => {
     const [soundOn, setSoundOn] = useState(true);
     const soundOnRef = useRef(soundOn);
     const [, setAppleIntervalId] = useState<ReturnType<typeof setInterval> | null>(null);
-    const themeSongRef = useRef(new Audio(ThemeSong));
 
     const appleImg = useRef(new Image());
     appleImg.current.src = AppleImage;
@@ -65,31 +62,11 @@ export const Game = () => {
 
     const toggleSound = () => {
         setSoundOn((prevSoundOn) => {
-            const newSoundOn = !prevSoundOn;
-            if (newSoundOn) {
-                themeSongRef.current.play();
-            } else {
-                themeSongRef.current.pause();
-            }
-            return newSoundOn;
+            soundOnRef.current = !prevSoundOn;
+            
+            return !prevSoundOn;
         })
-    }
-
-    const fadeInVolume = (audioElement: { volume: number; play: () => void; }, duration: number) => {
-        let volume = 0;
-        const interval = 50;
-        const gap = interval / duration;
-        audioElement.volume = volume;
-        const fadeInInterval = setInterval(() => {
-            volume += gap;
-            audioElement.volume = volume;
-            if (volume >= 0.5) {
-                volume = 0.5;
-                clearInterval(fadeInInterval);
-            }
-            audioElement.volume = volume;
-        }, interval);
-    }
+    };
 
     const playMovementSound = (direction: { x: number, y: number }) => {
         if (!soundOnRef.current) return;
@@ -420,10 +397,6 @@ export const Game = () => {
                 return prev - 1;
             });
         }, 1000);
-
-        themeSongRef.current.play();
-        themeSongRef.current.loop = true;
-        fadeInVolume(themeSongRef.current, 3000);
     };
     
     const startTimer = () => {
@@ -481,9 +454,6 @@ export const Game = () => {
             clearTimeout(fastAppleTimer);
             setFastAppleTimer(null);
         }
-
-        themeSongRef.current.pause();
-        themeSongRef.current.currentTime = 0;
     };
 
     // Cleanup interval on component unmount
