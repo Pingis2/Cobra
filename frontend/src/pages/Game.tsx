@@ -7,9 +7,9 @@ import { CountryFlag } from "../components/CountryFlag";
 import { Jungle } from "../components/Jungle";
 import EatingSound from '../assets/sounds/eating-sound.wav';
 import { MovementSounds } from "../components/MovementSounds";
-import AppleImage from '../assets/images/apples/red-apple.png';
-import SlowAppleImage from '../assets/images/apples/yellow-apple.png';
-import FastAppleImage from '../assets/images/apples/blue-apple.png';
+import AppleImage from '../assets/images/apples/red-apple.webp';
+import SlowAppleImage from '../assets/images/apples/yellow-apple.webp';
+import FastAppleImage from '../assets/images/apples/blue-apple.webp';
 import SoundOnImage from '../assets/images/sound-icons/icon-1628258_640.png';
 import SoundOffImage from '../assets/images/sound-icons/mute-1628277_640.png';
 

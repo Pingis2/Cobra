@@ -1,7 +1,7 @@
-import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
-import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
-import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
-import CanadaFlag from "../assets/images/dropdown-flags/canada-flag.png";
+import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.webp";
+import AmericanFlag from "../assets/images/dropdown-flags/american-flag.webp";
+import EnglandFlag from "../assets/images/dropdown-flags/england-flag.webp";
+import CanadaFlag from "../assets/images/dropdown-flags/england-flag.webp";
 import { IUsers } from "../models/IUsers";
 
 interface CountryFlagProps {
@@ -24,6 +24,6 @@ export const CountryFlag = ({user}: CountryFlagProps) => {
     }
 
     return (
-        <img src={user ? countryImage(user) : ""} alt={`flag of ${user?.country}`}  className="user-country"/>
+        <img src={user ? countryImage(user) : ""} alt={`flag of ${user?.country}`}  className="user-country" loading="lazy" width={50} height={30}/>
     )
 }

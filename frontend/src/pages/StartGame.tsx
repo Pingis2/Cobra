@@ -9,9 +9,9 @@ import { Jungle } from "../components/Jungle";
 //import ArrowKeysImage from '../assets/images/keys/arrow-keys.png';
 import WASDKeysWhiteImage from '../assets/images/keys/wasd-keys-white.png';
 import ArrowKeysWhiteImage from '../assets/images/keys/arrow-keys-white.png';
-import AppleImage from '../assets/images/apples/red-apple.png';
-import SlowAppleImage from '../assets/images/apples/yellow-apple.png';
-import FastAppleImage from '../assets/images/apples/blue-apple.png'
+import AppleImage from '../assets/images/apples/red-apple.webp';
+import SlowAppleImage from '../assets/images/apples/yellow-apple.webp';
+import FastAppleImage from '../assets/images/apples/blue-apple.webp';
 
 
 export const StartGamePage = () => {
@@ -65,15 +65,15 @@ export const StartGamePage = () => {
                         <p>Normal snake rules apply</p>
                         <ul>
                             <li className="apple-container">
-                                <img src={AppleImage} alt="Red apple" className="apple-image" />
+                                <img src={AppleImage} alt="Red apple" className="apple-image" width={63} height={71}/>
                                 <p>The red apple is normal and gives you 100 points</p>
                             </li>
                             <li className="apple-container">
-                                <img src={SlowAppleImage} alt="Yellow apple" className="apple-image" />
+                                <img src={SlowAppleImage} alt="Yellow apple" className="apple-image" width={63} height={71} />
                                 <p>The yellow apple makes you go slower for 5 seconds and it gives you 80 points</p>
                             </li>
                             <li className="apple-container">
-                                <img src={FastAppleImage} alt="Blue apple" className="apple-image" />
+                                <img src={FastAppleImage} alt="Blue apple" className="apple-image" width={63} height={71} />
                                 <p>The blue apple makes you go faster for 5 seconds and it gives you 150 points</p>
                             </li>
                         </ul>
