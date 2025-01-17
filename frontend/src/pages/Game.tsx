@@ -12,6 +12,10 @@ import SlowAppleImage from '../assets/images/apples/yellow-apple.webp';
 import FastAppleImage from '../assets/images/apples/blue-apple.webp';
 import SoundOnImage from '../assets/images/sound-icons/icon-1628258_640.png';
 import SoundOffImage from '../assets/images/sound-icons/mute-1628277_640.png';
+import CobraHead from '../assets/images/cobra/cobra-head.webp';
+import CobraNeck from '../assets/images/cobra/cobra-neck.webp';
+import CobraBody from '../assets/images/cobra/cobra-body.webp';
+import CobraTail from '../assets/images/cobra/cobra-tail.webp';
 
 const renderFps = 2000;
 const cellSize = 15;
@@ -47,6 +51,14 @@ export const Game = () => {
     const [soundOn, setSoundOn] = useState(true);
     const soundOnRef = useRef(soundOn);
     const [, setAppleIntervalId] = useState<ReturnType<typeof setInterval> | null>(null);
+    const cobraHeadImg = useRef(new Image());
+    const cobraNeckImg = useRef(new Image());
+    const cobraBodyImg = useRef(new Image());
+    const cobraTailImg = useRef(new Image());
+    cobraHeadImg.current.src = CobraHead;
+    cobraNeckImg.current.src = CobraNeck;
+    cobraBodyImg.current.src = CobraBody;
+    cobraTailImg.current.src = CobraTail;
 
     const appleImg = useRef(new Image());
     appleImg.current.src = AppleImage;
@@ -272,11 +284,121 @@ export const Game = () => {
 
                 if (ctx && canvas) {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+                    
                     // Draw the snake
-                    ctx.fillStyle = "green";
-                    snake.forEach((segment) => {
-                        ctx.fillRect(segment.x * cellSize, segment.y * cellSize, cellSize, cellSize);
+                    snake.forEach((segment, index) => {
+                        ctx.save();
+
+                        ctx.translate(segment.x * cellSize + cellSize / 2, segment.y * cellSize + cellSize / 2);
+                        if (index === 0) {
+                            const headScale = 2.5;
+                            const scaledCellSize = cellSize * headScale;
+
+                            const headDirection = {
+                                x: segment.x - snake[index + 1].x,
+                                y: segment.y - snake[index + 1].y
+                            }
+
+                            if (headDirection.x === 1) {
+                                ctx.rotate(Math.PI / 2);
+                            } else if (headDirection.x === -1) {
+                                ctx.rotate(-Math.PI / 2);
+                            } else if (headDirection.y === 1) {
+                                ctx.rotate(Math.PI);
+                            } else if (headDirection.y === -1) {
+                                ctx.rotate(0);
+                            }
+
+                            ctx.drawImage(
+                                cobraHeadImg.current,
+                                -scaledCellSize / 2,
+                                -scaledCellSize / 2,
+                                scaledCellSize,
+                                scaledCellSize
+                            );
+                        } else if (index === 1) {
+                            const neckDirection = {
+                                x: snake[index - 1].x - segment.x,
+                                y: snake[index - 1].y - segment.y,
+                            }
+
+                            if (neckDirection.x === 1) {
+                                ctx.rotate(Math.PI / 2);
+                            } else if (neckDirection.x === -1) {
+                                ctx.rotate(-Math.PI / 2);
+                            } else if (neckDirection.y === 1) {
+                                ctx.rotate(Math.PI);
+                            } else if (neckDirection.y === -1) {
+                                ctx.rotate(0);
+                            }
+
+                            ctx.drawImage(
+                                cobraNeckImg.current,
+                                -cellSize / 2,
+                                -cellSize / 2,
+                                cellSize,
+                                cellSize
+                            );
+                        } else if (index === snake.length - 1) {
+                            const tailDirection = {
+                                x: segment.x - snake[index - 1].x,
+                                y: segment.y - snake[index - 1].y
+                            }
+
+                            if (tailDirection.x === 1) {
+                                ctx.rotate(Math.PI / 2);
+                            } else if (tailDirection.x === -1) {
+                                ctx.rotate(-Math.PI / 2);
+                            } else if (tailDirection.y === 1) {
+                                ctx.rotate(Math.PI);
+                            } else if (tailDirection.y === -1) {
+                                ctx.rotate(0);
+                            } else {
+                                ctx.rotate(Math.PI);
+                            }
+
+                            ctx.rotate(Math.PI);
+
+                            ctx.drawImage(
+                                cobraTailImg.current,
+                                -cellSize / 2,
+                                -cellSize / 2,
+                                cellSize,
+                                cellSize
+                            );
+
+                            
+                        } else { 
+                            const prevSegment = snake[index - 1];
+                            const nextSegment = snake[index + 1];
+
+                            const bodyDirection = {
+                                x: prevSegment.x - nextSegment.x,
+                                y: prevSegment.y - nextSegment.y
+                            }
+
+                            if (bodyDirection.x === 0) {
+                                ctx.rotate(0);
+                            } else if (bodyDirection.y === 0) {
+                                ctx.rotate(Math.PI / 2);
+                            } else {
+                                if (prevSegment.x < segment.x && nextSegment.y < segment.y || nextSegment.x < segment.x && prevSegment.y < segment.y) {
+                                    ctx.rotate(Math.PI / 2);
+                                } else if (prevSegment.x < segment.x && nextSegment.y > segment.y || nextSegment.x < segment.x && prevSegment.y > segment.y) {
+                                    ctx.rotate(Math.PI / 2);
+                                }
+                            }
+
+                            ctx.drawImage(
+                                cobraBodyImg.current,
+                                -cellSize / 2,
+                                -cellSize / 2,
+                                cellSize,
+                                cellSize
+                            );
+                        }
+
+                        ctx.restore();
                     });
 
                     // Draw the food
