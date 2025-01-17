@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../services/userService";
-import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.png";
-import AmericanFlag from "../assets/images/dropdown-flags/american-flag.png";
-import EnglandFlag from "../assets/images/dropdown-flags/england-flag.png";
-import CanadaFlag from "../assets/images/dropdown-flags/canada-flag.png";
+import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.webp";
+import AmericanFlag from "../assets/images/dropdown-flags/american-flag.webp";
+import EnglandFlag from "../assets/images/dropdown-flags/england-flag.webp";
+import CanadaFlag from "../assets/images/dropdown-flags/canada-flag.webp";
 
 
 export const CreateUser = () => {
