@@ -105,6 +105,7 @@ export const Login = () => {
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         required
+                                        id="email"    
                                     />
                                 </label>
                                 <label className="form-label">
@@ -114,6 +115,7 @@ export const Login = () => {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
+                                        id="password"    
                                     />
                                 </label>
                                 {error && <p>{error}</p>}
