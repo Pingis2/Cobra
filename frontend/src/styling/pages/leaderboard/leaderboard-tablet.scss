@@ -1,0 +1,307 @@
+@use '../../mixins/mixin-font.scss' as *;
+
+@media (min-width: 768px) {
+    .podium {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+
+        .podium-top {
+            @include main-font;
+            width: 500px;
+
+            ul {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: flex-end;
+                padding: 0;
+                margin: 0;
+                list-style: none;
+
+                .second-place {
+                    text-align: center;
+                    width: auto;
+
+                    .second-place-user {
+                        display: flex;
+                        flex-direction: column;
+                        width: auto;
+                        align-items: center;
+                        margin-bottom: 5px;
+
+                        .username {
+                            color: #c0c0c0;
+                            -webkit-animation: glow-silver 1s ease-in-out infinite alternate;
+                            -moz-animation: glow-silver 1s ease-in-out infinite alternate;
+                            animation: glow-silver 1s ease-in-out infinite alternate;
+                        }
+
+                        p {
+                            width: auto;
+                            margin: 0;
+                            font-size: 1.3rem;
+                        }
+
+                        .user-country {
+                            width: auto;
+                            height: 20px;
+                        }
+                    }
+
+                    .podium-image {
+                        width: auto;
+                        height: 160px;
+                    }
+                }
+
+                .first-place {
+                    width: auto;
+
+                    .first-place-user {
+
+                        .username {
+                            color: #ffd700;
+                            -webkit-animation: glow-gold 1s ease-in-out infinite alternate;
+                            -moz-animation: glow-gold 1s ease-in-out infinite alternate;
+                            animation: glow-gold 1s ease-in-out infinite alternate;
+                        }
+
+                        p {
+                            width: auto;
+                            margin: 0;
+                            font-size: 2rem;
+                        }
+
+                        .user-country {
+                            width: auto;
+                            height: 30px;
+                        }
+
+                    }
+
+                    .podium-image {
+                        width: auto;
+                        height: 230px;
+                    }
+                }
+
+                .third-place {
+                    width: auto;
+
+                    .third-place-user {
+
+                        .username {
+                            color: #cd7f32;
+                            -webkit-animation: glow-bronze 1s ease-in-out infinite alternate;
+                            -moz-animation: glow-bronze 1s ease-in-out infinite alternate;
+                            animation: glow-bronze 1s ease-in-out infinite alternate;
+                        }
+
+                        p {
+                            width: auto;
+                            margin: 0;
+                            font-size: 1.2rem;
+                        }
+
+                        .user-country {
+                            width: auto;
+                            height: 15px;
+                        }
+                    }
+
+                    .podium-image {
+                        width: auto;
+                        height: 140px;
+                    }
+                }
+            }
+
+        }
+
+        .podium-bottom {
+
+            ul {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                list-style: none;
+                padding: 0;
+                gap: 10px;
+            }
+        }
+
+        .other-users {
+            width: auto;
+            @include main-font;
+            font-size: 1.5rem;
+
+            .user-country {
+                width: auto;
+                height: 25px;
+            }
+
+            .user-data-list {
+                display: flex;
+                flex-direction: row;
+                list-style: none;
+                padding: 0;
+
+                .user-name {
+                    width: 150px;
+                }
+
+                li {
+                    width: 130px;
+                    margin: 20px 0 20px 0;
+
+                    ul {
+                        list-style: none;
+                        padding: 0;
+                    }
+
+                    p {
+                        margin: 0;
+                    }
+                }
+
+
+            }
+        }
+    }
+
+    @-webkit-keyframes glow-gold {
+        from {
+            text-shadow: 0 0 50px #fff,
+                0 0 55px #fff,
+                0 0 60px #ffd700,
+                0 0 65px #ffd700,
+                0 0 70px #ffd700,
+                0 0 75px #ffd700,
+                0 0 80px #ffd700;
+        }
+
+        to {
+            text-shadow: 0 0 30px #fff,
+                0 0 35px #ffd700,
+                0 0 40px #ffd700,
+                0 0 45px #ffd700,
+                0 0 50px #ffd700,
+                0 0 55px #ffd700,
+                0 0 60px #ffd700;
+        }
+    }
+
+    @keyframes glow-gold {
+        from {
+            text-shadow: 0 0 10px #fff,
+                0 0 10px #fff,
+                0 0 20px #ffd700,
+                0 0 20px #ffd700,
+                0 0 30px #ffd700,
+                0 0 30px #ffd700,
+                0 0 40px #ffd700;
+        }
+
+        to {
+            text-shadow: 0 0 10px #fff,
+                0 0 20px #ffd700,
+                0 0 20px #ffd700,
+                0 0 30px #ffd700,
+                0 0 30px #ffd700,
+                0 0 40px #ffd700,
+                0 0 40px #ffd700;
+        }
+    }
+
+    @-webkit-keyframes glow-silver {
+        from {
+            text-shadow: 0 0 10px #fff,
+                0 0 10px #fff,
+                0 0 20px #c0c0c0,
+                0 0 20px #c0c0c0,
+                0 0 30px #c0c0c0,
+                0 0 30px #c0c0c0,
+                0 0 40px #c0c0c0;
+        }
+
+        to {
+            text-shadow: 0 0 10px #fff,
+                0 0 20px#c0c0c0,
+                0 0 20px#c0c0c0,
+                0 0 30px#c0c0c0,
+                0 0 30px#c0c0c0,
+                0 0 40px#c0c0c0,
+                0 0 40px#c0c0c0;
+        }
+    }
+
+    @keyframes glow-silver {
+        from {
+            text-shadow: 0 0 10px #fff,
+                0 0 10px #fff,
+                0 0 20px #c0c0c0,
+                0 0 20px #c0c0c0,
+                0 0 30px #c0c0c0,
+                0 0 30px #c0c0c0,
+                0 0 40px #c0c0c0;
+        }
+
+        to {
+            text-shadow: 0 0 10px #fff,
+                0 0 20px#c0c0c0,
+                0 0 20px#c0c0c0,
+                0 0 30px#c0c0c0,
+                0 0 30px#c0c0c0,
+                0 0 40px#c0c0c0,
+                0 0 40px#c0c0c0;
+        }
+    }
+
+    @-webkit-keyframes glow-bronze {
+        from {
+            text-shadow: 0 0 10px #fff,
+                0 0 10px #fff,
+                0 0 20px #cd7f32,
+                0 0 20px #cd7f32,
+                0 0 30px #cd7f32,
+                0 0 30px #cd7f32,
+                0 0 40px #cd7f32;
+        }
+
+        to {
+            text-shadow: 0 0 10px #fff,
+                0 0 20px#cd7f32,
+                0 0 20px#cd7f32,
+                0 0 30px#cd7f32,
+                0 0 30px#cd7f32,
+                0 0 40px#cd7f32,
+                0 0 40px#cd7f32;
+        }
+    }
+
+    @keyframes glow-bronze {
+        from {
+            text-shadow: 0 0 10px #fff,
+                0 0 10px #fff,
+                0 0 20px #cd7f32,
+                0 0 20px #cd7f32,
+                0 0 30px #cd7f32,
+                0 0 30px #cd7f32,
+                0 0 40px #cd7f32;
+        }
+
+        to {
+            text-shadow: 0 0 10px #fff,
+                0 0 20px#cd7f32,
+                0 0 20px#cd7f32,
+                0 0 30px#cd7f32,
+                0 0 30px#cd7f32,
+                0 0 40px#cd7f32,
+                0 0 40px#cd7f32;
+        }
+    }
+}
