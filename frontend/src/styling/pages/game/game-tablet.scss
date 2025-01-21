@@ -1,0 +1,48 @@
+@use '../../mixins/mixin-font.scss' as *;
+
+@media (min-width: 768px) {
+    .stats-container {
+        @include main-font;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 30px;
+        font-size: 1.5rem;
+    }
+
+    .game-container {
+        position: relative;
+
+        .start-game-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.3rem;
+        }
+
+        .countdown {
+            @include main-font;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
+            color: black;
+        }
+    }
+
+    .sound-icon {
+        filter: invert(1) brightness(2);
+        position: relative;
+        width: auto;
+        height: 25px;
+        top: -605px;
+        right: -325px;
+
+        &:active {
+            filter: invert(0.9) brightness(1);
+            transform: scale(0.95);
+        }
+    }
+}
