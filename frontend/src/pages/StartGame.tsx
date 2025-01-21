@@ -80,7 +80,7 @@ export const StartGamePage = () => {
                         <p className="score-saved">Your score will be saved after the game is over</p>
                     </section>
                 </div>
-                <p className="instructions-4">Click the button below to start the game.</p>
+                <p className="click-to-start">Click the button below to start the game.</p>
                 <button type="button" onClick={() => handleNavigation("/game")}>Start Game</button>
             </div>
         </>
