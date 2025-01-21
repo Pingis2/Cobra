@@ -112,9 +112,10 @@
             }
 
             button {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
                 border: 1px solid white;
                 @include main-font;
+                margin-top: 30px;
 
                 &:hover {
                     color: #FFA500;
