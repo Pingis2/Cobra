@@ -3,6 +3,7 @@
 .loading-text {
     font-size: 1rem;
     @include main-font;
+    margin: auto;
 }
 
 .dots::after {
@@ -29,4 +30,10 @@
     100% {
         content: "...";
     }
+}
+
+.fetch-user {
+    @include main-font;
+    font-size: 1.5rem;
+    margin: auto;
 }

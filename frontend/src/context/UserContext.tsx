@@ -69,7 +69,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return (
         <>
             {loading? (
-                <div>Fetching user data <span className="dots"></span></div>
+                <div className="fetch-user">Fetching user data <span className="dots"></span></div>
             ):(
                 <UserContext.Provider value={{ user, loading, setUser }}>
                     { children }

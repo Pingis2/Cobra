@@ -55,6 +55,12 @@ export const CreateUser = () => {
         setError("");
         setLoading(true);
 
+        if (!country.name) {
+            setError("Please choose a country");
+            setLoading(false);
+            return;
+        }
+
         try {
             const data = await retryCreateUser(userName, firstName, lastName, email, password, country.name, highscore);
 
@@ -187,7 +193,7 @@ export const CreateUser = () => {
                                 <div>Country</div>
                                 <div
                                     className="chosen-country"
-                                    onClick={handleDropdown}
+                                    onClick={handleDropdown}    
                                 >
                                     <div className="country">
                                         {country.name ? (
