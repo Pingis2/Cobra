@@ -54,7 +54,7 @@ export const StartGamePage = () => {
                             </ul>
                         </div>
                         <div className="phone-instructions">
-                            <p>If on mobile you can swipe the screen or use the buttons below</p>
+                            <p>If on mobile or tablet you can swipe the screen or use the buttons below</p>
                             <div className="phone-images">
                                 <img src={PhoneSwipeImage} alt="Swipe the screen" className="phone-swipe-image" />
                                 <img src={PhoneButtonsImage} alt="Phone buttons" className="phone-buttons-image" />

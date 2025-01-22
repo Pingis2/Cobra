@@ -15,22 +15,31 @@
             margin-top: 0;
             position: relative;
 
+            &::before,
             &::after {
                 content: "";
                 display: block;
-                width: 120%;
+                width: 101%;
                 height: 2px;
                 background-color: currentColor;
                 position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                bottom: -5px;
+                bottom: 10px;
+                top: 110%;
+                transform: translateY(-50%);
+            }
+
+            &::before {
+                left: 0;
+            }
+
+            &::after {
+                right: 0;
             }
         }
 
         .seperation-line {
             width: 2px;
-            height: 400px;
+            height: 500px;
             background: linear-gradient(to bottom, rgba(118, 118, 118, 0), rgb(255, 255, 255) 0, rgb(255, 255, 255) 60%, rgba(118, 118, 118, 0));
             margin-top: 65px;
         }
@@ -39,16 +48,16 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
-            gap: 50px;
             align-items: flex-start;
 
             .movement-instructions {
-                width: 600px;
+                width: 50%;
 
                 .keys-instructions {
                     display: flex;
                     flex-direction: column;
-                    gap: 20px;
+                    width: 90%;
+                    margin: 0 auto;
 
                     .keys-container {
                         list-style: none;
@@ -84,16 +93,26 @@
 
                 .phone-instructions {
                     margin-top: 0;
+                    width: 90%;
+                    margin: 0 auto;
 
-                    .phone-swipe-image {
-                        width: 100px;
-                        height: auto;
+                    .phone-images {
+
+                        .phone-swipe-image {
+                            width: 80px;
+                            height: auto;
+                        }
+
+                        .phone-buttons-image {
+                            width: 170px;
+                            height: auto;
+                        }
                     }
                 }
             }
 
             .points-instructions {
-                width: 600px;
+                width: 50%;
                 font-size: 1.5rem;
 
                 ul {
@@ -102,6 +121,9 @@
                     flex-direction: column;
                     gap: 40px;
                     margin: 0;
+                    align-items: center;
+                    width: 90%;
+                    margin: 0 auto;
 
                     .apple-container {
                         list-style: none;
@@ -109,11 +131,13 @@
                         flex-direction: row;
                         align-items: center;
                         gap: 20px;
+                        width: 90%;
+                        margin: 0 auto;
 
                         p {
                             margin: 0;
                             height: auto;
-                            width: 500px;
+                            width: 100%;
                             text-align: left;
                         }
 
