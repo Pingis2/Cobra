@@ -5,9 +5,11 @@ footer {
     text-align: center;
     border-top: 1px solid rgb(192, 192, 192);
     display: flex;
-    flex-direction: column;
+    margin-top: auto;
+    flex-direction: row;
     justify-content: center;
     @include main-font;
+    position: relative;
 
     ul {
         display: flex;
@@ -17,11 +19,16 @@ footer {
         color: rgb(192, 192, 192);
         margin: 0;
         padding: 0;
+        align-items: center;
+
+        .privacy-policy-link {
+            cursor: pointer;
+        }
 
         li {
             list-style: none;
             position: relative;
-            font-size: 1rem;
+            font-size: 0.8rem;
 
             a {
                 text-decoration: none;
@@ -44,5 +51,13 @@ footer {
                 content: none;
             }
         }
+    }
+
+    .copyright {
+        position: absolute;
+        bottom: 23px;
+        right: 10px;
+        margin: 0;
+        font-size: 0.6rem;
     }
 }

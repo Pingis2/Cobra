@@ -6,7 +6,9 @@
         text-align: center;
         border-top: 1px solid rgb(192, 192, 192);
         display: flex;
-        flex-direction: column;
+        margin-top: auto;
+        flex-direction: row;
+        align-items: center;
         justify-content: center;
         @include main-font;
 
@@ -18,6 +20,11 @@
             color: rgb(192, 192, 192);
             margin: 0;
             padding: 0;
+            flex: 1;
+
+            .privacy-policy-link {
+                cursor: pointer;
+            }
 
             li {
                 list-style: none;
@@ -45,6 +52,14 @@
                     content: none;
                 }
             }
+        }
+
+        .copyright {
+            position: absolute;
+            bottom: 35px;
+            right: 10px;
+            margin: 0;
+            font-size: 1.2rem;
         }
     }
 }

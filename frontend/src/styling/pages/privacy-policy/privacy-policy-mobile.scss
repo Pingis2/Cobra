@@ -1,0 +1,50 @@
+@use '../../mixins/mixin-font.scss' as *;
+
+
+.back-button {
+    margin: 20px 0 0 20px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.privacy-policy-container {
+    @include main-font;
+    width: 768px;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+
+    .text-container {
+        display: flex;
+        flex-direction: column;
+        width: 700px;
+        margin: 0 auto;
+
+        .privacy-policy-1,
+        .privacy-policy-2,
+        .privacy-policy-3,
+        .privacy-policy-4,
+        .privacy-policy-5,
+        .privacy-policy-6,
+        .privacy-policy-7 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            ul {
+                //padding: 0;
+                width: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+
+                li {
+                    width: 500px;
+                    text-align: left;
+                }
+            }
+        }
+    }
+}

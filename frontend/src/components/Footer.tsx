@@ -10,16 +10,16 @@ export const Footer = () => {
     return (
         <>
             <ul>
-                <li onClick={() => handleNavigation('/privacy-policy')} aria-label="link to privacy policy">
+                <li onClick={() => handleNavigation('/privacy-policy')} aria-label="link to privacy policy" className="privacy-policy-link">
                     Privacy policy
                 </li>
                 <li>
                     <a href="https://github.com/Pingis2/express-test" aria-label="link to github project">Github project</a>
                 </li>
-                <li>
-                    © Cobra 2025
-                </li>
             </ul>
+            <p className="copyright">
+                © Cobra 2025
+            </p>
         </>
     );
 }
