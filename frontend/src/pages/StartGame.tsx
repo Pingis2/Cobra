@@ -12,6 +12,8 @@ import ArrowKeysWhiteImage from '../assets/images/keys/arrow-keys-white.png';
 import AppleImage from '../assets/images/apples/red-apple.webp';
 import SlowAppleImage from '../assets/images/apples/yellow-apple.webp';
 import FastAppleImage from '../assets/images/apples/blue-apple.webp';
+import PhoneSwipeImage from '../assets/images/phone/phone-swipe.png';
+import PhoneButtonsImage from '../assets/images/phone/phone-buttons.png';
 
 
 export const StartGamePage = () => {
@@ -42,21 +44,21 @@ export const StartGamePage = () => {
                         <h2>Movement</h2>
                         <div className="keys-instructions">
                             <ul className="keys-container">
-                                <li className="arrow-keys-container">
+                                <li className="text-container">
+                                    <p className="instructions-1">Use the arrow keys or "W, A, S, D" to move the snake</p>
+                                </li>
+                                <li className="keys-container">
                                     <img src={ArrowKeysWhiteImage} alt="Arrow keys" className="keys-image" />
-                                    <p className="instructions-1">Use the arrow keys</p>
-                                </li>
-                                <li>
-                                    <p className="instructions-1">or</p>
-                                </li>
-                                <li className="wasd-keys-container">
                                     <img src={WASDKeysWhiteImage} alt="WASD keys" className="keys-image" />
-                                    <p className="instructions-1">"W, A, S, D" to move the snake</p>
                                 </li>
                             </ul>
                         </div>
                         <div className="phone-instructions">
                             <p>If on mobile you can swipe the screen or use the buttons below</p>
+                            <div className="phone-images">
+                                <img src={PhoneSwipeImage} alt="Swipe the screen" className="phone-swipe-image" />
+                                <img src={PhoneButtonsImage} alt="Phone buttons" className="phone-buttons-image" />
+                            </div>
                         </div>
                     </section>
                     <span className="seperation-line"></span>

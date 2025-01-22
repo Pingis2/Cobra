@@ -7,7 +7,23 @@ export const LogoutButton = () => {
     const [logoutSuccess, setLogoutSuccess] = useState<null | boolean>(null);
     const navigate = useNavigate();
 
-    const logout = async () => {
+    const retryLogout = async (retries: number = 15, delay: number = 2000, token: string) => {
+        for (let attempt = 0; attempt < retries; attempt++) {
+            try {
+                const response = await logoutUser(token);
+                return response; // Successful logout
+            } catch (error) {
+                if (attempt < retries - 1) {
+                    console.error(`Retrying logout (${attempt + 1}/${retries})...`);
+                    await new Promise((resolve) => setTimeout(resolve, delay)); // Wait before retrying
+                } else {
+                    throw error; // Throw error after max retries
+                }
+            }
+        }
+    }
+
+    const handleLogout = async () => {
         const token = sessionStorage.getItem("token"); // or get the token from your auth state or context
 
         if (!token) {
@@ -19,7 +35,7 @@ export const LogoutButton = () => {
         setIsLoggingOut(true);
 
         try {
-            const success = await logoutUser(token);
+            const success = await retryLogout(15, 2000, token);
 
             if (success) {
                 sessionStorage.removeItem("token");
@@ -31,15 +47,26 @@ export const LogoutButton = () => {
         } catch (error) {
             console.error("Logout failed:", error);
             setLogoutSuccess(false);
+        } finally {
+            setIsLoggingOut(false);
         }
-
-        setIsLoggingOut(false);
     };
+
+    const startLogoutProcess = () => {
+        const inteervalId = setInterval(async () => {
+            try {
+                await handleLogout();
+                clearInterval(inteervalId);
+            } catch (error) {
+                console.error("Error during logout process:", error);
+            }
+        }, 2000);
+    }
 
     return (
         <>
             <div className="logout-button">
-                <button onClick={logout} disabled={isLoggingOut}>
+                <button onClick={startLogoutProcess} disabled={isLoggingOut}>
                     {isLoggingOut ? "Logging out..." : "Log out"}
                 </button>
                 {logoutSuccess !== null && (
