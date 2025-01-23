@@ -32,7 +32,7 @@
                         margin-bottom: 5px;
 
                         .username {
-                            color: #c0c0c0;
+                            color: #969696;
                             -webkit-animation: glow-silver 1s ease-in-out infinite alternate;
                             -moz-animation: glow-silver 1s ease-in-out infinite alternate;
                             animation: glow-silver 1s ease-in-out infinite alternate;
@@ -62,7 +62,7 @@
                     .first-place-user {
 
                         .username {
-                            color: #ffd700;
+                            color: #d3bb00;
                             -webkit-animation: glow-gold 1s ease-in-out infinite alternate;
                             -moz-animation: glow-gold 1s ease-in-out infinite alternate;
                             animation: glow-gold 1s ease-in-out infinite alternate;
@@ -175,22 +175,22 @@
     @-webkit-keyframes glow-gold {
         from {
             text-shadow: 0 0 10px #fff,
-                0 0 10px #fff,
-                0 0 20px #ffd700,
-                0 0 20px #ffd700,
-                0 0 30px #ffd700,
-                0 0 30px #ffd700,
-                0 0 40px #ffd700;
+                0 0 20px #fff,
+                0 0 30px #ffea74,
+                0 0 40px #ffea74,
+                0 0 50px #ffea74,
+                0 0 60px #ffea74,
+                0 0 70px #ffea74;
         }
 
         to {
             text-shadow: 0 0 10px #fff,
-                0 0 20px #ffd700,
-                0 0 20px #ffd700,
-                0 0 30px #ffd700,
-                0 0 30px #ffd700,
-                0 0 40px #ffd700,
-                0 0 40px #ffd700;
+                0 0 20px #ffea74,
+                0 0 30px #ffea74,
+                0 0 40px #ffea74,
+                0 0 50px #ffea74,
+                0 0 60px #ffea74,
+                0 0 70px #ffea74;
         }
     }
 
