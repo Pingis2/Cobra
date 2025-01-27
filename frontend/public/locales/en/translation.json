@@ -1,0 +1,38 @@
+{
+    "change-language": "Change language",
+    "footer": {
+        "privacy-policy": "Privacy Policy",
+        "github": "GitHub project"
+    },
+    "create-user": {
+        "title": "Create User",
+        "first-name": "First name",
+        "last-name": "Last name",
+        "user-name": "Username",
+        "email": "Email",
+        "password": "Password",
+        "country": "Country",
+        "choose-country": "Choose country",
+        "create-account-button": "Create account",
+        "login-link": "Already have an account? Click here to log in",
+        "dropdown-options": {
+            "sweden": "Sweden",
+            "usa": "USA",
+            "england": "England",
+            "canada": "Canada"
+        }
+    },
+    "login": {
+        "title": "Log in to your account",
+        "email": "Email",
+        "password": "Password",
+        "login-button": "Login",
+        "create-account-link": "Don't have an account? Click here to create one"
+    },
+    "start": {
+        "title": "Start",
+        "welcome": "Welcome {{username}} to the start page",
+        "start-playing": "Start playing",
+        "leaderboard": "Leaderboard"
+    }
+}

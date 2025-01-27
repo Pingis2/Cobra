@@ -5,6 +5,8 @@ import SwedenFlag from "../assets/images/dropdown-flags/sweden-flag.webp";
 import AmericanFlag from "../assets/images/dropdown-flags/american-flag.webp";
 import EnglandFlag from "../assets/images/dropdown-flags/england-flag.webp";
 import CanadaFlag from "../assets/images/dropdown-flags/canada-flag.webp";
+import { useTranslation } from "react-i18next";
+import { LanguageToggle } from "../components/LanguageToggle";
 
 
 export const CreateUser = () => {
@@ -19,6 +21,7 @@ export const CreateUser = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const handleNavigation = (path: string) => {
@@ -97,12 +100,13 @@ export const CreateUser = () => {
                 <p className="loading-text">Creating account, please wait<span className="dots"></span>
                 </p>
             ) : (
-                <>
+                    <>
+                    <LanguageToggle />
                     <h1>Create Account</h1>
                     <section className="create-user-container">
                         <form className="create-user-form" onSubmit={handleCreateUser}>
                             <div className="input-container">
-                                <label htmlFor="firstName">First name:</label>
+                                <label htmlFor="firstName">{t("create-user.first-name")}:</label>
                                 <input
                                     type="text"
                                     id="firstName"
@@ -120,7 +124,7 @@ export const CreateUser = () => {
                             </div>
 
                             <div className="input-container">
-                                <label htmlFor="lastName">Last name:</label>
+                                <label htmlFor="lastName">{t("create-user.last-name")}:</label>
                                 <input
                                     type="text"
                                     id="lastName"
@@ -137,7 +141,7 @@ export const CreateUser = () => {
                             </div>
 
                             <div className="input-container">
-                                <label htmlFor="username">Username:</label>
+                                <label htmlFor="username">{t("create-user.user-name")}:</label>
                                 <input
                                     type="text"
                                     id="username"
@@ -155,7 +159,7 @@ export const CreateUser = () => {
                             </div>
 
                             <div className="input-container">
-                                <label htmlFor="email">Email:</label>
+                                <label htmlFor="email">{t("create-user.email")}:</label>
                                 <input
                                     type="text"
                                     id="email"
@@ -173,7 +177,7 @@ export const CreateUser = () => {
                             </div>
 
                             <div className="input-container">
-                                <label htmlFor="password">Password:</label>
+                                    <label htmlFor="password">{t("create-user.password")}:</label>
                                 <input
                                     type="password"
                                     id="password"
@@ -190,7 +194,7 @@ export const CreateUser = () => {
                             </div>
 
                             <div className="dropdown-container">
-                                <div>Country</div>
+                                <div>{t("create-user.country")}</div>
                                 <div
                                     className="chosen-country"
                                     onClick={handleDropdown}    
@@ -202,7 +206,7 @@ export const CreateUser = () => {
                                                 <img src={country.flag} alt={`${country.name} flag`} className="dropdown-flag" />
                                             </>
                                         ) : (
-                                            "Choose country"
+                                            t("create-user.choose-country")
                                         )}
                                     </div>
                                     <svg
@@ -216,7 +220,7 @@ export const CreateUser = () => {
                                                 setCountry({ name: "Sweden", flag: SwedenFlag })
                                                 setShowDropdown(false);
                                             }}>
-                                                <p>Sweden</p>
+                                                <p>{t("create-user.dropdown-options.sweden")}</p>
                                                 <img
                                                     src={SwedenFlag}
                                                     alt="Sweden flag"
@@ -227,7 +231,7 @@ export const CreateUser = () => {
                                                 setCountry({ name: "USA", flag: AmericanFlag })
                                                 setShowDropdown(false);
                                             }}>
-                                                <p>USA</p>
+                                                <p>{t("create-user.dropdown-options.usa")}</p>
                                                 <img
                                                     src={AmericanFlag}
                                                     alt="USA flag"
@@ -238,7 +242,7 @@ export const CreateUser = () => {
                                                 setCountry({ name: "England", flag: EnglandFlag })
                                                 setShowDropdown(false);
                                             }}>
-                                            <p>England</p>
+                                            <p>{t("create-user.dropdown-options.england")}</p>
                                             <img
                                                 src={EnglandFlag}
                                                 alt="England flag"
@@ -249,7 +253,7 @@ export const CreateUser = () => {
                                                 setCountry({ name: "Canada", flag: CanadaFlag })
                                                 setShowDropdown(false);
                                             }}>
-                                                <p>Canada</p>
+                                                <p>{t("create-user.dropdown-options.canada")}</p>
                                                 <img
                                                     src={CanadaFlag}
                                                     alt="Canadian flag"
@@ -261,10 +265,10 @@ export const CreateUser = () => {
                                 }
                             </div>
                             {error && <p>{error}</p>}
-                            <button type="submit">Create account</button>
+                            <button type="submit">{t("create-user.create-account-button")}</button>
                         </form>
 
-                        <p onClick={() => handleNavigation('/')} className="login-link">Already have an account? Click here to log in</p>
+                        <p onClick={() => handleNavigation('/')} className="login-link">{t("create-user.login-link")}</p>
                     </section>
                 </>
             )}

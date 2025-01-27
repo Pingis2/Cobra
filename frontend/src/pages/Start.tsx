@@ -5,9 +5,13 @@ import { useContext, useEffect } from "react";
 import { CountryFlag } from "../components/CountryFlag";
 import { Jungle } from "../components/Jungle";
 import { FlyingBirds } from "../components/FlyingBirds";
+import { LanguageToggle } from "../components/LanguageToggle";
+import { useTranslation } from "react-i18next";
+
 export const StartPage = () => {
     const { user, loading } = useContext(UserContext);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!loading && !user) {
@@ -32,14 +36,15 @@ export const StartPage = () => {
                 </div>
                 <Jungle />
             </header>
-            
+
             <section className="start-container">
-                <h1>Start</h1>
+                <LanguageToggle />
+                <h1>{t("start.title")}</h1>
                 <div className="user-buttons">
-                    <p>Welcome {user?.userName} to the start page</p>
+                    <p>{t("start.welcome", { username: user?.userName} )}</p>
                     <nav className="nav-buttons">
-                        <button onClick={() => handleNavigation('/start-game')} type="submit">Start Playing</button>
-                        <button onClick={() => handleNavigation('/leaderboard')} type="submit">Leaderboard</button>
+                        <button onClick={() => handleNavigation('/start-game')} type="submit">{t("start.start-playing")}</button>
+                        <button onClick={() => handleNavigation('/leaderboard')} type="submit">{t("start.leaderboard")}</button>
                     </nav>
                 </div>
                 <FlyingBirds />

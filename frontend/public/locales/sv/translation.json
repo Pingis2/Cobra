@@ -1,0 +1,38 @@
+{
+    "change-language": "Byt språk",
+    "footer": {
+        "privacy-policy": "Användarvilkor",
+        "github": "GitHub projekt"
+    },
+    "create-user": {
+        "title": "Skapa användare",
+        "first-name": "Förnamn",
+        "last-name": "Efternamn",
+        "user-name": "Användarnamn",
+        "email": "Email",
+        "password": "Lösenord",
+        "country": "Land",
+        "choose-country": "Välj land",
+        "create-account-button": "Skapa konto",
+        "login-link": "Har du redan ett konto? Klicka här för att logga in",
+        "dropdown-options": {
+            "sweden": "Sverige",
+            "usa": "USA",
+            "england": "England",
+            "canada": "Kanada"
+        }
+    },
+    "login": {
+        "title": "Logga in på ditt konto",
+        "email": "Email",
+        "password": "Lösenord",
+        "login-button": "Logga in",
+        "create-account-link": "Har du inget konto? Klicka här för att skapa ett"
+    },
+    "start": {
+        "title": "Start",
+        "welcome": "Välkommen {{username}} till start sidan",
+        "start-playing": "Börja spela",
+        "leaderboard": "Topplista"
+    }
+}

@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { getLoggedInUser, loginUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
 import { UserContext} from "../context/UserContext";
+import { LanguageToggle } from "../components/LanguageToggle";
+import { useTranslation } from "react-i18next";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -10,6 +12,7 @@ export const Login = () => {
     const { setUser } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     useEffect(() => {
         sessionStorage.removeItem("token");
@@ -95,11 +98,12 @@ export const Login = () => {
                     </p>
                 ) : (
                     <>
-                        <h2>Log in to your account</h2>
+                        <LanguageToggle />       
+                        <h2>{t("login.title")}</h2>
                         <section className="login-container">
                             <form className="login-form" onSubmit={handleLogin}>
                                 <label className="form-label">
-                                    <p>Email:</p>
+                                    <p>{t("login.email")}:</p>
                                     <input
                                         type="text"
                                         value={email}
@@ -109,7 +113,7 @@ export const Login = () => {
                                     />
                                 </label>
                                 <label className="form-label">
-                                    <p>Password:</p>
+                                    <p>{t("login.password")}:</p>
                                     <input
                                         type="password"
                                         value={password}
@@ -120,11 +124,11 @@ export const Login = () => {
                                 </label>
                                 {error && <p>{error}</p>}
 
-                                <button type="submit" className="login-button">Login</button>
+                                    <button type="submit" className="login-button">{t("login.login-button")}</button>
                             </form>
                         
 
-                            <p onClick={() => handleNavigation('/create-account')} className="create-account">Don't have an account? Click to create one</p>
+                            <p onClick={() => handleNavigation('/create-account')} className="create-account">{t("login.create-account-link")}</p>
                         </section>
                     </>
                 )}
