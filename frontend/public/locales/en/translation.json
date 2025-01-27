@@ -34,5 +34,19 @@
         "welcome": "Welcome {{username}} to the start page",
         "start-playing": "Start playing",
         "leaderboard": "Leaderboard"
+    },
+    "start-game": {
+        "title": "Cobra",
+        "movement": "Movement",
+        "movement-description-keys": "Use the arrow keys or W, A, S, D to move the snake",
+        "movement-description-mobile": "If on mobile or tablet you can swipe the screen or use the buttons below",
+        "points-rules": "Point system and rules",
+        "rules-description": "Normal snake rules apply",
+        "points-description-red": "The red apple is normal and gives you 100 points",
+        "points-description-yellow": "The yellow apple makes you go slower for 5 seconds and it gives you 80 points",
+        "points-description-blue": "The blue apple makes you go faster for 5 seconds and it gives you 150 points",
+        "points-saved": "Your score will be saved after the game is over",
+        "start-game-text": "Click the button below to start the game",
+        "start-game-button": "Start game"
     }
 }

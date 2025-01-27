@@ -14,10 +14,12 @@ import SlowAppleImage from '../assets/images/apples/yellow-apple.webp';
 import FastAppleImage from '../assets/images/apples/blue-apple.webp';
 import PhoneSwipeImage from '../assets/images/phone/phone-swipe.png';
 import PhoneButtonsImage from '../assets/images/phone/phone-buttons.png';
+import { useTranslation } from "react-i18next";
 
 
 export const StartGamePage = () => {
     const { user } = useContext(UserContext);
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const handleNavigation = (path: string) => {
@@ -38,14 +40,14 @@ export const StartGamePage = () => {
             </header>
 
             <div className="instructions-container">
-                <h1>Cobra</h1>
+                <h1>{t("start-game.title")}</h1>
                 <div className="instructions">
                     <section className="movement-instructions">
-                        <h2>Movement</h2>
+                        <h2>{t("start-game.movement")}</h2>
                         <div className="keys-instructions">
                             <ul className="keys-container">
                                 <li className="text-container">
-                                    <p className="instructions-1">Use the arrow keys or "W, A, S, D" to move the snake</p>
+                                    <p className="instructions-1">{t("start-game.movement-description-keys")}</p>
                                 </li>
                                 <li className="keys-container">
                                     <img src={ArrowKeysWhiteImage} alt="Arrow keys" className="keys-image" />
@@ -54,7 +56,7 @@ export const StartGamePage = () => {
                             </ul>
                         </div>
                         <div className="phone-instructions">
-                            <p>If on mobile or tablet you can swipe the screen or use the buttons below</p>
+                            <p>{t("start-game.movement-description-mobile")}</p>
                             <div className="phone-images">
                                 <img src={PhoneSwipeImage} alt="Swipe the screen" className="phone-swipe-image" />
                                 <img src={PhoneButtonsImage} alt="Phone buttons" className="phone-buttons-image" />
@@ -63,27 +65,27 @@ export const StartGamePage = () => {
                     </section>
                     <span className="seperation-line"></span>
                     <section className="points-instructions">
-                        <h2>Point system and rules</h2>
-                        <p>Normal snake rules apply</p>
+                        <h2>{t("start-game.points-rules")}</h2>
+                        <p>{t("start-game.rules-description")}</p>
                         <ul>
                             <li className="apple-container">
                                 <img src={AppleImage} alt="Red apple" className="apple-image" width={63} height={71}/>
-                                <p>The red apple is normal and gives you 100 points</p>
+                                <p>{t("start-game.points-description-red")}</p>
                             </li>
                             <li className="apple-container">
                                 <img src={SlowAppleImage} alt="Yellow apple" className="apple-image" width={63} height={71} />
-                                <p>The yellow apple makes you go slower for 5 seconds and it gives you 80 points</p>
+                                <p>{t("start-game.points-description-yellow")}</p>
                             </li>
                             <li className="apple-container">
                                 <img src={FastAppleImage} alt="Blue apple" className="apple-image" width={63} height={71} />
-                                <p>The blue apple makes you go faster for 5 seconds and it gives you 150 points</p>
+                                <p>{t("start-game.points-description-blue")}</p>
                             </li>
                         </ul>
-                        <p className="score-saved">Your score will be saved after the game is over</p>
+                        <p className="score-saved">{t("start-game.points-saved")}</p>
                     </section>
                 </div>
-                <p className="click-to-start">Click the button below to start the game.</p>
-                <button type="button" onClick={() => handleNavigation("/game")}>Start Game</button>
+                <p className="click-to-start">{t("start-game.start-game-text")}</p>
+                <button type="button" onClick={() => handleNavigation("/game")}>{t("start-game.start-game-button")}</button>
             </div>
         </>
     );

@@ -3,22 +3,21 @@
 @media (min-width: 1024px) {
     .language-container {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        width: 200px;
+        width: auto;
+        gap: 5px;
         position: absolute;
-        top: 100px;
-        right: 10px;
+        left: 10px;
 
         p {
             @include main-font;
-            margin: 0 0 10px 0;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
     
         .language-toggle-icon {
             height: auto;
-            width: 40px;
+            width: 35px;
         }
     }
 

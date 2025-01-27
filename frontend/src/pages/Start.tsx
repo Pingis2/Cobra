@@ -5,7 +5,6 @@ import { useContext, useEffect } from "react";
 import { CountryFlag } from "../components/CountryFlag";
 import { Jungle } from "../components/Jungle";
 import { FlyingBirds } from "../components/FlyingBirds";
-import { LanguageToggle } from "../components/LanguageToggle";
 import { useTranslation } from "react-i18next";
 
 export const StartPage = () => {
@@ -38,7 +37,6 @@ export const StartPage = () => {
             </header>
 
             <section className="start-container">
-                <LanguageToggle />
                 <h1>{t("start.title")}</h1>
                 <div className="user-buttons">
                     <p>{t("start.welcome", { username: user?.userName} )}</p>

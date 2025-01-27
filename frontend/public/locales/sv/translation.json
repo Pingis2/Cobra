@@ -34,5 +34,19 @@
         "welcome": "Välkommen {{username}} till start sidan",
         "start-playing": "Börja spela",
         "leaderboard": "Topplista"
+    },
+    "start-game": {
+        "title": "Cobra",
+        "movement": "Rörelse",
+        "movement-description-keys": "Använd piltangenterna eller W, A, S, D för att röra på kobran",
+        "movement-description-mobile": "Om du är på mobil eller surfplatta kan du svepa skärmen eller använda knapparna nedan",
+        "points-rules": "Poäng system och regler",
+        "rules-description": "Vanliga snake regler gäller",
+        "points-description-red": "Den röda äpplet är normalt och ger dig 100 poäng",
+        "points-description-yellow": "Den gula äpplet gör att du går långsammare i 5 sekunder och ger dig 80 poäng",
+        "points-description-blue": "Den blåa äpplet gör att du går snabbare i 5 sekunder och ger dig 150 poäng",
+        "points-saved": "Din poäng kommer att sparas efter att spelet är över",
+        "start-game-text": "Klicka på knappen nedan för att starta spelet",
+        "start-game-button": "Starta spela"
     }
 }

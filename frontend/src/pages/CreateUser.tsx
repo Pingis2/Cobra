@@ -6,7 +6,6 @@ import AmericanFlag from "../assets/images/dropdown-flags/american-flag.webp";
 import EnglandFlag from "../assets/images/dropdown-flags/england-flag.webp";
 import CanadaFlag from "../assets/images/dropdown-flags/canada-flag.webp";
 import { useTranslation } from "react-i18next";
-import { LanguageToggle } from "../components/LanguageToggle";
 
 
 export const CreateUser = () => {
@@ -101,7 +100,6 @@ export const CreateUser = () => {
                 </p>
             ) : (
                     <>
-                    <LanguageToggle />
                     <h1>Create Account</h1>
                     <section className="create-user-container">
                         <form className="create-user-form" onSubmit={handleCreateUser}>

@@ -16,6 +16,7 @@ import CobraHead from '../assets/images/cobra/cobra-head.webp';
 import CobraNeck from '../assets/images/cobra/cobra-neck.webp';
 import CobraBody from '../assets/images/cobra/cobra-body.webp';
 import CobraTail from '../assets/images/cobra/cobra-tail.webp';
+//import { useTranslation } from "react-i18next";
 
 const renderFps = 2000;
 const cellSize = 15;
@@ -24,6 +25,7 @@ export const Game = () => {
     const { user, setUser } = useUser();
     const [canvasWidth, setCanvasWidth] = useState(40);
     const [canvasHeight, setCanvasHeight] = useState(40);
+    //const { t } = useTranslation();
     const [snake, setSnake] = useState([
         { x: 10, y: 10 },
         { x: 9, y: 10 },

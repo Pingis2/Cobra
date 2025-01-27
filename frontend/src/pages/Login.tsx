@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { getLoggedInUser, loginUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
 import { UserContext} from "../context/UserContext";
-import { LanguageToggle } from "../components/LanguageToggle";
 import { useTranslation } from "react-i18next";
 
 export const Login = () => {
@@ -97,8 +96,7 @@ export const Login = () => {
                     <p className="loading-text">Logging in, please wait <span className="dots"></span>
                     </p>
                 ) : (
-                    <>
-                        <LanguageToggle />       
+                    <>     
                         <h2>{t("login.title")}</h2>
                         <section className="login-container">
                             <form className="login-form" onSubmit={handleLogin}>
