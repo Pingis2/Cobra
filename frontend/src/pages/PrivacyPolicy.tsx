@@ -1,117 +1,117 @@
+import { useTranslation } from "react-i18next";
 import { BackButton } from "../components/BackButton"
 
 
 export const PrivacyPolicy = () => {
+    const { t } = useTranslation();
 
     return (
         <>
             <BackButton />
             <section className="privacy-policy-container">
-                <h1>Privacy Policy</h1>
+                <h1>{t("privacy-policy.title")}</h1>
                 <section className="privacy-policy-intro">
-                    <h2>Effective Data: January 2025</h2>
+                    <h2>{t("privacy-policy.privacy-policy-intro.title")}</h2>
                     <p>
-                        Cobra-game is committed to protecting your privacy.
-                        This Privacy Policy explains how I collect, use, and safeguard your information when
-                        you use our game and services. By using my game, you agree to the terms of this Privacy Policy.
+                        {t("privacy-policy.privacy-policy-intro.text")}
                     </p>
                 </section>
 
                 <section className="text-container">
                     <section className="privacy-policy-1">
-                    <h2>1. Information I collect</h2>
+                        <h2>{t("privacy-policy.privacy-policy-1.title")}</h2>
                         <p>
-                            I collect the following information when you create an account or use my services:
+                            {t("privacy-policy.privacy-policy-1.intro")}
                         </p>
                         <ul>
                             <li>
-                                Username: To identify you in the game and on the leaderboard.
+                                {t("privacy-policy.privacy-policy-1.list.item-1")}
                             </li>
                             <li>
-                                Country: To display your country on the leaderboard.
+                                {t("privacy-policy.privacy-policy-1.list.item-2")}
                             </li>
                             <li>
-                                Password: Your password is securely encrypted and stored in my database.
+                                {t("privacy-policy.privacy-policy-1.list.item-3")}
                             </li>
                             <li>
-                                Score Data: I store your game scores and update your high score if your latest score is higher.
+                                {t("privacy-policy.privacy-policy-1.list.item-4")}
                             </li>
                         </ul>
                     </section>
 
                     <section className="privacy-policy-2">
-                        <h2>2. How I Use Your Information</h2>
+                        <h2>{t("privacy-policy.privacy-policy-2.title")}</h2>
                         <p>
-                            I use your information for the following purposes:
+                            {t("privacy-policy.privacy-policy-2.intro")}
                         </p>
 
                         <ul>
                             <li>
-                                To create and manage your account.
+                                {t("privacy-policy.privacy-policy-2.list.item-1")}
                             </li>
                             <li>
-                                To update and display your scores on the leaderboard.
+                                {t("privacy-policy.privacy-policy-2.list.item-2")}
                             </li>
                             <li>
-                                To improve the game experience.
+                                {t("privacy-policy.privacy-policy-2.list.item-3")}
                             </li>
                         </ul>
                     </section>
 
                     <section className="privacy-policy-3">
-                        <h2>3. Data Security</h2>
+                        <h2>{t("privacy-policy.privacy-policy-3.title")}</h2>
                         <p>
-                            I take your data security seriously:
+                            {t("privacy-policy.privacy-policy-3.intro")}
                         </p>
                         <ul>
                             <li>
-                                Your password is encrypted and cannot be accessed in its original form.
+                                {t("privacy-policy.privacy-policy-3.list.item-1")}
                             </li>
                             <li>
-                                Your data is stored securely in a MongoDB database, and access is limited to authorized personnel only.
+                                {t("privacy-policy.privacy-policy-3.list.item-2")}
                             </li>
                         </ul>
                     </section>
 
                     <section className="privacy-policy-4">
-                        <h2>4. Data Sharing</h2>
+                        <h2>{t("privacy-policy.privacy-policy-4.title")}</h2>
                         <p>
-                            I do not share your personal information, including usernames, countries, or scores, with third parties unless required by law.
+                            {t("privacy-policy.privacy-policy-4.intro")}
                         </p>
                     </section>
 
                     <section className="privacy-policy-5">
-                        <h2>5. Your Rights</h2>
+                        <h2>{t("privacy-policy.privacy-policy-5.title")}</h2>
                         <p>
-                            You have the right to:
+                            {t("privacy-policy.privacy-policy-5.intro")}
                         </p>
                         <ul>
                             <li>
-                                Access the data we store about you.
+                                {t("privacy-policy.privacy-policy-5.list.item-1")}
                             </li>
                             <li>
-                                Request the deletion of your account and associated data.
+                                {t("privacy-policy.privacy-policy-5.list.item-2")}
                             </li>
                             <li>
-                                Update your account information.
+                                {t("privacy-policy.privacy-policy-5.list.item-3")}
                             </li>
                         </ul>
                         <p>
-                            To exercise these rights, please contact me at anton@medieinstitutet.se.
+                            {t("privacy-policy.privacy-policy-5.contact")}
                         </p>
                     </section>
 
                     <section className="privacy-policy-6">
-                        <h2>6. Changes to This Privacy Policy</h2>
+                        <h2>{t("privacy-policy.privacy-policy-6.title")}</h2>
                         <p>
-                            I may update this Privacy Policy from time to time. Changes will be posted with the updated "Effective Date." Continued use of the game constitutes acceptance of the revised policy.
+                            {t("privacy-policy.privacy-policy-6.intro")}
                         </p>
                     </section>
 
                     <section className="privacy-policy-7">
-                        <h2>7. Contact Us</h2>
+                        <h2>{t("privacy-policy.privacy-policy-7.title")}</h2>
                         <p>
-                            If you have questions or concerns about this Privacy Policy, please contact me at anton@medieinstitutet.se
+                            {t("privacy-policy.privacy-policy-7.intro")}
                         </p>
                         </section>
                 </section>

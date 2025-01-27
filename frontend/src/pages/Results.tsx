@@ -6,6 +6,7 @@ import { Jungle } from "../components/Jungle";
 import { useState, useEffect } from "react";
 import { IUsers } from "../models/IUsers";
 import { getUsers } from "../services/userService";
+import { useTranslation } from "react-i18next";
 
 const formatTime = (timeInSeconds: number | undefined): string => {
     if (timeInSeconds === undefined) return "N/A";
@@ -16,6 +17,7 @@ const formatTime = (timeInSeconds: number | undefined): string => {
 
 export const Results = () => {
     const { user } = useUser();
+    const { t } = useTranslation();
     const [backendData, setBackendData] = useState<IUsers[] | null>(null);
     const [, setError] = useState(false);
     
@@ -77,18 +79,18 @@ export const Results = () => {
                 <Jungle />
             </header>
             <div>
-                <h1>Game over</h1>
+                <h1>{t("results.title")}</h1>
                 <div className="results-leaderboard">
                     <section className="results-container">
-                        <h2>Results: </h2>
+                        <h2>{t("results.results")}: </h2>
                         <ul className="results">
-                            <li>Score: {user?.latestScore}</li>
-                            <li>Time: {formattedTime}</li>
-                            <li>Highscore: {user?.highscore}</li>
+                            <li>{t("results.score")}: {user?.latestScore}</li>
+                            <li>{t("results.time")}: {formattedTime}</li>
+                            <li>{t("results.high-score")}: {user?.highscore}</li>
                         </ul>
                     </section>
                     <section className="leaderboard-container">
-                        <h2>Top 5 leaderboard</h2>
+                        <h2>{t("results.top-5-leaderboard")}</h2>
                         {backendData === null ? (
                             <p className="loading-text">Loading<span className="dots"></span></p>
                         ) : (
@@ -118,8 +120,8 @@ export const Results = () => {
                     </section>
                 </div>
                 <div className="nav-buttons">
-                    <button onClick={() => handleNavigation("/game")} type="button">Play again</button>
-                    <button onClick={() => handleNavigation("/start-page")} type="button">Back to home</button>
+                    <button onClick={() => handleNavigation("/game")} type="button">{t("results.play-again")}</button>
+                    <button onClick={() => handleNavigation("/start-page")} type="button">{t("results.back-to-start")}</button>
                 </div>
             </div>
         </>

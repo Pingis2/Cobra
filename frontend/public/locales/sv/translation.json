@@ -1,7 +1,7 @@
 {
     "change-language": "Byt språk",
     "footer": {
-        "privacy-policy": "Användarvilkor",
+        "privacy-policy": "Integritetspolicy",
         "github": "GitHub projekt"
     },
     "create-user": {
@@ -48,5 +48,78 @@
         "points-saved": "Din poäng kommer att sparas efter att spelet är över",
         "start-game-text": "Klicka på knappen nedan för att starta spelet",
         "start-game-button": "Starta spela"
+    },
+    "game": {
+        "current-score": "Nuvarande poäng",
+        "time": "Tid",
+        "high-score": "Högsta poäng",
+        "start-game": "Starta spelet"
+    },
+    "results": {
+        "title": "Spelet är över",
+        "results": "Resultat",
+        "score": "Poäng",
+        "time": "Tid",
+        "high-score": "Högsta poäng",
+        "top-5-leaderboard": "Top 5 topplista",
+        "play-again": "Spela igen",
+        "back-to-start": "Tillbaka till start"
+    },
+    "logout": "Logga ut",
+    "privacy-policy": {
+        "title": "Integritetspolicy",
+        "privacy-policy-intro": {
+            "title": "Giltighetsdatum: Januari 2025",
+            "text": "Cobra-game är engagerat i att skydda din integritet. Denna integritetspolicy förklarar hur jag samlar in, använder och skyddar din information när du använder vårt spel och våra tjänster. Genom att använda mitt spel godkänner du villkoren i denna integritetspolicy."
+        },
+        "privacy-policy-1": {
+            "title": "1. Information jag samlar in",
+            "intro": "Jag samlar in följande information när du skapar ett konto eller använder mina tjänster:",
+            "list": {
+                "item-1": "Användarnamn: För att identifiera dig i spelet och på topplistan.",
+                "item-2": "Land: För att visa ditt land på topplistan.",
+                "item-3": "Lösenord: Ditt lösenord är säkert krypterat och lagras i min databas.",
+                "item-4": "Poängdata: Jag lagrar dina spelpoäng och uppdaterar din högsta poäng om din senaste poäng är högre."
+            }
+        },
+        "privacy-policy-2": {
+            "title": "2. Hur jag använder din information",
+            "intro": "Jag använder din information för följande ändamål:",
+            "list": {
+                "item-1": "För att skapa och hantera ditt konto.",
+                "item-2": "För att uppdatera och visa dina poäng på topplistan.",
+                "item-3": "För att förbättra spelupplevelsen."
+            }
+        },
+        "privacy-policy-3": {
+            "title": "3. Datasäkerhet",
+            "intro": "Jag tar din datasäkerhet på allvar:",
+            "list": {
+                "item-1": "Ditt lösenord är krypterat och kan inte nås i sin ursprungliga form.",
+                "item-2": "Din data lagras säkert i en MongoDB-databas, och åtkomst är begränsad till behörig personal."
+            }
+        },
+        "privacy-policy-4": {
+            "title": "4. Dela av data",
+            "intro": "Jag delar inte din personliga information, inklusive användarnamn, länder eller poäng, med tredje parter om det inte krävs enligt lag."
+        },
+        "privacy-policy-5": {
+            "title": "5. Dina rättigheter",
+            "intro": "Du har rätt att:",
+            "list": {
+                "item-1": "Få tillgång till den data vi lagrar om dig.",
+                "item-2": "Begära radering av ditt konto och tillhörande data.",
+                "item-3": "Uppdatera din kontoinformation."
+            },
+            "contact": "För att utöva dessa rättigheter, vänligen kontakta mig på anton@medieinstitutet.se."
+        },
+        "privacy-policy-6": {
+            "title": "6. Ändringar i denna integritetspolicy",
+            "intro": "Jag kan komma att uppdatera denna integritetspolicy då och då. Ändringar kommer att publiceras med det uppdaterade 'Giltighetsdatumet.' Fortsatt användning av spelet innebär att du godkänner den reviderade policyn."
+        },
+        "privacy-policy-7": {
+            "title": "7. Kontakta mig",
+            "intro": "Om du har några frågor eller funderingar angående denna integritetspolicy, vänligen kontakta mig på anton@medieinstitutet.se."
+        }
     }
 }

@@ -9,6 +9,7 @@
         gap: 5px;
         position: absolute;
         left: 10px;
+        cursor: pointer;
 
         p {
             @include main-font;

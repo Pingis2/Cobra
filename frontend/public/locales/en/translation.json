@@ -48,5 +48,78 @@
         "points-saved": "Your score will be saved after the game is over",
         "start-game-text": "Click the button below to start the game",
         "start-game-button": "Start game"
+    },
+    "game": {
+        "current-score": "Current score",
+        "time": "Time",
+        "high-score": "Highscore",
+        "start-game": "Start game"
+    },
+    "results": {
+        "title": "Game over",
+        "results": "Results",
+        "score": "Score",
+        "time": "Time",
+        "high-score": "Highscore",
+        "top-5-leaderboard": "Top 5 leaderboard",
+        "play-again": "Play again",
+        "back-to-start": "Back to start"
+    },
+    "logout": "Logout",
+    "privacy-policy": {
+        "title": "Privacy Policy",
+        "privacy-policy-intro": {
+            "title": "Effective date: January 2025",
+            "text": "Cobra-game is committed to protecting your privacy. This Privacy Policy explains how I collect, use, and safeguard your information when you use our game and services. By using my game, you agree to the terms of this Privacy Policy."
+        },
+        "privacy-policy-1": {
+            "title": "1. Information I collect",
+            "intro": "I collect the following information when you create an account or use my services:",
+            "list": {
+                "item-1": "Username: To identify you in the game and on the leaderboard.",
+                "item-2": "Country: To display your country on the leaderboard.",
+                "item-3": "Password: Your password is securely encrypted and stored in my database.",
+                "item-4": "Score Data: I store your game scores and update your high score if your latest score is higher."
+            }
+        },
+        "privacy-policy-2": {
+            "title": "2. How I Use Your Information",
+            "intro": "I use your information for the following purposes:",
+            "list": {
+                "item-1": "To create and manage your account.",
+                "item-2": "To update and display your scores on the leaderboard.",
+                "item-3": "To improve the game experience."
+            }
+        },
+        "privacy-policy-3": {
+            "title": "3. Data Security",
+            "intro": "I take your data security seriously:",
+            "list": {
+                "item-1": "Your password is encrypted and cannot be accessed in its original form.",
+                "item-2": "Your data is stored securely in a MongoDB database, and access is limited to authorized personnel only."
+            }
+        },
+        "privacy-policy-4": {
+            "title": "4. Data Sharing",
+            "intro": "I do not share your personal information, including usernames, countries, or scores, with third parties unless required by law."
+        },
+        "privacy-policy-5": {
+            "title": "5. Your Rights",
+            "intro": "You have the right to:",
+            "list": {
+                "item-1": "Access the data we store about you.",
+                "item-2": "Request the deletion of your account and associated data.",
+                "item-3": "Update your account information."
+            },
+            "contact": "To exercise these rights, please contact me at anton@medieinstitutet.se."
+        },
+        "privacy-policy-6": {
+            "title": "6. Changes to This Privacy Policy",
+            "intro": "I may update this Privacy Policy from time to time. Changes will be posted with the updated 'Effective Date.' Continued use of the game constitutes acceptance of the revised policy."
+        },
+        "privacy-policy-7": {
+            "title": "7. Contact Me",
+            "intro": "If you have any questions or concerns about this Privacy Policy, please contact me at anton@medieinstitutet.se"
+        }
     }
 }

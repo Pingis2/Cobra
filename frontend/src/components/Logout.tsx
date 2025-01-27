@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { logoutUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const LogoutButton = () => {
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [logoutSuccess, setLogoutSuccess] = useState<null | boolean>(null);
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const retryLogout = async (retries: number = 15, delay: number = 2000, token: string) => {
@@ -67,7 +69,7 @@ export const LogoutButton = () => {
         <>
             <div className="logout-button">
                 <button onClick={startLogoutProcess} disabled={isLoggingOut}>
-                    {isLoggingOut ? "Logging out..." : "Log out"}
+                    {isLoggingOut ? "Logging out..." : t("logout")}
                 </button>
                 {logoutSuccess !== null && (
                     <p>{logoutSuccess ? "Successfully logged out!" : "Logout failed. Please try again."}</p>

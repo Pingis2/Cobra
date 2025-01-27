@@ -16,7 +16,7 @@ import CobraHead from '../assets/images/cobra/cobra-head.webp';
 import CobraNeck from '../assets/images/cobra/cobra-neck.webp';
 import CobraBody from '../assets/images/cobra/cobra-body.webp';
 import CobraTail from '../assets/images/cobra/cobra-tail.webp';
-//import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const renderFps = 2000;
 const cellSize = 15;
@@ -25,7 +25,7 @@ export const Game = () => {
     const { user, setUser } = useUser();
     const [canvasWidth, setCanvasWidth] = useState(40);
     const [canvasHeight, setCanvasHeight] = useState(40);
-    //const { t } = useTranslation();
+    const { t } = useTranslation();
     const [snake, setSnake] = useState([
         { x: 10, y: 10 },
         { x: 9, y: 10 },
@@ -604,9 +604,9 @@ export const Game = () => {
                 <Jungle />
             </header>
             <div className="stats-container">
-                <p className="current-score">Current score: {currentScore}</p>
-                <p className="timer">Time: {formatTime(timer)}</p>
-                <p className="higscore">Highscore: {user?.highscore}</p>
+                <p className="current-score">{t("game.current-score")}: {currentScore}</p>
+                <p className="timer">{t("game.time")}: {formatTime(timer)}</p>
+                <p className="higscore">{t("game.high-score")}: {user?.highscore}</p>
             </div>
             <section className="game-container">
                 <canvas
@@ -620,7 +620,7 @@ export const Game = () => {
                 >
                 </canvas>
                 {!gameStarted && countdown === 0 && (
-                    <button onClick={startCountdown} type="button" className="start-game-button">Start Game</button>
+                    <button onClick={startCountdown} type="button" className="start-game-button">{t("game.start-game")}</button>
                 )}
                 {!gameStarted && countdown > 0 && (
                     <div className="countdown">{countdown}</div>
