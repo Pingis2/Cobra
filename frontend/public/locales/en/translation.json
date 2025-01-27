@@ -65,6 +65,12 @@
         "play-again": "Play again",
         "back-to-start": "Back to start"
     },
+    "leaderboard": {
+        "rank": "Rank",
+        "name": "Name",
+        "score": "Score",
+        "country": "Country"
+    },
     "logout": "Logout",
     "privacy-policy": {
         "title": "Privacy Policy",
@@ -121,5 +127,6 @@
             "title": "7. Contact Me",
             "intro": "If you have any questions or concerns about this Privacy Policy, please contact me at anton@medieinstitutet.se"
         }
-    }
+    },
+    "back-button": "Back"
 }

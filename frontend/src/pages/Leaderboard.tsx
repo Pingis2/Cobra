@@ -9,10 +9,12 @@ import LogoutButton from "../components/Logout";
 import { useUser } from "../context/UserContext";
 import { CountryFlag } from "../components/CountryFlag";
 import { Jungle } from "../components/Jungle";
+import { useTranslation } from "react-i18next";
 
 export const Leaderboard = () => {
     const [backendData, setBackendData] = useState<IUsers[] | null>(null);
     const [, setError] = useState(false);
+    const { t } = useTranslation();
     const { user } = useUser();
 
     const retryFetchUsers= async (token: string, retries: number = 15, delay: number = 2000) => {
@@ -113,7 +115,7 @@ export const Leaderboard = () => {
                         <div className="other-users">
                             <ul className="user-data-list">
                                 <li>
-                                    <p>Rank</p>
+                                    <p>{t("leaderboard.rank")}</p>
                                     <ul>
                                         {backendData.slice(3).map((user, index) => (
                                             <li key={`rank-${user._id}`}>
@@ -124,7 +126,7 @@ export const Leaderboard = () => {
                                 </li>
 
                                 <li className="user-name">
-                                    <p>Name</p>
+                                    <p>{t("leaderboard.name")}</p>
                                     <ul>
                                         {backendData.slice(3).map((user) => (
                                             <li key={`name-${user._id}`}>
@@ -135,7 +137,7 @@ export const Leaderboard = () => {
                                 </li>
 
                                 <li>
-                                    <p>Score</p>
+                                    <p>{t("leaderboard.score")}</p>
                                     <ul>
                                         {backendData.slice(3).map((user) => (
                                             <li key={`score-${user._id}`}>
@@ -146,7 +148,7 @@ export const Leaderboard = () => {
                                 </li>
 
                                 <li>
-                                    <p>Country</p>
+                                    <p>{t("leaderboard.country")}</p>
                                     <ul>
                                         {backendData.slice(3).map((user) => (
                                             <li key={`country-${user._id}`}>

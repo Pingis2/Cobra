@@ -65,6 +65,12 @@
         "play-again": "Spela igen",
         "back-to-start": "Tillbaka till start"
     },
+    "leaderboard": {
+        "rank": "Rank",
+        "name": "Namn",
+        "score": "Poäng",
+        "country": "Land"
+    },
     "logout": "Logga ut",
     "privacy-policy": {
         "title": "Integritetspolicy",
@@ -121,5 +127,6 @@
             "title": "7. Kontakta mig",
             "intro": "Om du har några frågor eller funderingar angående denna integritetspolicy, vänligen kontakta mig på anton@medieinstitutet.se."
         }
-    }
+    },
+    "back-button": "Tillbaka"
 }
