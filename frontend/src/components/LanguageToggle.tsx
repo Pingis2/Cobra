@@ -20,7 +20,7 @@ export const LanguageToggle = () => {
                     }
                     alt={`Switch to ${i18n.resolvedLanguage === 'en' ? 'Swedish' : 'English'}`}
                     className="language-toggle-icon"
-                    
+                    width={50} height={30}
                     title={`Switch to ${i18n.resolvedLanguage === 'en' ? 'Swedish' : 'English'}`}
                 />
             </div>
