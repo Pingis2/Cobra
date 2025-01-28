@@ -1,8 +1,13 @@
 import { useEffect } from "react";
-import Jungle1 from "../assets/images/jungle/jungle-1.webp";
-import Jungle2 from '../assets/images/jungle/jungle-2.webp';
-import Jungle3 from '../assets/images/jungle/jungle-3.webp';
-import Jungle4 from '../assets/images/jungle/jungle-4.webp';
+//import Jungle1 from "../assets/images/jungle/jungle-1.webp";
+//import Jungle2 from '../assets/images/jungle/jungle-2.webp';
+//import Jungle3 from '../assets/images/jungle/jungle-3.webp';
+//import Jungle4 from '../assets/images/jungle/jungle-4.webp';
+import Jungle1 from "../assets/images/jungle/jungle-1.png"
+import Jungle2 from '../assets/images/jungle/jungle-2.png';
+import Jungle3 from '../assets/images/jungle/jungle-3.png';
+import Jungle4 from '../assets/images/jungle/jungle-4.png';
+
 
 export const Jungle = () => {
     useEffect(() => {
