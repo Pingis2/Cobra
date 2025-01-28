@@ -1,0 +1,25 @@
+@use '../../mixins/mixin-font.scss' as *;
+
+.language-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    gap: 3px;
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+
+    p {
+        @include main-font;
+        font-size: 0.6rem;
+        margin: 0;
+    }
+
+    .language-toggle-icon {
+        height: auto;
+        width: 20px;
+    }
+}
